@@ -11,5 +11,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
         public float Height;
         [Range(0, 6)]
         public float Delay;
+        public Vector3 TargetPosition;
     }
 }
