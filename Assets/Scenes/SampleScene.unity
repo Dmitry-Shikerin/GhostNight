@@ -270,15 +270,15 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: c1e8afb5a66f775448502e40b7273abb, type: 2}
     - target: {fileID: 4624190357906471964, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2769537
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4624190357906471964, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.355925
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4624190357906471964, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.430845
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4624190357906471964, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -496,13 +496,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.31788388, y: 0, z: 0, w: 0.9481297}
+  m_LocalPosition: {x: 2.62, y: 5.65, z: -3.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.07, y: 0, z: 0}
 --- !u!1 &1370638254
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +624,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1817680271}
   - component: {fileID: 1817680270}
+  - component: {fileID: 1817680272}
   - component: {fileID: 1817680269}
+  - component: {fileID: 1817680274}
+  - component: {fileID: 1817680273}
   m_Layer: 0
   m_Name: CharacterView
   m_TagString: Untagged
@@ -645,7 +648,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _component:
-    Name: 
+    CharacterController: {fileID: 1817680273}
+    Speed: 3.02
 --- !u!114 &1817680270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _converters:
   - {fileID: 1817680269}
+  - {fileID: 1817680272}
+  - {fileID: 1817680274}
   _destroyAfterConversion: 0
 --- !u!4 &1817680271
 Transform:
@@ -670,13 +676,66 @@ Transform:
   m_GameObject: {fileID: 1817680268}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.0483513, y: -8.355925, z: -12.904057}
+  m_LocalPosition: {x: 3.515, y: 0, z: 2.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1392070313}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1817680272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e916fb8fab71414c8a702f79d46a0a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!143 &1817680273
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.81
+  m_Radius: 0.43
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.87, z: 0}
+--- !u!114 &1817680274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d1527504204811bfb4896681dfd719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _component:
+    Transform: {fileID: 1817680271}
+    Speed: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
