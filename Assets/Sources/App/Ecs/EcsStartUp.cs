@@ -1,6 +1,8 @@
-﻿using System;
-using AB_Utility.FromSceneToEntityConverter;
+﻿using AB_Utility.FromSceneToEntityConverter;
 using Leopotam.EcsLite;
+using SevenBoldPencil.EasyEvents;
+using Sources.BoundedContexts.CharacterMovements.Events;
+using Sources.BoundedContexts.CharacterMovements.Systems;
 using UnityEngine;
 
 namespace Sources.App.Ecs
@@ -9,43 +11,57 @@ namespace Sources.App.Ecs
     {
         private IEcsSystems _systems;
         private IEcsSystems _editorSystems;
+        private EcsWorld _world;
+        private SharedData _sharedData;
 
-        private void Awake() 
+        private void Awake()
         {
-            _systems = new EcsSystems(new EcsWorld());
+            _world = new EcsWorld();
+            _sharedData = new SharedData
+            {
+                EventsBus = new EventsBus(),
+            };
+            _systems = new EcsSystems(_world, _sharedData);
             AddEditorSystems();
             AddRunSystems();
             AddOneFrame();
             Inject();
             AddComponentsConverterWorld();
-            _systems.Init ();
+            _systems.Init();
         }
 
-        private void Update () 
+        private void Update()
         {
-            _systems?.Run ();
+            _systems?.Run();
             UpdateEditorSystems();
         }
 
-        private void OnDestroy () 
+        private void OnDestroy()
         {
-            if (_systems != null) 
+            if (_systems != null)
             {
-                _systems.Destroy ();
+                _systems.Destroy();
                 _systems.GetWorld().Destroy();
                 _systems = null;
             }
-            
+
             DestroyEditorSystems();
         }
 
         private void AddRunSystems()
         {
-            
+            _systems
+                .Add(new PlayerJumpSystem())
+                ;
         }
 
         private void AddOneFrame()
         {
+            _systems.Add(
+                _sharedData.EventsBus
+                    .GetDestroyEventsSystem()
+                    // .IncSingleton<CharacterJumpEvent>()
+                );
         }
 
         private void Inject()
@@ -63,11 +79,11 @@ namespace Sources.App.Ecs
         {
 #if UNITY_EDITOR
             // Создаем отдельную группу для отладочных систем.
-            _editorSystems = new EcsSystems (_systems.GetWorld ());
+            _editorSystems = new EcsSystems(_systems.GetWorld());
             _editorSystems
-                .Add(new Mitfart.LeoECSLite.UnityIntegration.EcsWorldDebugSystem()) 
-                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
-                .Init ();
+                .Add(new Mitfart.LeoECSLite.UnityIntegration.EcsWorldDebugSystem())
+                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+                .Init();
 #endif
             //_systems.Add ()
 #if UNITY_EDITOR
@@ -78,16 +94,16 @@ namespace Sources.App.Ecs
         private void UpdateEditorSystems()
         {
 #if UNITY_EDITOR
-            _editorSystems?.Run ();
+            _editorSystems?.Run();
 #endif
         }
 
         private void DestroyEditorSystems()
         {
 #if UNITY_EDITOR
-            if (_editorSystems != null) 
+            if (_editorSystems != null)
             {
-                _editorSystems.Destroy ();
+                _editorSystems.Destroy();
                 _editorSystems = null;
             }
 #endif
