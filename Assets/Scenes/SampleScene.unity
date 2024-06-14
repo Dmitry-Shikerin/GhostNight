@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 1370638258}
   - component: {fileID: 1370638257}
   - component: {fileID: 1370638256}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,6 +627,7 @@ GameObject:
   - component: {fileID: 1817680272}
   - component: {fileID: 1817680269}
   - component: {fileID: 1817680274}
+  - component: {fileID: 1817680275}
   - component: {fileID: 1817680273}
   m_Layer: 0
   m_Name: CharacterView
@@ -663,9 +664,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _converters:
-  - {fileID: 1817680269}
   - {fileID: 1817680272}
+  - {fileID: 1817680269}
   - {fileID: 1817680274}
+  - {fileID: 1817680275}
   _destroyAfterConversion: 0
 --- !u!4 &1817680271
 Transform:
@@ -736,6 +738,21 @@ MonoBehaviour:
   _component:
     Transform: {fileID: 1817680271}
     Speed: 2
+--- !u!114 &1817680275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95342e089d54cf8bed481d9e3bc6227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _component:
+    Height: 3
+    Delay: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
