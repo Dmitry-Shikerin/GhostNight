@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sources.BoundedContexts.Ids.Domain.Constant
 {
@@ -44,19 +45,19 @@ namespace Sources.BoundedContexts.Ids.Domain.Constant
             Tutorial,
         };
 
-        // public static IReadOnlyDictionary<string, Type> Types { get; } = new Dictionary<string, Type>()
-        // {
-        //     [HealthUpgrade] = typeof(Upgrade),
-        //     [AttackUpgrade] = typeof(Upgrade),
-        //     [NukeUpgrade] = typeof(Upgrade),
-        //     [FlamethrowerUpgrade] = typeof(Upgrade),
-        //     [PlayerWallet] = typeof(PlayerWallet),
-        //     [Bunker] = typeof(Bunker),
-        //     [EnemySpawner] = typeof(EnemySpawner),
-        //     [NukeAbility] = typeof(NukeAbility),
-        //     [FlamethrowerAbility] = typeof(FlamethrowerAbility),
-        //     [KillEnemyCounter] = typeof(KillEnemyCounter),
-        //     [Volume] = typeof(Volume),
-        // };
+        public static IReadOnlyDictionary<string, Type> Types { get; } = new Dictionary<string, Type>()
+        {
+            // [HealthUpgrade] = typeof(Upgrade),
+            // [AttackUpgrade] = typeof(Upgrade),
+            // [NukeUpgrade] = typeof(Upgrade),
+            // [FlamethrowerUpgrade] = typeof(Upgrade),
+            // [PlayerWallet] = typeof(PlayerWallet),
+            // [Bunker] = typeof(Bunker),
+            // [EnemySpawner] = typeof(EnemySpawner),
+            // [NukeAbility] = typeof(NukeAbility),
+            // [FlamethrowerAbility] = typeof(FlamethrowerAbility),
+            // [KillEnemyCounter] = typeof(KillEnemyCounter),
+            // [Volume] = typeof(Volume),
+        };
     }
 }
