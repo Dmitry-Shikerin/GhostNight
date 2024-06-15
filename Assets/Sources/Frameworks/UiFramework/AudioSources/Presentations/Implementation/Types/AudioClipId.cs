@@ -4,5 +4,6 @@
     {
         Default = 0,
         Button = 1,
+        Jump = 2,
     }
 }
