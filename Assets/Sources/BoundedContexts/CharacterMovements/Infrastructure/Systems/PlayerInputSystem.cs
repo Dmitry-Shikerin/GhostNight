@@ -30,7 +30,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             float vertical = Input.GetAxisRaw("Vertical");
 
             ref InputEvent body = ref _eventsBus.GetEventBodySingleton<InputEvent>();
-            body.Direction = new Vector2(horizontal, vertical);
+            body.Direction = new Vector2(horizontal, vertical).normalized;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -43,7 +43,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 
                 _eventsBus.NewEventSingleton<JumpEvent>();
             }
-
         }
 
         private void DestroyEvent()

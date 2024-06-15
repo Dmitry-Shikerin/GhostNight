@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Leopotam.EcsLite;
+﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs;
@@ -26,6 +25,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             {
                 ref MovementComponent movementComponent = ref _filter.Pools.Inc3.Get(entity);
                 ref JumpComponent jumpComponent = ref _filter.Pools.Inc2.Get(entity);
+                ref CharacterAnimationComponent animationComponent = ref _filter.Pools.Inc4.Get(entity);
 
                 if (_eventsBus.HasEventSingleton<JumpEvent>() == false)
                     return;
@@ -38,7 +38,12 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                     if (jumpComponent.CurrentDalay < jumpComponent.Delay)
                     {
                         jumpComponent.CurrentDalay += Time.deltaTime;
-                        Vector3 direction = Time.deltaTime * new Vector3(0, jumpComponent.JumpForce, 0);
+                        Vector3 direction = 
+                            Time.deltaTime 
+                            * new Vector3(
+                                inputEvent.Direction.x + 0.2f, 
+                                jumpComponent.JumpForce, 
+                                inputEvent.Direction.y + 0.2f);
                         movementComponent.CharacterController.Move(direction);
                     }
                     else
