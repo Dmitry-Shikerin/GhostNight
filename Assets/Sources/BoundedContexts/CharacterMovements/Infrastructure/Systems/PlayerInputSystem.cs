@@ -39,14 +39,19 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             if (Input.GetKeyDown(KeyCode.Space))
                 _eventsBus.NewEventSingleton<JumpEvent>();
 
+        }
+
+        private void DestroyEvent()
+        {
+            
             if (_eventsBus.HasEventSingleton<JumpEvent>(out var jumpEvent) == false)
                 return;
 
             ref JumpEvent body = ref _eventsBus.GetEventBodySingleton<JumpEvent>();
             
-            if (jumpEvent.Delay == 0)
+            if (body.Delay == 0)
                 body.Delay += Time.deltaTime;
-            else if (jumpEvent.Delay is > 0 and < 3)
+            else if (body.Delay is > 0 and < 3)
                 body.Delay += Time.deltaTime;
             else
                 _eventsBus.DestroyEventSingleton<JumpEvent>();

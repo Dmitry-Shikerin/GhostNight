@@ -25,13 +25,21 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 
         public void Run(IEcsSystems systems)
         {
-            if(_eventsBus.HasEventSingleton(out InputEvent inputEvent) == false)
+            if (_eventsBus.HasEventSingleton<JumpEvent>())
+            {
+                _animation.PlayJump();
+                
+                return;
+            }
+            
+            if (_eventsBus.HasEventSingleton(out InputEvent inputEvent) == false)
                 return;
 
             if (inputEvent.Direction == Vector2.zero)
                 _animation.PlayIdle();
             else
                 _animation.PlayWalk();
+
         }
     }
 }

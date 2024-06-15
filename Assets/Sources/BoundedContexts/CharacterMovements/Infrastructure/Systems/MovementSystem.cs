@@ -25,10 +25,16 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             foreach (int entity in _filter.Value)
             {
                 ref MovementComponent movementComponent = ref _filter.Pools.Inc2.Get(entity);
+
+                if (movementComponent.IsLockMovement)
+                    return;
+                
+                float gravity = 10;
                 Vector3 moveDirection = 
                     Time.deltaTime 
                     * movementComponent.Speed 
                     * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
+                moveDirection.y -= gravity * Time.deltaTime;
                 movementComponent.CharacterController.Move(moveDirection);
             }
         }

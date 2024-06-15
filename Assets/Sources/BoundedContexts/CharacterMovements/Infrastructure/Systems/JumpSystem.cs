@@ -11,34 +11,47 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
     public class JumpSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly EcsFilterInject<Inc<CharacterTag, JumpComponent, MovementComponent>> _filter = default;
-        
-        private EventsBus _eventsBus;
-        private MovementComponent _movementComponent;
-        private JumpComponent _jumpComponent;
+        private readonly EcsFilterInject<
+            Inc<CharacterTag, JumpComponent, MovementComponent, CharacterAnimationComponent>> _filter = default;
 
-        public void Init(IEcsSystems systems)
-        {
+        private EventsBus _eventsBus;
+
+        public void Init(IEcsSystems systems) =>
             _eventsBus = systems.GetShared<SharedData>().EventsBus;
-            _movementComponent = _filter.Pools.Inc3.Get(0);
-            _jumpComponent = _filter.Pools.Inc2.Get(0);
-        }
 
         public void Run(IEcsSystems systems)
         {
-            if (_eventsBus.HasEventSingleton(out JumpEvent inputEvent) == false)
-                return;
-            
-            if (inputEvent.IsJumped)
-                return;
+            foreach (int entity in _filter.Value)
+            {
+                ref MovementComponent movementComponent = ref _filter.Pools.Inc3.Get(entity);
+                ref JumpComponent jumpComponent = ref _filter.Pools.Inc2.Get(entity);
+                ref CharacterAnimationComponent animationComponent = ref _filter.Pools.Inc4.Get(entity);
+                
+                if (_eventsBus.HasEventSingleton<JumpEvent>() == false)
+                    return;
+                
+                ref JumpEvent jumpBody = ref _eventsBus.GetEventBodySingleton<JumpEvent>();
 
-            
-            
-            // float xPosition = _movementComponent.CharacterController.transform.position.x;
-            // float zPosition = _movementComponent.CharacterController.transform.position.z;
-            //
-            // _movementComponent.CharacterController.Move(new Vector3(xPosition, yPosition, zPosition));
-            //
+                if (jumpBody.IsJumped)
+                {
+                    jumpComponent.CurrentDalay += Time.deltaTime;
+                    Vector3 direction = Time.deltaTime * new Vector3(0, jumpComponent.JumpForce, 0);
+                    movementComponent.CharacterController.Move(direction);
+
+                    if (jumpComponent.CurrentDalay >= jumpComponent.Delay)
+                    {
+                        jumpBody.IsJumped = false;
+                        movementComponent.IsLockMovement = false;
+                        jumpComponent.CurrentDalay = 0;
+                        _eventsBus.DestroyEventSingleton<JumpEvent>();
+                    }
+                    
+                    return;
+                }
+                
+                movementComponent.IsLockMovement = true;
+                jumpBody.IsJumped = true;
+            }
         }
     }
 }

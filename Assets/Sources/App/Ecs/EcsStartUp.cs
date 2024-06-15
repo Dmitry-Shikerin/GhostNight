@@ -33,7 +33,7 @@ namespace Sources.App.Ecs
         private void Update()
         {
             _systems?.Run();
-            UpdateEditorSystems();
+            RunEditorSystems();
         }
 
         private void OnDestroy()
@@ -41,8 +41,9 @@ namespace Sources.App.Ecs
             if (_systems != null)
             {
                 _systems.Destroy();
-                _systems.GetWorld().Destroy();
                 _systems = null;
+                _world.Destroy();
+                _world = null;
             }
 
             DestroyEditorSystems();
@@ -94,7 +95,7 @@ namespace Sources.App.Ecs
 #endif
         }
 
-        private void UpdateEditorSystems()
+        private void RunEditorSystems()
         {
 #if UNITY_EDITOR
             _editorSystems?.Run();

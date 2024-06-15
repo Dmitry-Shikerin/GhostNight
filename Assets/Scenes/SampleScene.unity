@@ -676,8 +676,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _component:
+    Transform: {fileID: 1817680271}
     CharacterController: {fileID: 1817680273}
     Speed: 3.02
+    IsLockMovement: 0
 --- !u!114 &1817680270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +737,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -765,7 +767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component:
     Transform: {fileID: 1817680271}
-    Speed: 2
+    Speed: 4.01
 --- !u!114 &1817680275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,8 +781,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _component:
-    Height: 3
-    Delay: 3
+    JumpForce: 10
+    Delay: 0.3
+    CurrentDalay: 0
+    TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1817680276
 MonoBehaviour:
   m_ObjectHideFlags: 0
