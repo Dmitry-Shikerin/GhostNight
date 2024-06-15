@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
+using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using UnityEngine;
 
 namespace Sources.App.Ecs
@@ -57,6 +58,7 @@ namespace Sources.App.Ecs
                 .Add(new PlayerInputSystem())
                 .Add(new RotateSystem())
                 .Add(new CharacterAnimationSystem())
+                .Add(new FootstepParticleSystem())
                 ;
         }
 
