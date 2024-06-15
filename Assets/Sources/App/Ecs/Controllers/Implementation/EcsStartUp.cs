@@ -15,7 +15,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
     public class EcsStartUp : IEcsStartUp
     {
         private readonly DiContainer _container;
-        
+
         private IEcsSystems _systems;
         private IEcsSystems _editorSystems;
         private EcsWorld _world;
@@ -41,6 +41,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             AddRunSystems();
             AddEvents();
             AddComponentsConverterWorld();
+            AddUnityIntegrationSystem();
             Inject();
             _systems.Init();
         }
@@ -60,7 +61,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 _world.Destroy();
                 _world = null;
             }
-            
+
             DestroyEditorSystems();
         }
 
@@ -103,15 +104,19 @@ namespace Sources.App.Ecs.Controllers.Implementation
         private void AddEditorSystems()
         {
 #if UNITY_EDITOR
-            _editorSystems = new EcsSystems(_systems.GetWorld());
+            _editorSystems = new EcsSystems(_world);
             _editorSystems
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
-                .Add(new Mitfart.LeoECSLite.UnityIntegration.EcsWorldDebugSystem())
+                .Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem())
                 .Init();
 #endif
+        }
 
+        private void AddUnityIntegrationSystem()
+        {
 #if UNITY_EDITOR
-            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+            _systems
+                .Add(new Mitfart.LeoECSLite.UnityIntegration.EcsWorldDebugSystem());
 #endif
         }
 
