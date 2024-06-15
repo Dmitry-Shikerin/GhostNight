@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Configs
 {
-    [CreateAssetMenu(fileName = "AudioClipContainer", menuName = "Configs/AudioClipContainer", order = 51)]
+    [CreateAssetMenu(fileName = "AudioServiceDataBase", menuName = "Configs/AudioServiceDataBase", order = 51)]
     public class AudioServiceDataBase : ScriptableObject, IConstruct<Volume>
     {
         [DisplayAsString(false)] [HideLabel] 

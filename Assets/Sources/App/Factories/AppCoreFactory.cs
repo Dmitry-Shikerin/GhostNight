@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sources.App.Core;
+using Sources.BoundedContexts.Ids.Domain.Constant;
 using Sources.BoundedContexts.Prefabs;
+using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Interfaces;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Frameworks.GameServices.Curtains.Presentation.Implementation;
 using Sources.Frameworks.GameServices.Curtains.Presentation.Interfaces;
@@ -32,13 +34,13 @@ namespace Sources.App.Factories
             SceneService sceneService = new SceneService(sceneFactories);
             projectContext.Container.BindInterfacesAndSelfTo<SceneService>().FromInstance(sceneService);
 
-            // sceneFactories[ModelId.MainMenu] = (payload, sceneContext) =>
-            //     sceneContext.Container.Resolve<ISceneFactory>().Create(payload);
-            // sceneFactories[ModelId.Gameplay] = (payload, sceneContext) =>
-            //     sceneContext.Container.Resolve<ISceneFactory>().Create(payload);
+            sceneFactories[ModelId.MainMenu] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<ISceneFactory>().Create(payload);
+            sceneFactories[ModelId.Gameplay] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<ISceneFactory>().Create(payload);
 
             // sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowCurtain());
-            //
+            
             sceneService.AddBeforeSceneChangeHandler(async sceneName =>
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
 

@@ -1,14 +1,16 @@
-using Sources.App;
 using Sources.App.Core;
 using Sources.App.Factories;
 using UnityEngine;
 
-public class Bootstrapper : MonoBehaviour
+namespace Sources.App.Bootstrap
 {
-    private AppCore _appCore;
-
-    private void Awake()
+    public class Bootstrapper : MonoBehaviour
     {
-        _appCore = FindObjectOfType<AppCore>() ?? new AppCoreFactory().Create();
+        private AppCore _appCore;
+
+        private void Awake()
+        {
+            _appCore = FindObjectOfType<AppCore>() ?? new AppCoreFactory().Create();
+        }
     }
 }

@@ -4,13 +4,13 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
+using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
-using UnityEngine;
 using Zenject;
 
-namespace Sources.App.Ecs
+namespace Sources.App.Ecs.Controllers.Implementation
 {
     public class EcsStartUp : IEcsStartUp
     {
@@ -34,6 +34,7 @@ namespace Sources.App.Ecs
             _sharedData = new SharedData
             {
                 EventsBus = _eventsBus,
+                DiContainer = _container
             };
             _systems = new EcsSystems(_world, _sharedData);
             AddEditorSystems();
@@ -52,8 +53,6 @@ namespace Sources.App.Ecs
 
         public void Destroy()
         {
-            DestroyEditorSystems();
-            
             if (_systems != null)
             {
                 _systems.Destroy();
@@ -61,6 +60,8 @@ namespace Sources.App.Ecs
                 _world.Destroy();
                 _world = null;
             }
+            
+            DestroyEditorSystems();
         }
 
         private void AddRunSystems()
@@ -87,8 +88,8 @@ namespace Sources.App.Ecs
         private void Inject()
         {
             _systems
-                .Inject(_eventsBus)
-                .Inject(_container)
+                // .Inject(_eventsBus)
+                // .Inject(_container)
                 .Inject();
         }
 
@@ -104,8 +105,8 @@ namespace Sources.App.Ecs
 #if UNITY_EDITOR
             _editorSystems = new EcsSystems(_systems.GetWorld());
             _editorSystems
-                .Add(new Mitfart.LeoECSLite.UnityIntegration.EcsWorldDebugSystem())
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+                .Add(new Mitfart.LeoECSLite.UnityIntegration.EcsWorldDebugSystem())
                 .Init();
 #endif
 

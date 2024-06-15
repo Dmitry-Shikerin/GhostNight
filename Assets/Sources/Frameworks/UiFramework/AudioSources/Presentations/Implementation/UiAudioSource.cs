@@ -102,6 +102,6 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementati
         }
 
         private bool CanPlay() =>
-            _audioSource != null && _audioSource.clip.length <= _audioSource.time + 0.1f;
+            _audioSource != null && _audioSource.clip.length <= _audioSource.time + 0.025f;
     }
 }

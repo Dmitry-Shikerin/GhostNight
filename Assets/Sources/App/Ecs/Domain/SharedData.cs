@@ -1,7 +1,7 @@
 ﻿using SevenBoldPencil.EasyEvents;
 using Zenject;
 
-namespace Sources.App.Ecs
+namespace Sources.App.Ecs.Domain
 {
     public class SharedData
     {
