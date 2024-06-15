@@ -31,7 +31,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         public void PlayJump()
         {
             ExceptAnimation(StopJump);
-            Debug.Log($"Jump");
             Animator.SetBool(s_isJump, true);
         }
 

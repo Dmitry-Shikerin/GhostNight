@@ -14,32 +14,34 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
     {
         private readonly EcsFilterInject<Inc<CharacterTag, CharacterAnimationComponent>> _filter = default;
 
-        private CharacterAnimation _animation;
         private EventsBus _eventsBus;
         
         public void Init(IEcsSystems systems)
         {
-            _animation = _filter.Pools.Inc2.Get(0).Animation;
             _eventsBus = systems.GetShared<SharedData>().EventsBus;
         }
 
         public void Run(IEcsSystems systems)
         {
-            if (_eventsBus.HasEventSingleton<JumpEvent>())
+            foreach (int entity in _filter.Value)
             {
-                _animation.PlayJump();
+                CharacterAnimation animation = _filter.Pools.Inc2.Get(entity).Animation;
                 
-                return;
+                if (_eventsBus.HasEventSingleton<JumpEvent>())
+                {
+                    animation.PlayJump();
+
+                    return;
+                }
+
+                if (_eventsBus.HasEventSingleton(out InputEvent inputEvent) == false)
+                    return;
+
+                if (inputEvent.Direction != Vector2.zero)
+                    animation.PlayWalk();
+                else
+                    animation.PlayIdle();
             }
-            
-            if (_eventsBus.HasEventSingleton(out InputEvent inputEvent) == false)
-                return;
-
-            if (inputEvent.Direction == Vector2.zero)
-                _animation.PlayIdle();
-            else
-                _animation.PlayWalk();
-
         }
     }
 }

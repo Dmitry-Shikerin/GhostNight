@@ -28,13 +28,13 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 
                 if (movementComponent.IsLockMovement)
                     return;
-                
-                float gravity = 10;
-                Vector3 moveDirection = 
-                    Time.deltaTime 
-                    * movementComponent.Speed 
+
+                Vector3 moveDirection =
+                    Time.deltaTime
+                    * movementComponent.Speed
                     * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
-                moveDirection.y -= gravity * Time.deltaTime;
+                moveDirection.y -= movementComponent.Gravity * Time.deltaTime;
+
                 movementComponent.CharacterController.Move(moveDirection);
             }
         }

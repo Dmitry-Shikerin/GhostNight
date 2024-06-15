@@ -37,7 +37,12 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
         private void UpdateJumpInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_eventsBus.HasEventSingleton<JumpEvent>())
+                    return;
+                
                 _eventsBus.NewEventSingleton<JumpEvent>();
+            }
 
         }
 

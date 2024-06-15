@@ -10,7 +10,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
         public CharacterController CharacterController;
         [Range(1, 6)]
         public float Speed;
-
+        [Range(0, 15)]
+        public float Gravity;
         public bool IsLockMovement;
     }
 }
