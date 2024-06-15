@@ -1,27 +1,39 @@
-﻿using AB_Utility.FromSceneToEntityConverter;
+﻿using System;
+using AB_Utility.FromSceneToEntityConverter;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
+using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using UnityEngine;
+using Zenject;
 
 namespace Sources.App.Ecs
 {
-    public class EcsStartUp : MonoBehaviour
+    public class EcsStartUp : IEcsStartUp
     {
+        private readonly DiContainer _container;
+        
         private IEcsSystems _systems;
         private IEcsSystems _editorSystems;
         private EcsWorld _world;
         private SharedData _sharedData;
+        private EventsBus _eventsBus;
 
-        private void Start()
+        public EcsStartUp(DiContainer container)
+        {
+            _container = container ?? throw new ArgumentNullException(nameof(container));
+        }
+
+        public void Initialize()
         {
             _world = new EcsWorld();
+            _eventsBus = new EventsBus();
             _sharedData = new SharedData
             {
-                EventsBus = new EventsBus(),
+                EventsBus = _eventsBus,
             };
             _systems = new EcsSystems(_world, _sharedData);
             AddEditorSystems();
@@ -32,14 +44,16 @@ namespace Sources.App.Ecs
             _systems.Init();
         }
 
-        private void Update()
+        public void Update(float deltaTime)
         {
             _systems?.Run();
             RunEditorSystems();
         }
 
-        private void OnDestroy()
+        public void Destroy()
         {
+            DestroyEditorSystems();
+            
             if (_systems != null)
             {
                 _systems.Destroy();
@@ -47,8 +61,6 @@ namespace Sources.App.Ecs
                 _world.Destroy();
                 _world = null;
             }
-
-            DestroyEditorSystems();
         }
 
         private void AddRunSystems()
@@ -69,12 +81,15 @@ namespace Sources.App.Ecs
             _systems.Add(
                 _sharedData.EventsBus
                     .GetDestroyEventsSystem()
-                );
+            );
         }
 
         private void Inject()
         {
-            _systems.Inject();
+            _systems
+                .Inject(_eventsBus)
+                .Inject(_container)
+                .Inject();
         }
 
         private void AddComponentsConverterWorld()
@@ -93,7 +108,7 @@ namespace Sources.App.Ecs
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
                 .Init();
 #endif
-            
+
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
 #endif

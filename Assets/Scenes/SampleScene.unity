@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 1817680275}
   - component: {fileID: 1817680276}
   - component: {fileID: 1817680277}
+  - component: {fileID: 1817680278}
   - component: {fileID: 1817680273}
   m_Layer: 0
   m_Name: CharacterView
@@ -802,6 +803,7 @@ MonoBehaviour:
   - {fileID: 1817680275}
   - {fileID: 1817680276}
   - {fileID: 1817680277}
+  - {fileID: 1817680278}
   _destroyAfterConversion: 0
 --- !u!4 &1817680271
 Transform:
@@ -918,6 +920,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component:
     ParticleSystem: {fileID: 1841170146}
+--- !u!114 &1817680278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31732f0af80b44a194e91d7aadee875f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1841170144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2996988100426820553, guid: 4d73f63fcdd151847a47cf9850891fb3, type: 3}
