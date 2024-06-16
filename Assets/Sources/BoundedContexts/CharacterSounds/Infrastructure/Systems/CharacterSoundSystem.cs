@@ -28,14 +28,8 @@ namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
             if (_eventsBus.HasEventSingleton(out JumpEvent jumpEvent) == false)
                 return;
 
-            if (jumpEvent.IsJumped)
-                return;
-            
             foreach (int entity in _filter.Value)
-            {
-                Debug.Log($"Play sound");
                 _audioService.Play(AudioClipId.Jump);
-            }
         }
     }
 }

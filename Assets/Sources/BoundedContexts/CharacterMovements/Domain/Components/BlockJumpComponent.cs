@@ -1,12 +1,11 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
 {
     [Serializable]
-    public struct MovementComponent
+    public struct BlockJumpComponent
     {
-        [Range(1, 6)]
-        public float Speed;
+        public float CurrentTime;
+        public float MaxTime;
     }
 }

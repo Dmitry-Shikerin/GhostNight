@@ -1,7 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
@@ -30,6 +29,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             foreach (int entity in _filter.Value)
             {
                 ref RotateComponent rotateComponent = ref _filter.Pools.Inc2.Get(entity);
+                
                 Vector3 moveDirection = new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
                 float angle = Vector3.SignedAngle(Vector3.forward, moveDirection, Vector3.up);
                 Quaternion targetAngle = Quaternion.Euler(0, angle, 0);

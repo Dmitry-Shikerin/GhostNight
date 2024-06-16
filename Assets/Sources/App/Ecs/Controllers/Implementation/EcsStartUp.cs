@@ -5,6 +5,7 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
@@ -72,6 +73,9 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new MovementSystem())
                 .Add(new PlayerInputSystem())
                 .Add(new RotateSystem())
+                .Add(new GroundCheckSystem())
+                .Add(new JumpGravitySystem())
+                .Add(new BlockJumpRemoveSystem())
                 .Add(new CharacterAnimationSystem())
                 .Add(new FootstepParticleSystem())
                 .Add(new CharacterSoundSystem())
@@ -83,6 +87,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             _systems.Add(
                 _sharedData.EventsBus
                     .GetDestroyEventsSystem()
+                    .IncSingleton<JumpEvent>()
             );
         }
 

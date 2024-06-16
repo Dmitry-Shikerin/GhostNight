@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
 {
@@ -9,12 +10,10 @@ namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
         [Range(2, 10)]
         public float JumpForce;
         [Range(0, 6)]
-        public float Delay;
+        public float UpTime;
         [HideInInspector]
-        public float CurrentDalay;
-        [Range(1, 6)]
-        public float Speed;
-        [Range(0, 15)]
-        public float Gravity;
+        public float CurrentTime;
+        // [Range(1, 6)]
+        // public float Speed;
     }
 }

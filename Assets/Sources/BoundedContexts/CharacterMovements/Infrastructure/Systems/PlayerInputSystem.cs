@@ -1,15 +1,20 @@
 ﻿using System.Runtime.CompilerServices;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs;
 using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
+using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
     public class PlayerInputSystem : IEcsRunSystem, IEcsInitSystem
     {
+        private readonly EcsFilterInject<Inc<CharacterTag>, Exc<BlockJumpComponent>> _filter;
+        private readonly EcsWorldInject _world;
+        
         private EventsBus _eventsBus;
         
         public void Init(IEcsSystems systems)
@@ -39,27 +44,16 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (_eventsBus.HasEventSingleton<JumpEvent>())
-                    return;
-                
-                _eventsBus.NewEventSingleton<JumpEvent>();
+                foreach (int entity in _filter.Value)
+                {
+                    ref JumpComponent jumpComponent = ref _world.Value.GetPool<JumpComponent>().Add(entity);
+                    _world.Value.GetPool<BlockJumpComponent>().Add(entity);
+                    Debug.Log(jumpComponent);
+                    jumpComponent.JumpForce = 10f;
+                    jumpComponent.UpTime = 0.3f;
+                    _eventsBus.NewEventSingleton<JumpEvent>();
+                }
             }
-        }
-
-        private void DestroyEvent()
-        {
-            
-            if (_eventsBus.HasEventSingleton<JumpEvent>(out var jumpEvent) == false)
-                return;
-
-            ref JumpEvent body = ref _eventsBus.GetEventBodySingleton<JumpEvent>();
-            
-            if (body.Delay == 0)
-                body.Delay += Time.deltaTime;
-            else if (body.Delay is > 0 and < 3)
-                body.Delay += Time.deltaTime;
-            else
-                _eventsBus.DestroyEventSingleton<JumpEvent>();
         }
     }
 }

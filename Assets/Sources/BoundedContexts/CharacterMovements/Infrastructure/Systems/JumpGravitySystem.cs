@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
-    public class JumpSystem : IEcsRunSystem, IEcsInitSystem
+    public class JumpGravitySystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<
             Inc<CharacterTag, JumpComponent, CharacterControllerComponent, GravityComponent>> _filter = default;
@@ -31,17 +31,15 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 
                 ref InputEvent inputEvent = ref _eventsBus.GetEventBodySingleton<InputEvent>();
 
-                if (jumpComponent.CurrentTime >= jumpComponent.UpTime)
+                if (jumpComponent.CurrentTime < jumpComponent.UpTime)
                     continue;
                 
-                jumpComponent.CurrentTime += Time.deltaTime;
-                Vector3 direction =
+                Vector3 moveDirection =
                     Time.deltaTime
-                    * new Vector3(
-                        inputEvent.Direction.x + 0.2f,
-                        jumpComponent.JumpForce,
-                        inputEvent.Direction.y + 0.2f);
-                controllerComponent.CharacterController.Move(direction);
+                    * gravityComponent.Speed
+                    * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
+                moveDirection.y -= gravityComponent.Gravity * Time.deltaTime;
+                controllerComponent.CharacterController.Move(moveDirection);
             }
         }
     }

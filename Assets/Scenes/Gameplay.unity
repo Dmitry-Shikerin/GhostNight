@@ -997,11 +997,11 @@ GameObject:
   - component: {fileID: 1817680272}
   - component: {fileID: 1817680269}
   - component: {fileID: 1817680274}
-  - component: {fileID: 1817680275}
   - component: {fileID: 1817680276}
   - component: {fileID: 1817680277}
   - component: {fileID: 1817680278}
   - component: {fileID: 1817680279}
+  - component: {fileID: 1817680280}
   - component: {fileID: 1817680273}
   m_Layer: 0
   m_Name: CharacterView
@@ -1024,8 +1024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component:
     Speed: 6
-    Gravity: 7.7
-    IsLockMovement: 0
 --- !u!114 &1817680270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,11 +1040,11 @@ MonoBehaviour:
   - {fileID: 1817680272}
   - {fileID: 1817680269}
   - {fileID: 1817680274}
-  - {fileID: 1817680275}
   - {fileID: 1817680276}
   - {fileID: 1817680277}
   - {fileID: 1817680278}
   - {fileID: 1817680279}
+  - {fileID: 1817680280}
   _destroyAfterConversion: 0
 --- !u!4 &1817680271
 Transform:
@@ -1118,24 +1116,6 @@ MonoBehaviour:
   _component:
     Transform: {fileID: 1817680271}
     Speed: 4.01
---- !u!114 &1817680275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817680268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c95342e089d54cf8bed481d9e3bc6227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _component:
-    JumpForce: 10
-    Delay: 0.3
-    CurrentDalay: 0
-    Speed: 6
-    Gravity: 7.48
 --- !u!114 &1817680276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1190,6 +1170,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component:
     CharacterController: {fileID: 1817680273}
+--- !u!114 &1817680280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad852308a0a4d3ca67721a6f64bbd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _component:
+    Gravity: 7.81
+    Speed: 6
 --- !u!4 &1841170144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2996988100426820553, guid: 4d73f63fcdd151847a47cf9850891fb3, type: 3}

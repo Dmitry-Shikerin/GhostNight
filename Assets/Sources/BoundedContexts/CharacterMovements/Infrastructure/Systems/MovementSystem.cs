@@ -1,7 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
@@ -13,7 +12,11 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
     public class MovementSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<
-            Inc<CharacterTag, MovementComponent, CharacterControllerComponent>> _filter = default;
+            Inc<CharacterTag, MovementComponent, CharacterControllerComponent, GravityComponent>, 
+            Exc<JumpComponent>> _filter = default;
+
+        private readonly EcsWorldInject _world;
+
         private EventsBus _eventsBus;
 
         public void Init(IEcsSystems systems) =>
@@ -28,15 +31,13 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             {
                 ref MovementComponent movementComponent = ref _filter.Pools.Inc2.Get(entity);
                 ref CharacterControllerComponent controllerComponent = ref _filter.Pools.Inc3.Get(entity);
-
-                if (movementComponent.IsLockMovement)
-                    return;
+                ref GravityComponent gravityComponent = ref _filter.Pools.Inc4.Get(entity);
 
                 Vector3 moveDirection =
                     Time.deltaTime
                     * movementComponent.Speed
                     * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
-                moveDirection.y -= movementComponent.Gravity * Time.deltaTime;
+                moveDirection.y -= gravityComponent.Gravity * Time.deltaTime;
 
                 controllerComponent.CharacterController.Move(moveDirection);
             }
