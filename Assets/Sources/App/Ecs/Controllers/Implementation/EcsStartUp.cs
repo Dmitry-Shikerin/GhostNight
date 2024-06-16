@@ -41,7 +41,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             AddRunSystems();
             AddEvents();
             AddComponentsConverterWorld();
-            AddUnityIntegrationSystem();
+            // AddUnityIntegrationSystem();
             Inject();
             _systems.Init();
         }

@@ -1001,6 +1001,7 @@ GameObject:
   - component: {fileID: 1817680276}
   - component: {fileID: 1817680277}
   - component: {fileID: 1817680278}
+  - component: {fileID: 1817680279}
   - component: {fileID: 1817680273}
   m_Layer: 0
   m_Name: CharacterView
@@ -1022,8 +1023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _component:
-    Transform: {fileID: 1817680271}
-    CharacterController: {fileID: 1817680273}
     Speed: 6
     Gravity: 7.7
     IsLockMovement: 0
@@ -1047,6 +1046,7 @@ MonoBehaviour:
   - {fileID: 1817680276}
   - {fileID: 1817680277}
   - {fileID: 1817680278}
+  - {fileID: 1817680279}
   _destroyAfterConversion: 0
 --- !u!4 &1817680271
 Transform:
@@ -1134,7 +1134,8 @@ MonoBehaviour:
     JumpForce: 10
     Delay: 0.3
     CurrentDalay: 0
-    TargetPosition: {x: 0, y: 0, z: 0}
+    Speed: 6
+    Gravity: 7.48
 --- !u!114 &1817680276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,6 +1176,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31732f0af80b44a194e91d7aadee875f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1817680279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c63308071d48a888d75e7c24e91d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _component:
+    CharacterController: {fileID: 1817680273}
 --- !u!4 &1841170144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2996988100426820553, guid: 4d73f63fcdd151847a47cf9850891fb3, type: 3}

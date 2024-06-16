@@ -1,7 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
@@ -13,7 +12,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
     public class JumpSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<
-            Inc<CharacterTag, JumpComponent, MovementComponent, CharacterAnimationComponent>> _filter = default;
+            Inc<CharacterTag, JumpComponent, CharacterControllerComponent>> _filter = default;
+        private readonly EcsWorldInject _world = default;
 
         private EventsBus _eventsBus;
 
@@ -24,13 +24,12 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
         {
             foreach (int entity in _filter.Value)
             {
-                ref MovementComponent movementComponent = ref _filter.Pools.Inc3.Get(entity);
                 ref JumpComponent jumpComponent = ref _filter.Pools.Inc2.Get(entity);
-                ref CharacterAnimationComponent animationComponent = ref _filter.Pools.Inc4.Get(entity);
+                ref CharacterControllerComponent controllerComponent = ref _filter.Pools.Inc3.Get(entity);
 
                 if (_eventsBus.HasEventSingleton<JumpEvent>() == false)
                     return;
-                
+
                 ref JumpEvent jumpBody = ref _eventsBus.GetEventBodySingleton<JumpEvent>();
                 ref InputEvent inputEvent = ref _eventsBus.GetEventBodySingleton<InputEvent>();
 
@@ -45,31 +44,33 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                                 inputEvent.Direction.x + 0.2f, 
                                 jumpComponent.JumpForce, 
                                 inputEvent.Direction.y + 0.2f);
-                        movementComponent.CharacterController.Move(direction);
+                        controllerComponent.CharacterController.Move(direction);
                     }
                     else
                     {
-                        if (movementComponent.CharacterController.isGrounded)
+                        if (controllerComponent.CharacterController.isGrounded)
                         {
                             jumpComponent.CurrentDalay = 0;
                             jumpBody.IsJumped = false;
+                            ref var movementComponent = ref _world.Value.GetPool<MovementComponent>().Add(entity);
+                            movementComponent.Gravity = jumpComponent.Gravity;
+                            movementComponent.Speed = jumpComponent.Speed;
                             _eventsBus.DestroyEventSingleton<JumpEvent>();
-                            movementComponent.IsLockMovement = false;
                         }
                         
                         Vector3 moveDirection = 
                             Time.deltaTime 
-                            * movementComponent.Speed
+                            * jumpComponent.Speed
                             * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
-                        moveDirection.y -= movementComponent.Gravity * Time.deltaTime;
-                        movementComponent.CharacterController.Move(moveDirection);
+                        moveDirection.y -= jumpComponent.Gravity * Time.deltaTime;
+                        controllerComponent.CharacterController.Move(moveDirection);
                     }
                     
                     return;
                 }
 
-                movementComponent.IsLockMovement = true;
                 jumpBody.IsJumped = true;
+                _world.Value.GetPool<MovementComponent>().Del(entity);
             }
         }
     }

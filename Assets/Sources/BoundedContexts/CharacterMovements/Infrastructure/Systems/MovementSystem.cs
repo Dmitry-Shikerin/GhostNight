@@ -12,7 +12,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
     public class MovementSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly EcsFilterInject<Inc<CharacterTag, MovementComponent>> _filter = default;
+        private readonly EcsFilterInject<
+            Inc<CharacterTag, MovementComponent, CharacterControllerComponent>> _filter = default;
         private EventsBus _eventsBus;
 
         public void Init(IEcsSystems systems) =>
@@ -26,6 +27,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             foreach (int entity in _filter.Value)
             {
                 ref MovementComponent movementComponent = ref _filter.Pools.Inc2.Get(entity);
+                ref CharacterControllerComponent controllerComponent = ref _filter.Pools.Inc3.Get(entity);
 
                 if (movementComponent.IsLockMovement)
                     return;
@@ -36,7 +38,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                     * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
                 moveDirection.y -= movementComponent.Gravity * Time.deltaTime;
 
-                movementComponent.CharacterController.Move(moveDirection);
+                controllerComponent.CharacterController.Move(moveDirection);
             }
         }
     }

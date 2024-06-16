@@ -12,6 +12,9 @@ namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
         public float Delay;
         [HideInInspector]
         public float CurrentDalay;
-        public Vector3 TargetPosition;
+        [Range(1, 6)]
+        public float Speed;
+        [Range(0, 15)]
+        public float Gravity;
     }
 }
