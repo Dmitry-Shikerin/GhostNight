@@ -1,0 +1,26 @@
+{
+  "title": "Pattern Matcher - Large Ground Tiles",
+  "layout": "Details",
+
+  "header": "Pattern Matcher - Large Ground Tiles",
+  "desc": "Insert larger ground tiles using the pattern matcher",
+  "image": "samples/images/pattern_match_ground",
+  "actions": [
+    {
+      "type": "OpenScene",
+      "data": { "path": "Assets/CodeRespawn/DungeonArchitect_Samples/Demo_PatternMatcher/Demo_GroundTiles/Demo_PatternMatcher_GroundTiles.unity" }
+    },
+    {
+      "type": "OpenFolder",
+      "data": { "path": "Assets/CodeRespawn/DungeonArchitect_Samples/Demo_PatternMatcher/Demo_GroundTiles/Demo_PatternMatcher_GroundTiles.unity" }
+    },
+    {
+      "type": "CloneScene",
+      "data": { "path": "Assets/CodeRespawn/DungeonArchitect_Samples/Demo_PatternMatcher/Demo_GroundTiles/Demo_PatternMatcher_GroundTiles.unity" }
+    },
+    {
+      "type": "Documentation",
+      "data": { "path": "https://docs.dungeonarchitect.dev/unity/pattern-matcher/getting-started" }
+    }
+  ]
+}
