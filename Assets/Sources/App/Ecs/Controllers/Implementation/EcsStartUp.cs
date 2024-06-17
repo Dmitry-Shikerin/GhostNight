@@ -5,6 +5,7 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.Cameras.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
@@ -23,6 +24,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
         private EcsWorld _world;
         private SharedData _sharedData;
         private EventsBus _eventsBus;
+
+        private bool _isInitialize;
 
         public EcsStartUp(DiContainer container)
         {
@@ -46,10 +49,14 @@ namespace Sources.App.Ecs.Controllers.Implementation
             // AddUnityIntegrationSystem();
             Inject();
             _systems.Init();
+            _isInitialize = true;
         }
 
         public void Update(float deltaTime)
         {
+            if (_isInitialize == false)
+                return;
+            
             _systems?.Run();
             RunEditorSystems();
         }
