@@ -8,6 +8,7 @@ using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
+using Sources.BoundedContexts.EnemyMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using Zenject;
 
@@ -79,6 +80,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new CharacterAnimationSystem())
                 .Add(new FootstepParticleSystem())
                 .Add(new CharacterSoundSystem())
+                
+                .Add(new EnemyMovementSystem())
                 ;
         }
 
