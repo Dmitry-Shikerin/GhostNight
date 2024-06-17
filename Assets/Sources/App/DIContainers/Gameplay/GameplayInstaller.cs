@@ -9,6 +9,7 @@ using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Domain.Implementat
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Implementation;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Sources.App.DIContainers.Gameplay
@@ -16,12 +17,12 @@ namespace Sources.App.DIContainers.Gameplay
     public class GameplayInstaller : MonoInstaller
     {
         [SerializeField] private GameplayHud _gameplayHud;
-        [SerializeField] private RootGameObject _rootGameObject;
+        [FormerlySerializedAs("environment")] [FormerlySerializedAs("_rootGameObject")] [SerializeField] private RootGameObject rootGameObject;
         
         public override void InstallBindings()
         {
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
-            Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
+            Container.Bind<RootGameObject>().FromInstance(rootGameObject).AsSingle();
             
             Container.Bind<ISceneFactory>().To<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplayModelsCreatorService>().AsSingle();

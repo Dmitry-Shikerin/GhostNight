@@ -37,10 +37,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Ghost_Green_02
-  m_Shader: {fileID: 31, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 26ac6b86cbebf834fb2ac55c14c9bb16, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - TCP2_TANGENT_AS_NORMALS
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -92,6 +93,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SketchTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -153,7 +158,10 @@ Material:
     - _DstBlend: 0
     - _EmissionEnabled: 0
     - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableConstSizeOutline: 0
     - _EnableFogOnTransparent: 1
+    - _EnableTexturedOutline: 0
+    - _EnableZSmooth: 0
     - _EnvironmentReflections: 1
     - _Falloff: 0.39
     - _FlipbookMode: 0
@@ -167,17 +175,27 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 0
+    - _Offset2: 0
     - _OpaqueCullMode: 2
+    - _Outline: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RampSmooth: 0.1
+    - _RampThreshold: 0.5
     - _ReceiveShadows: 1
     - _RenderQueueType: 4
+    - _RimMax: 1
+    - _RimMin: 0.11
+    - _SketchHalftoneMax: 1
+    - _SketchHalftoneMin: 0.242
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
+    - _SpecSmooth: 0.078
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -192,6 +210,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _Surface: 0
     - _SurfaceType: 1
+    - _TexLod: 5
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -201,12 +220,15 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _WorkflowMode: 1
+    - _ZSmooth: -0.5
     - _ZTest: 4
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _ZWriteControl: 1
+    - __dummy__: 0
+    - __outline_gui_dummy__: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
@@ -215,8 +237,13 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnalColor: {r: 1.8539587, g: 7.3772106, b: 2.2402, a: 0}
+    - _HColor: {r: 0.785, g: 0.785, b: 0.785, a: 1}
     - _InterioirPosition: {r: 0, g: 0, b: 1, a: 0}
     - _InteriorColor: {r: 0, g: 1, b: 0.5053382, a: 1}
+    - _OutlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
+    - _SColor: {r: 0.195, g: 0.195, b: 0.195, a: 1}
+    - _SketchColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
