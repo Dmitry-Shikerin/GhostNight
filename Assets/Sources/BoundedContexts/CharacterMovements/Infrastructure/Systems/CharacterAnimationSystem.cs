@@ -7,13 +7,15 @@ using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Views;
+using Sources.BoundedContexts.Footsteps.Domain.Events;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
     public class CharacterAnimationSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly EcsFilterInject<Inc<CharacterTag, CharacterAnimationComponent>> _filter = default;
+        private readonly EcsFilterInject<
+            Inc<CharacterTag, CharacterAnimationComponent>> _filter = default;
 
         private EventsBus _eventsBus;
         

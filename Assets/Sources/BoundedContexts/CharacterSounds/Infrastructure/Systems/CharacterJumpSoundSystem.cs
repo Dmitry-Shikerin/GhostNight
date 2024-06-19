@@ -10,9 +10,10 @@ using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
 {
-    public class CharacterSoundSystem : IEcsRunSystem, IEcsInitSystem
+    public class CharacterJumpSoundSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly EcsFilterInject<Inc<CharacterSoundComponent>> _filter = default;
+        private readonly EcsFilterInject<
+            Inc<CharacterSoundComponent>> _filter = default;
         private EventsBus _eventsBus;
         private IAudioService _audioService;
 

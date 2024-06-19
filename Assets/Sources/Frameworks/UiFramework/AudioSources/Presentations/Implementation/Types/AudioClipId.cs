@@ -5,5 +5,6 @@
         Default = 0,
         Button = 1,
         Jump = 2,
+        FootStep = 3,
     }
 }

@@ -1,4 +1,11 @@
-﻿using Sources.BoundedContexts.Animations.Presentations;
+﻿using System;
+using JetBrains.Annotations;
+using Leopotam.EcsLite;
+using Sources.BoundedContexts.Animations.Presentations;
+using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
+using Sources.BoundedContexts.EntityReferences.Presentation.Views;
+using Sources.BoundedContexts.Footsteps.Domain.Events;
+using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Constructors;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
@@ -9,6 +16,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         private static int s_isIdle = Animator.StringToHash("IsIdle");
         private static int s_isJump = Animator.StringToHash("IsJump");
         private static int s_isFlip = Animator.StringToHash("IsFlip");
+        
+        private EntityReference _entityReference;
 
         private void Awake()
         {
@@ -16,8 +25,10 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
             StoppingAnimations.Add(StopIdle);
             StoppingAnimations.Add(StopJump);
             StoppingAnimations.Add(StopFlip);
-        }
 
+            _entityReference = GetComponentInParent<EntityReference>();
+        }
+        
         public void PlayWalk()
         {
             ExceptAnimation(StopWalk);
@@ -42,8 +53,19 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
             if (Animator.GetBool(s_isFlip))
                 return;
                 
-            Debug.Log($"Play flip");
             Animator.SetBool(s_isFlip, true);
+        }
+
+        [UsedImplicitly]
+        private void OnRightStep()
+        {
+            _entityReference.World.GetPool<FootstepEvent>().Add(_entityReference.Entity);
+        }
+
+        [UsedImplicitly]
+        private void OnLeftStep()
+        {
+            _entityReference.World.GetPool<FootstepEvent>().Add(_entityReference.Entity);
         }
 
         private void StopFlip() =>

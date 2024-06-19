@@ -10,6 +10,8 @@ using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Systems;
+using Sources.BoundedContexts.EntityReferences;
+using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
@@ -80,6 +82,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
         private void AddRunSystems()
         {
             _systems
+                .Add(new EntityReferenceInitializeSystem())
+                .Add(new CharacterAnimationInitSystem())
                 .Add(new JumpSystem())
                 .Add(new MovementSystem())
                 .Add(new PlayerInputSystem())
@@ -89,7 +93,9 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new BlockJumpRemoveSystem())
                 .Add(new CharacterAnimationSystem())
                 .Add(new FootstepParticleSystem())
-                .Add(new CharacterSoundSystem())
+                .Add(new CharacterJumpSoundSystem())
+                .Add(new CharacterFootStepSoundSystem())
+                
                 .Add(new EnemyMovementSystem())
                 ;
         }

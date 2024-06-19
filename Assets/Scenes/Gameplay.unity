@@ -2480,6 +2480,8 @@ GameObject:
   - component: {fileID: 1817680279}
   - component: {fileID: 1817680280}
   - component: {fileID: 1817680273}
+  - component: {fileID: 1817680283}
+  - component: {fileID: 1817680282}
   m_Layer: 0
   m_Name: CharacterView
   m_TagString: Untagged
@@ -2515,6 +2517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _converters:
   - {fileID: 1817680272}
+  - {fileID: 1817680281}
   - {fileID: 1817680269}
   - {fileID: 1817680274}
   - {fileID: 1817680276}
@@ -2522,7 +2525,7 @@ MonoBehaviour:
   - {fileID: 1817680278}
   - {fileID: 1817680279}
   - {fileID: 1817680280}
-  - {fileID: 1817680281}
+  - {fileID: 1817680283}
   _destroyAfterConversion: 0
 --- !u!4 &1817680271
 Transform:
@@ -2677,6 +2680,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component:
     Transform: {fileID: 1817680271}
+--- !u!114 &1817680282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0671988a64b4bf888296651046da670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Entity: 0
+--- !u!114 &1817680283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817680268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6fb0d1d25a41bdb1361fa8f3439f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _component:
+    EntityReference: {fileID: 1817680282}
 --- !u!4 &1841170144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2996988100426820553, guid: 4d73f63fcdd151847a47cf9850891fb3, type: 3}
