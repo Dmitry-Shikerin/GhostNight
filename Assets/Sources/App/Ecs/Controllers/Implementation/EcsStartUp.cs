@@ -5,14 +5,10 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
-using Sources.BoundedContexts.Cameras.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
-using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
-using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
-using Sources.BoundedContexts.EnemyMovements.Infrastructure.Systems;
-using Sources.BoundedContexts.EntityReferences;
+using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
+using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
-using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Zenject;
@@ -83,20 +79,10 @@ namespace Sources.App.Ecs.Controllers.Implementation
         {
             _systems
                 .Add(new EntityReferenceInitializeSystem())
-                .Add(new CharacterAnimationInitSystem())
-                .Add(new JumpSystem())
-                .Add(new MovementSystem())
-                .Add(new PlayerInputSystem())
-                .Add(new RotateSystem())
-                .Add(new GroundCheckSystem())
-                .Add(new JumpGravitySystem())
-                .Add(new BlockJumpRemoveSystem())
-                .Add(new CharacterAnimationSystem())
-                .Add(new FootstepParticleSystem())
-                .Add(new CharacterJumpSoundSystem())
-                .Add(new CharacterFootStepSoundSystem())
                 
-                .Add(new EnemyMovementSystem())
+                .Add(new CharacterMovementFeature())
+                
+                .Add(new EnemyMovementFeature())
                 ;
         }
 

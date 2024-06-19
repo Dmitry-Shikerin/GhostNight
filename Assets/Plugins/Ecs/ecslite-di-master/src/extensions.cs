@@ -6,33 +6,39 @@
 using System;
 using System.Reflection;
 
-namespace Leopotam.EcsLite.Di {
+namespace Leopotam.EcsLite.Di 
+{
 #if LEOECSLITE_DI
-    public interface IEcsInjectSystem : IEcsSystem {
+    public interface IEcsInjectSystem : IEcsSystem 
+{
         void Inject (IEcsSystems systems, params object[] injects);
-    }
+}
 #endif
-    public static class Extensions {
-        public static IEcsSystems Inject (this IEcsSystems systems, params object[] injects) {
+    public static class Extensions 
+    {
+        public static IEcsSystems Inject (this IEcsSystems systems, params object[] injects) 
+        {
             if (injects == null)
-                injects = Array.Empty<object> ();
+                injects = Array.Empty<object>();
             
-            foreach (var system in systems.GetAllSystems ()) 
+            foreach (var system in systems.GetAllSystems())
             {
 #if LEOECSLITE_DI
-                if (system is IEcsInjectSystem injectSystem) {
-                    injectSystem.Inject (systems, injects);
+                if (system is IEcsInjectSystem injectSystem) 
+                {
+                    injectSystem.Inject(systems, injects);
                     continue;
                 }
 #endif
-                InjectToSystem (system, systems, injects);
+                InjectToSystem(system, systems, injects);
             }
 
             return systems;
         }
 
-        public static void InjectToSystem (IEcsSystem system, IEcsSystems systems, object[] injects) {
-            foreach (var f in system.GetType ().GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) 
+        public static void InjectToSystem(IEcsSystem system, IEcsSystems systems, object[] injects) 
+        {
+            foreach(var f in system.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) 
             {
                 // skip statics.
                 if (f.IsStatic)
@@ -49,12 +55,13 @@ namespace Leopotam.EcsLite.Di {
             }
         }
 
-        static bool InjectBuiltIns (FieldInfo fieldInfo, IEcsSystem system, IEcsSystems systems) 
+        static bool InjectBuiltIns(FieldInfo fieldInfo, IEcsSystem system, IEcsSystems systems) 
         {
-            if (typeof (IEcsDataInject).IsAssignableFrom (fieldInfo.FieldType)) {
-                var instance = (IEcsDataInject) fieldInfo.GetValue (system);
-                instance.Fill (systems);
-                fieldInfo.SetValue (system, instance);
+            if (typeof(IEcsDataInject).IsAssignableFrom(fieldInfo.FieldType)) 
+            {
+                IEcsDataInject instance = (IEcsDataInject)fieldInfo.GetValue(system);
+                instance.Fill(systems);
+                fieldInfo.SetValue(system, instance);
                 
                 return true;
             }
@@ -62,13 +69,13 @@ namespace Leopotam.EcsLite.Di {
             return false;
         }
 
-        static bool InjectCustoms (FieldInfo fieldInfo, IEcsSystem system, object[] injects) 
+        static bool InjectCustoms(FieldInfo fieldInfo, IEcsSystem system, object[] injects) 
         {
-            if (typeof (IEcsCustomDataInject).IsAssignableFrom (fieldInfo.FieldType)) 
+            if (typeof (IEcsCustomDataInject).IsAssignableFrom(fieldInfo.FieldType)) 
             {
                 var instance = (IEcsCustomDataInject) fieldInfo.GetValue (system);
-                instance.Fill (injects);
-                fieldInfo.SetValue (system, instance);
+                instance.Fill(injects);
+                fieldInfo.SetValue(system, instance);
                 
                 return true;
             }
@@ -86,31 +93,37 @@ namespace Leopotam.EcsLite.Di {
 
     public interface IEcsDataInject 
     {
-        void Fill (IEcsSystems systems);
+        void Fill(IEcsSystems systems);
     }
 
     public interface IEcsCustomDataInject 
     {
-        void Fill (object[] injects);
+        void Fill(object[] injects);
     }
 
-    public interface IEcsInclude {
-        
-        EcsWorld.Mask Fill (EcsWorld world);
+    public interface IEcsInclude 
+    {
+        EcsWorld.Mask Fill(EcsWorld world);
     }
 
-    public interface IEcsExclude {
-        EcsWorld.Mask Fill (EcsWorld.Mask mask);
+    public interface IEcsExclude 
+    {
+        EcsWorld.Mask Fill(EcsWorld.Mask mask);
     }
 
     public struct EcsFilterInject<TInc> : IEcsDataInject
-        where TInc : struct, IEcsInclude {
+        where TInc : struct, IEcsInclude 
+    {
         public EcsFilter Value;
         public TInc Pools;
         string _worldName;
 
-        public static implicit operator EcsFilterInject<TInc> (string worldName) {
-            return new EcsFilterInject<TInc> { _worldName = worldName };
+        public static implicit operator EcsFilterInject<TInc> (string worldName) 
+        {
+            return new EcsFilterInject<TInc>()
+            {
+                _worldName = worldName
+            };
         }
 
         void IEcsDataInject.Fill (IEcsSystems systems) {
@@ -121,16 +134,19 @@ namespace Leopotam.EcsLite.Di {
 
     public struct EcsFilterInject<TInc, TExc> : IEcsDataInject
         where TInc : struct, IEcsInclude
-        where TExc : struct, IEcsExclude {
+        where TExc : struct, IEcsExclude 
+    {
         public EcsFilter Value;
         public TInc Pools;
         string _worldName;
 
-        public static implicit operator EcsFilterInject<TInc, TExc> (string worldName) {
+        public static implicit operator EcsFilterInject<TInc, TExc> (string worldName) 
+        {
             return new EcsFilterInject<TInc, TExc> { _worldName = worldName };
         }
 
-        void IEcsDataInject.Fill (IEcsSystems systems) {
+        void IEcsDataInject.Fill (IEcsSystems systems) 
+        {
             Pools = default;
             TExc exc = default;
             Value = exc.Fill (Pools.Fill (systems.GetWorld (_worldName))).End ();

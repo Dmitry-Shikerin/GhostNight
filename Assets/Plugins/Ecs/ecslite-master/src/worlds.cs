@@ -142,9 +142,10 @@ namespace Leopotam.EcsLite {
             _allFilters.Clear ();
             _filtersByIncludedComponents = Array.Empty<List<EcsFilter>> ();
             _filtersByExcludedComponents = Array.Empty<List<EcsFilter>> ();
+            
 #if DEBUG || LEOECSLITE_WORLD_EVENTS
-            for (var ii = _eventListeners.Count - 1; ii >= 0; ii--)
-                _eventListeners[ii].OnWorldDestroyed (this);
+            for (int ii = _eventListeners.Count - 1; ii >= 0; ii--)
+                _eventListeners[ii].OnWorldDestroyed(this);
 #endif
         }
 
@@ -172,10 +173,10 @@ namespace Leopotam.EcsLite {
                 {
                     // resize entities and component pools.
                     int newSize = _entitiesCount << 1;
-                    Array.Resize (ref _entities, newSize * _entitiesItemSize);
+                    Array.Resize(ref _entities, newSize * _entitiesItemSize);
                     
                     for (int i = 0, iMax = _poolsCount; i < iMax; i++)
-                        _pools[i].Resize (newSize);
+                        _pools[i].Resize(newSize);
                     
                     for (int i = 0, iMax = _allFilters.Count; i < iMax; i++)
                         _allFilters[i].ResizeSparseIndex(newSize);
@@ -185,7 +186,7 @@ namespace Leopotam.EcsLite {
 #endif
                 }
                 entity = _entitiesCount++;
-                _entities[GetRawEntityOffset (entity) + RawEntityOffsets.Gen] = 1;
+                _entities[GetRawEntityOffset(entity) + RawEntityOffsets.Gen] = 1;
             }
 #if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
             _leakedEntities.Add(entity);
@@ -203,7 +204,7 @@ namespace Leopotam.EcsLite {
             if (entity < 0 || entity >= _entitiesCount)
                 throw new Exception ("Cant touch destroyed entity.");
 #endif
-            int entityOffset = GetRawEntityOffset (entity);
+            int entityOffset = GetRawEntityOffset(entity);
             short componentsCount = _entities[entityOffset + RawEntityOffsets.ComponentsCount];
             ref short entityGen = ref _entities[entityOffset + RawEntityOffsets.Gen];
             
@@ -220,24 +221,24 @@ namespace Leopotam.EcsLite {
                 entityGen = (short) (entityGen == short.MaxValue ? -1 : -(entityGen + 1));
                 
                 if (_recycledEntitiesCount == _recycledEntities.Length)
-                    Array.Resize (ref _recycledEntities, _recycledEntitiesCount << 1);
+                    Array.Resize(ref _recycledEntities, _recycledEntitiesCount << 1);
                 
                 _recycledEntities[_recycledEntitiesCount++] = entity;
                 
 #if DEBUG || LEOECSLITE_WORLD_EVENTS
                 for (int ii = 0, iMax = _eventListeners.Count; ii < iMax; ii++)
-                    _eventListeners[ii].OnEntityDestroyed (entity);
+                    _eventListeners[ii].OnEntityDestroyed(entity);
 #endif
             }
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public int GetComponentsCount (int entity) =>
-            _entities[GetRawEntityOffset (entity) + RawEntityOffsets.ComponentsCount];
+        public int GetComponentsCount(int entity) =>
+            _entities[GetRawEntityOffset(entity) + RawEntityOffsets.ComponentsCount];
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public short GetEntityGen (int entity) =>
-            _entities[GetRawEntityOffset (entity) + RawEntityOffsets.Gen];
+        public short GetEntityGen(int entity) =>
+            _entities[GetRawEntityOffset(entity) + RawEntityOffsets.Gen];
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public int GetRawEntityItemSize() =>
@@ -256,32 +257,32 @@ namespace Leopotam.EcsLite {
             _poolsCount;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public int GetEntitiesCount () =>
+        public int GetEntitiesCount() =>
             _entitiesCount - _recycledEntitiesCount;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public short[] GetRawEntities () =>
+        public short[] GetRawEntities() =>
             _entities;
 
-        public EcsPool<T> GetPool<T> () where T : struct 
+        public EcsPool<T> GetPool<T>() where T : struct 
         {
-            Type poolType = typeof (T);
+            Type poolType = typeof(T);
             
             if (_poolHashes.TryGetValue (poolType, out var rawPool))
                 return (EcsPool<T>) rawPool;
 #if DEBUG
             if (_poolsCount == short.MaxValue)
-                throw new Exception ("No more room for new component into this world.");
+                throw new Exception("No more room for new component into this world.");
 #endif
-            EcsPool<T> pool = new EcsPool<T> (this, _poolsCount, _poolDenseSize, GetWorldSize (), _poolRecycledSize);
+            EcsPool<T> pool = new EcsPool<T>(this, _poolsCount, _poolDenseSize, GetWorldSize (), _poolRecycledSize);
             _poolHashes[poolType] = pool;
             
             if (_poolsCount == _pools.Length) 
             {
                 var newSize = _poolsCount << 1;
-                Array.Resize (ref _pools, newSize);
-                Array.Resize (ref _filtersByIncludedComponents, newSize);
-                Array.Resize (ref _filtersByExcludedComponents, newSize);
+                Array.Resize(ref _pools, newSize);
+                Array.Resize(ref _filtersByIncludedComponents, newSize);
+                Array.Resize(ref _filtersByExcludedComponents, newSize);
             }
             
             _pools[_poolsCount++] = pool;
@@ -290,11 +291,11 @@ namespace Leopotam.EcsLite {
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public IEcsPool GetPoolById (int typeId) =>
+        public IEcsPool GetPoolById(int typeId) =>
             typeId >= 0 && typeId < _poolsCount ? _pools[typeId] : null;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public IEcsPool GetPoolByType (Type type) =>
+        public IEcsPool GetPoolByType(Type type) =>
             _poolHashes.TryGetValue (type, out var pool) ? pool : null;
 
         public int GetAllEntities (ref int[] entities) 
@@ -323,13 +324,14 @@ namespace Leopotam.EcsLite {
             if (pools == null || pools.Length < count)
                 pools = new IEcsPool[count];
             
-            Array.Copy (_pools, 0, pools, 0, _poolsCount);
+            Array.Copy(_pools, 0, pools, 0, _poolsCount);
             
             return _poolsCount;
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public Mask Filter<T>() where T : struct 
+        public Mask Filter<T>() 
+            where T : struct 
         {
             var mask = _masksCount > 0 ? _masks[--_masksCount] : new Mask (this);
             
@@ -369,14 +371,14 @@ namespace Leopotam.EcsLite {
             int dataOffset = entityOffset + RawEntityOffsets.Components;
             
             for (int i = 0; i < itemsCount; i++)
-                list[i] = _pools[_entities[dataOffset + i]].GetComponentType ();
+                list[i] = _pools[_entities[dataOffset + i]].GetComponentType();
             
             return itemsCount;
         }
 
-        public void CopyEntity (int srcEntity, int dstEntity) 
+        public void CopyEntity(int srcEntity, int dstEntity) 
         {
-            int entityOffset = GetRawEntityOffset (srcEntity);
+            int entityOffset = GetRawEntityOffset(srcEntity);
             short itemsCount = _entities[entityOffset + RawEntityOffsets.ComponentsCount];
             
             if (itemsCount > 0) 
