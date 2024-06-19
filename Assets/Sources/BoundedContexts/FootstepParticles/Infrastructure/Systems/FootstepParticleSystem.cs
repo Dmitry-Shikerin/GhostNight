@@ -1,7 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.FootstepParticles.Domain.Components;

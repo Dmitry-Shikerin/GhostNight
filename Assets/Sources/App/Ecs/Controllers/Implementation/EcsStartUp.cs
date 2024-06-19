@@ -11,6 +11,8 @@ using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
+using Sources.BoundedContexts.Footsteps.Domain.Events;
+using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Zenject;
 
 namespace Sources.App.Ecs.Controllers.Implementation
@@ -44,6 +46,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             _systems = new EcsSystems(_world, _sharedData);
             AddEditorSystems();
             AddRunSystems();
+            AddOneFrame();
             AddEvents();
             AddComponentsConverterWorld();
             // AddUnityIntegrationSystem();
@@ -63,6 +66,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
 
         public void Destroy()
         {
+            DestroyEditorSystems();
+            
             if (_systems != null)
             {
                 _systems.Destroy();
@@ -70,8 +75,6 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 _world.Destroy();
                 _world = null;
             }
-
-            DestroyEditorSystems();
         }
 
         private void AddRunSystems()
@@ -87,8 +90,14 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new CharacterAnimationSystem())
                 .Add(new FootstepParticleSystem())
                 .Add(new CharacterSoundSystem())
-                
                 .Add(new EnemyMovementSystem())
+                ;
+        }
+
+        private void AddOneFrame()
+        {
+            _systems
+                .AddOneFrame<FootstepEvent>()
                 ;
         }
 
@@ -104,8 +113,6 @@ namespace Sources.App.Ecs.Controllers.Implementation
         private void Inject()
         {
             _systems
-                // .Inject(_eventsBus)
-                // .Inject(_container)
                 .Inject();
         }
 
