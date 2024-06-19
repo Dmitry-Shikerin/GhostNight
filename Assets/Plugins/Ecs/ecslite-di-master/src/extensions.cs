@@ -14,8 +14,11 @@ namespace Leopotam.EcsLite.Di {
 #endif
     public static class Extensions {
         public static IEcsSystems Inject (this IEcsSystems systems, params object[] injects) {
-            if (injects == null) { injects = Array.Empty<object> (); }
-            foreach (var system in systems.GetAllSystems ()) {
+            if (injects == null)
+                injects = Array.Empty<object> ();
+            
+            foreach (var system in systems.GetAllSystems ()) 
+            {
 #if LEOECSLITE_DI
                 if (system is IEcsInjectSystem injectSystem) {
                     injectSystem.Inject (systems, injects);
@@ -29,51 +32,70 @@ namespace Leopotam.EcsLite.Di {
         }
 
         public static void InjectToSystem (IEcsSystem system, IEcsSystems systems, object[] injects) {
-            foreach (var f in system.GetType ().GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) {
+            foreach (var f in system.GetType ().GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) 
+            {
                 // skip statics.
-                if (f.IsStatic) { continue; }
+                if (f.IsStatic)
+                    continue;
+                
                 // EcsWorldInject, EcsFilterInject, EcsPoolInject, EcsSharedInject.
-                if (InjectBuiltIns (f, system, systems)) { continue; }
+                if (InjectBuiltIns(f, system, systems))
+                    continue;
+                
                 // IEcsCustomDataInject derivatives (EcsCustomInject, etc).
-                if (InjectCustoms (f, system, injects)) { }
+                if (InjectCustoms(f, system, injects))
+                {
+                }
             }
         }
 
-        static bool InjectBuiltIns (FieldInfo fieldInfo, IEcsSystem system, IEcsSystems systems) {
+        static bool InjectBuiltIns (FieldInfo fieldInfo, IEcsSystem system, IEcsSystems systems) 
+        {
             if (typeof (IEcsDataInject).IsAssignableFrom (fieldInfo.FieldType)) {
                 var instance = (IEcsDataInject) fieldInfo.GetValue (system);
                 instance.Fill (systems);
                 fieldInfo.SetValue (system, instance);
+                
                 return true;
             }
+            
             return false;
         }
 
-        static bool InjectCustoms (FieldInfo fieldInfo, IEcsSystem system, object[] injects) {
-            if (typeof (IEcsCustomDataInject).IsAssignableFrom (fieldInfo.FieldType)) {
+        static bool InjectCustoms (FieldInfo fieldInfo, IEcsSystem system, object[] injects) 
+        {
+            if (typeof (IEcsCustomDataInject).IsAssignableFrom (fieldInfo.FieldType)) 
+            {
                 var instance = (IEcsCustomDataInject) fieldInfo.GetValue (system);
                 instance.Fill (injects);
                 fieldInfo.SetValue (system, instance);
+                
                 return true;
             }
+            
             return false;
         }
 
-        public static ref T NewEntity<T> (this in EcsPoolInject<T> poolInject, out int entity) where T : struct {
+        public static ref T NewEntity<T> (this in EcsPoolInject<T> poolInject, out int entity) where T : struct 
+        {
             entity = poolInject.Value.GetWorld ().NewEntity ();
+            
             return ref poolInject.Value.Add (entity);
         }
     }
 
-    public interface IEcsDataInject {
+    public interface IEcsDataInject 
+    {
         void Fill (IEcsSystems systems);
     }
 
-    public interface IEcsCustomDataInject {
+    public interface IEcsCustomDataInject 
+    {
         void Fill (object[] injects);
     }
 
     public interface IEcsInclude {
+        
         EcsWorld.Mask Fill (EcsWorld world);
     }
 
