@@ -10,7 +10,6 @@ namespace Sources.BoundedContexts.Animations.Presentations
         [Required] [SerializeField] private Animator _animator;
         
         protected Animator Animator => _animator;
-        
         protected  List<Action> StoppingAnimations { get; private set; } = new List<Action>();
         
         protected void ExceptAnimation(Action exceptAnimation)

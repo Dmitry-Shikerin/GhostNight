@@ -59,13 +59,19 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         [UsedImplicitly]
         private void OnRightStep()
         {
-            _entityReference.World.GetPool<FootstepEvent>().Add(_entityReference.Entity);
+            _entityReference
+                .World
+                .GetPool<FootstepEvent>()
+                .Add(_entityReference.Entity);
         }
 
         [UsedImplicitly]
         private void OnLeftStep()
         {
-            _entityReference.World.GetPool<FootstepEvent>().Add(_entityReference.Entity);
+            _entityReference
+                .World
+                .GetPool<FootstepEvent>()
+                .Add(_entityReference.Entity);
         }
 
         private void StopFlip() =>

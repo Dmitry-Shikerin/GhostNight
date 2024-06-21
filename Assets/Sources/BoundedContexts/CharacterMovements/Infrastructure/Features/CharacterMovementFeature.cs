@@ -2,7 +2,6 @@
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using Sources.Frameworks.MyLeoEcsExtensions.Features.Infrastructure.Systems.Implementation;
-using Sources.Frameworks.MyLeoEcsExtensions.Features.Infrastructure.Systems.Interfaces;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Features
 {

@@ -43,7 +43,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             };
             _systems = new EcsSystems(_world, _sharedData);
             AddEditorSystems();
-            AddRunSystems();
+            AddSystems();
             AddOneFrame();
             AddEvents();
             AddComponentsConverterWorld();
@@ -75,13 +75,11 @@ namespace Sources.App.Ecs.Controllers.Implementation
             }
         }
 
-        private void AddRunSystems()
+        private void AddSystems()
         {
             _systems
                 .Add(new EntityReferenceInitializeSystem())
-                
                 .Add(new CharacterMovementFeature())
-                
                 .Add(new EnemyMovementFeature())
                 ;
         }
