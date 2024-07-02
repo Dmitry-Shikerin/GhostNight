@@ -20,7 +20,6 @@ namespace Sources.BoundedContexts.Traps.Presentation.Views
         private EcsPool<EnemyTag> EnemyPool => _enemyPool ??= _entityReference.World.GetPool<EnemyTag>();
         private EcsPool<DizzinessComponent> DizzinessPool => 
             _dizzinessPool ??= _entityReference.World.GetPool<DizzinessComponent>();
-        private int _entity;
 
         private void OnEnable()
         {
