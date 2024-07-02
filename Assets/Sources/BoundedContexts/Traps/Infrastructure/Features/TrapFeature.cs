@@ -1,6 +1,5 @@
 ﻿using Sources.BoundedContexts.Dizzinesses.Infrastructure.Systems;
 using Sources.Frameworks.MyLeoEcsExtensions.Features.Infrastructure.Systems.Implementation;
-using Sources.Frameworks.MyLeoEcsExtensions.Features.Infrastructure.Systems.Interfaces;
 
 namespace Sources.BoundedContexts.Traps.Infrastructure.Features
 {
@@ -9,6 +8,7 @@ namespace Sources.BoundedContexts.Traps.Infrastructure.Features
         protected override void Register()
         {
             AddSystem(new DizzinessSystem());
+            AddSystem(new DizzinessParticleSystem());
         }
     }
 }
