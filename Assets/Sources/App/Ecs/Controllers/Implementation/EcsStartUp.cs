@@ -10,6 +10,7 @@ using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
+using Sources.BoundedContexts.Traps.Infrastructure.Features;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Zenject;
 
@@ -81,6 +82,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new EntityReferenceInitializeSystem())
                 .Add(new CharacterMovementFeature())
                 .Add(new EnemyMovementFeature())
+                .Add(new TrapFeature())
                 ;
         }
 
