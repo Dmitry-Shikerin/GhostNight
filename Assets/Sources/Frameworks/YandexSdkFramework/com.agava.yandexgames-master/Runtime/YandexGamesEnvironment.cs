@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Scripting;
 
-namespace Agava.YandexGames
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime
 {
     [Serializable]
     public class YandexGamesEnvironment

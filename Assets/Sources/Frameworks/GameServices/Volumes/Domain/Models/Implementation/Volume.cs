@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Frameworks.Domain.Interfaces.Entities;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 using Sources.Frameworks.GameServices.Volumes.Domain.Models.Interfaces;
 
 namespace Sources.Frameworks.GameServices.Volumes.Domain.Models.Implementation

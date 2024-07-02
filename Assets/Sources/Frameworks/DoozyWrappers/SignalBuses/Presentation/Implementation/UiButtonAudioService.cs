@@ -12,7 +12,7 @@ namespace Sources.Frameworks.DoozyWrappers.SignalBuses.Presentation.Implementati
         [DisplayAsString(false)] [HideLabel] 
         [SerializeField] private string _labele = UiConstant.UiButtonAudioServiceLabel;
         [Space(10)]
-        [SerializeField] private AudioClipId _onClickAudioClip; 
+        [SerializeField] private AudioGroupId _onClickAudioClip;
         [Space(10)]
         [SerializeField] private UIButton _button;
         protected override void OnAfterEnable() =>

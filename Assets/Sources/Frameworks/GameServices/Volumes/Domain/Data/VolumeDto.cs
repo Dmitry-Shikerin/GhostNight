@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Sources.Frameworks.Domain.Interfaces.Data;
+using Sources.Frameworks.GameServices.Loads.Domain.Data;
 
-namespace Sources.Domain.Models.Data
+namespace Sources.Frameworks.GameServices.Volumes.Domain.Data
 {
     public class VolumeDto : IDto
     {

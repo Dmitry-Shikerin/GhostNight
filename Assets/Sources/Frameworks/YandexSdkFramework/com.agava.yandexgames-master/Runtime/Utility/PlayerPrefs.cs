@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Agava.YandexGames.Utility
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Utility
 {
     public static class PlayerPrefs
     {
@@ -32,7 +32,7 @@ namespace Agava.YandexGames.Utility
             s_onSaveSuccessCallback = onSuccessCallback;
             s_onSaveErrorCallback = onErrorCallback;
 
-            PlayerAccount.SetCloudSaveData(jsonData, OnSaveSuccessCallback, OnSaveErrorCallback);
+            PlayerAccount.PlayerAccount.SetCloudSaveData(jsonData, OnSaveSuccessCallback, OnSaveErrorCallback);
         }
 
         private static void OnSaveSuccessCallback()
@@ -50,7 +50,7 @@ namespace Agava.YandexGames.Utility
             s_onLoadSuccessCallback = onSuccessCallback;
             s_onLoadErrorCallback = onErrorCallback;
 
-            PlayerAccount.GetCloudSaveData(OnLoadSuccessCallback, OnLoadErrorCallback);
+            PlayerAccount.PlayerAccount.GetCloudSaveData(OnLoadSuccessCallback, OnLoadErrorCallback);
         }
 
         enum IterationState

@@ -1,6 +1,4 @@
-﻿using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.ControllerLifetimes;
-using Sources.Frameworks.UiFramework.ServicesInterfaces;
+﻿using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.ControllerLifetimes;
 
 namespace Sources.Frameworks.UiFramework.Core.Services.Common
 {

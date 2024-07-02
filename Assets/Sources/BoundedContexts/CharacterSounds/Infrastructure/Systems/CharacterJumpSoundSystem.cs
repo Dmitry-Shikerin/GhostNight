@@ -5,8 +5,6 @@ using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterSounds.Domain.Components;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
-using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
-using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
 {
@@ -29,8 +27,8 @@ namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
             if (_eventsBus.HasEventSingleton(out JumpEvent jumpEvent) == false)
                 return;
 
-            foreach (int entity in _filter.Value)
-                _audioService.Play(AudioClipId.Jump);
+            // foreach (int entity in _filter.Value)
+            //     _audioService.Play(AudioClipId.Jump);
         }
     }
 }

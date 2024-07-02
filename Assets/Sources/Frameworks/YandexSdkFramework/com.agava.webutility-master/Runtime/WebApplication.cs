@@ -1,13 +1,13 @@
-using AOT;
 using System;
 using System.Runtime.InteropServices;
+using AOT;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.Scripting;
 
 [assembly: AlwaysLinkAssembly]
 #endif
-namespace Agava.WebUtility
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Runtime
 {
     public static class WebApplication
     {

@@ -2,15 +2,15 @@
 using System.Linq;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
-using Sources.Domain.Models.Constants;
 using Sources.Frameworks.UiFramework.Core.Domain.Constants;
 using Sources.Frameworks.UiFramework.Core.Presentation.CommonTypes;
-using Sources.Frameworks.UiFramework.Texts.Extensions;
+using Sources.Frameworks.UiFramework.Texts.Domain.Constant;
+using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Phrases;
 using UnityEditor;
 using UnityEngine;
 
-namespace Sources.Frameworks.UiFramework.Texts.Services.Localizations.Configs
+namespace Sources.Frameworks.UiFramework.Texts.Domain
 {
     public class LocalizationDataBase : ScriptableObject
     {

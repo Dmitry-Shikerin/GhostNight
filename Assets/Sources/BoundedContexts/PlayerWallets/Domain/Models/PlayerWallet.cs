@@ -1,6 +1,6 @@
 ﻿using System;
-using Sources.Domain.Models.Data;
-using Sources.Frameworks.Domain.Interfaces.Entities;
+using Sources.BoundedContexts.PlayerWallets.Domain.Data;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 
 namespace Sources.BoundedContexts.PlayerWallets.Domain.Models
 {

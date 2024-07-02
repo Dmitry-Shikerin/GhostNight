@@ -1,7 +1,8 @@
 using System;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.PlayerAccount;
 using UnityEngine.Scripting;
 
-namespace Agava.YandexGames
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Leaderboard
 {
     [Serializable]
     public class LeaderboardEntryResponse

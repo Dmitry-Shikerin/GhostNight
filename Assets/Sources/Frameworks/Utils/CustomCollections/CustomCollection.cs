@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Sources.Utils.CustomCollections
+namespace Sources.Frameworks.Utils.CustomCollections
 {
     public class CustomCollection<T> : ICustomCollection<T>
     {

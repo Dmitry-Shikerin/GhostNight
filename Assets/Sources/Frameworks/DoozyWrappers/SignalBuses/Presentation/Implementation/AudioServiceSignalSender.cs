@@ -34,7 +34,7 @@ namespace Sources.Frameworks.DoozyWrappers.SignalBuses.Presentation.Implementati
         {
         }
 
-        protected void SendSignal(AudioClipId audioClipId) =>
+        protected void SendSignal(AudioGroupId audioClipId) =>
             _stream.SendSignal(new AudioSignal(audioClipId));
     }
 }

@@ -1,8 +1,9 @@
 using System.Collections;
 using NUnit.Framework;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime;
 using UnityEngine.TestTools;
 
-namespace Agava.YandexGames.Tests
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Tests.Runtime
 {
     public class SdkTests
     {

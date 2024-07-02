@@ -9,8 +9,8 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
     public interface IAudioService : IInitialize, IDestroy, IConstruct<Volume>
     {
         void Play(AudioSourceId id);
-        IUiAudioSource Play(AudioClipId audioClipId);
-        void Play(AudioGroupId audioGroupId);
+        IUiAudioSource Play(AudioGroupId audioClipId);
+        void PlayAsync(AudioGroupId audioGroupId);
         void Stop(AudioGroupId audioGroupId);
     }
 }

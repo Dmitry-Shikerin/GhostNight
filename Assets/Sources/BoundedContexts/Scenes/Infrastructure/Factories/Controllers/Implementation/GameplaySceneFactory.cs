@@ -1,21 +1,24 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.BoundedContexts.Scenes.Controllers;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Interfaces;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Interfaces;
-using Sources.ControllersInterfaces.Scenes;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Interfaces.Collectors;
+using Sources.Frameworks.GameServices.AddressablesInfr.AssetServices.Interfaces;
 using Sources.Frameworks.GameServices.Curtains.Presentation.Interfaces;
+using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.Scenes;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.YandexSdcFramework.Advertisings.Services.Interfaces;
-using Sources.Frameworks.YandexSdcFramework.Focuses.Interfaces;
+using Sources.Frameworks.UiFramework.Core.Services.Localizations.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.Advertisings.Services.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.Focuses.Interfaces;
 
 namespace Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Implementation
 {
     public class GameplaySceneFactory : ISceneFactory
     {
+        private readonly ICompositeAssetService _compositeAssetService;
         private readonly IEcsStartUp _ecsGameStartUp;
         private readonly ISceneViewFactory _sceneViewFactory;
         private readonly IFocusService _focusService;
@@ -26,6 +29,7 @@ namespace Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Im
         private readonly ISignalControllersCollector _signalControllersCollector;
 
         public GameplaySceneFactory(
+            ICompositeAssetService compositeAssetService,
             IEcsStartUp ecsGameStartUp,
             ISceneViewFactory gameplaySceneViewFactory,
             IFocusService focusService,
@@ -35,6 +39,7 @@ namespace Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Im
             ICurtainView curtainView,
             ISignalControllersCollector signalControllersCollector)
         {
+            _compositeAssetService = compositeAssetService ?? throw new ArgumentNullException(nameof(compositeAssetService));
             _ecsGameStartUp = ecsGameStartUp ?? throw new ArgumentNullException(nameof(ecsGameStartUp));
             _sceneViewFactory = gameplaySceneViewFactory ?? 
                                 throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
@@ -50,6 +55,7 @@ namespace Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Im
         public UniTask<IScene> Create(object payload)
         {
             IScene gameplayScene = new GameplayScene(
+                _compositeAssetService,
                 _ecsGameStartUp,
                 _sceneViewFactory,
                 _focusService,

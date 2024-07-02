@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Sources.Frameworks.Domain.Interfaces.Data;
+using Sources.Frameworks.GameServices.Loads.Domain.Data;
 
 namespace Sources.Frameworks.Domain.Implementation.Data
 {

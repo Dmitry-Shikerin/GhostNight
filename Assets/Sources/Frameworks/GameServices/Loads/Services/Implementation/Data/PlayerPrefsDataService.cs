@@ -1,8 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Sources.Frameworks.Domain.Interfaces.Data;
-using Sources.Frameworks.Domain.Interfaces.Entities;
 using Sources.Frameworks.GameServices.Loads.Services.Interfaces.Data;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 using UnityEngine;
 
 namespace Sources.Frameworks.GameServices.Loads.Services.Implementation.Data

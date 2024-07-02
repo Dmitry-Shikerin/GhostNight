@@ -42,12 +42,12 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 DiContainer = _container
             };
             _systems = new EcsSystems(_world, _sharedData);
-            AddEditorSystems();
+            // AddEditorSystems();
             AddSystems();
             AddOneFrame();
             AddEvents();
             AddComponentsConverterWorld();
-            // AddUnityIntegrationSystem();
+            AddUnityIntegrationSystem();
             Inject();
             _systems.Init();
             _isInitialize = true;
@@ -96,7 +96,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             _systems.Add(
                 _sharedData.EventsBus
                     .GetDestroyEventsSystem()
-                    .IncSingleton<JumpEvent>()
+                    // .IncSingleton<JumpEvent>()
             );
         }
 

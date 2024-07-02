@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sources.Frameworks.Domain.Interfaces.Data
+﻿namespace Sources.Frameworks.GameServices.Loads.Domain.Data
 {
     public interface IDto
     {

@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Models.TextViewTypes
+﻿namespace Sources.Frameworks.UiFramework.Texts.Presentations.Implementation.Types
 {
     public enum TextViewType
     {

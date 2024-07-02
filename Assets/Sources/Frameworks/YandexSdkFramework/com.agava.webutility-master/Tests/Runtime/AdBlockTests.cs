@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Runtime;
 
-namespace Agava.WebUtility.Tests
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Tests.Runtime
 {
     public class AdBlockTests
     {

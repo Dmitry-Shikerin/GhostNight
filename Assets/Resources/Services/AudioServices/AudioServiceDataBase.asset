@@ -1,5 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6707310200659605414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7768d372fd56426abc7629a3a8efd397, type: 3}
+  m_Name: GameplayBackground_AudioGroup
+  m_EditorClassIdentifier: 
+  _id: 0
+  _parent: {fileID: 11400000}
+  type: 1
+  _audioClips:
+  - {fileID: 8300000, guid: b0a292b136471f74fa41ac702c3424c5, type: 3}
+  _currentClip: {fileID: 0}
+  _currentTime: 0
+--- !u!114 &-2548600227786409102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7768d372fd56426abc7629a3a8efd397, type: 3}
+  m_Name: Footstep_AudioGroup
+  m_EditorClassIdentifier: 
+  _id: 2
+  _parent: {fileID: 11400000}
+  type: 0
+  _audioClips:
+  - {fileID: 8300000, guid: 21f4dfe163d3473439832314dc527047, type: 3}
+  _currentClip: {fileID: 0}
+  _currentTime: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,15 +53,9 @@ MonoBehaviour:
   _labele: <size=18><b><color=#FFD700><i>AudioServiceDataBase</i></color></b></size>
   _poolCount: 3
   _volume: 0.5
-  _audioClips:
-    _keys: 0200000003000000
-    _values:
-    - {fileID: 8300000, guid: 05a2c990c2c35c847ab81322bc72c161, type: 3}
-    - {fileID: 8300000, guid: b22f97dba0813824594b5c08639894df, type: 3}
   _audioClipGroups:
-    _keys: 00000000
+    _keys: 0000000002000000
     _values:
-    - _audioClips:
-      - {fileID: 8300000, guid: b0a292b136471f74fa41ac702c3424c5, type: 3}
-      _currentClip: {fileID: 8300000, guid: b0a292b136471f74fa41ac702c3424c5, type: 3}
-      _currentTime: 0
+    - {fileID: -6707310200659605414}
+    - {fileID: -2548600227786409102}
+  _audioGroupId: 2

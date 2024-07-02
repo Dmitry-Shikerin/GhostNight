@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Sources.Frameworks.Domain.Interfaces.Data;
+using Sources.Frameworks.GameServices.Loads.Domain.Data;
 
-namespace Sources.Domain.Models.Data
+namespace Sources.BoundedContexts.PlayerWallets.Domain.Data
 {
     public class PlayerWalletDto : IDto
     {

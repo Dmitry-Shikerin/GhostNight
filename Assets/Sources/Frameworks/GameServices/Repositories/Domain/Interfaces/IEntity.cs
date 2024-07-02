@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sources.Frameworks.Domain.Interfaces.Entities
+namespace Sources.Frameworks.GameServices.Repositories.Domain.Interfaces
 {
     public interface IEntity
     {

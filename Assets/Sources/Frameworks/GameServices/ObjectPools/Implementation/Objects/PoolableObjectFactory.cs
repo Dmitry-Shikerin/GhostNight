@@ -1,12 +1,11 @@
 ﻿using System;
-using Sources.Frameworks.GameServices.ObjectPools.Implementation.Objects;
 using Sources.Frameworks.GameServices.ObjectPools.Interfaces.Generic;
 using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views;
 using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Sources.BoundedContexts.ObjectPools.Infrastructure.Factories
+namespace Sources.Frameworks.GameServices.ObjectPools.Implementation.Objects
 {
     public abstract class PoolableObjectFactory<T>
         where T : MonoBehaviour, IView

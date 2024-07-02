@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.InfrastructureInterfaces.Services.Cameras;
-using Sources.PresentationsInterfaces.Views.Cameras.Points;
+using Sources.Frameworks.GameServices.Cameras.Interfaces;
+using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Cameras.Points;
 
-namespace Sources.Infrastructure.Services.Cameras
+namespace Sources.Frameworks.GameServices.Cameras.Implementation
 {
     public class CameraService : ICameraService
     {

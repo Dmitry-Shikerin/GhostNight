@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using Sources.Frameworks.MVPPassiveView.Presentations.Implementation.Views;
-using Sources.PresentationsInterfaces.UI.AudioSources;
+using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.UI.AudioSources;
 using UnityEngine;
 
 namespace Sources.Frameworks.MVPPassiveView.Presentations.Implementation.UI.AudioSources

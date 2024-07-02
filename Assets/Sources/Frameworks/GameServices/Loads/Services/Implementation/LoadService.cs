@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.BoundedContexts.Ids.Domain.Constant;
-using Sources.Frameworks.Domain.Interfaces.Entities;
 using Sources.Frameworks.GameServices.Loads.Services.Interfaces;
 using Sources.Frameworks.GameServices.Loads.Services.Interfaces.Data;
-using Sources.InfrastructureInterfaces.Services.Repositories;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
+using Sources.Frameworks.GameServices.Repositories.Services.Interfaces;
 
 namespace Sources.Frameworks.GameServices.Loads.Services.Implementation
 {

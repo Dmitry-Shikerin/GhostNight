@@ -1,20 +1,23 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Interfaces;
-using Sources.ControllersInterfaces.Scenes;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Interfaces.Collectors;
+using Sources.Frameworks.GameServices.AddressablesInfr.AssetServices.Interfaces;
 using Sources.Frameworks.GameServices.Curtains.Presentation.Interfaces;
 using Sources.Frameworks.GameServices.Scenes.Domain.Interfaces;
+using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.Scenes;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.YandexSdcFramework.Advertisings.Services.Interfaces;
-using Sources.Frameworks.YandexSdcFramework.Focuses.Interfaces;
+using Sources.Frameworks.UiFramework.Core.Services.Localizations.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.Advertisings.Services.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.Focuses.Interfaces;
 
 namespace Sources.BoundedContexts.Scenes.Controllers
 {
     public class GameplayScene : IScene
     {
+        private readonly ICompositeAssetService _compositeAssetService;
         private readonly IEcsStartUp _ecsGameStartUp;
         private readonly ISceneViewFactory _gameplaySceneViewFactory;
         private readonly IFocusService _focusService;
@@ -25,6 +28,7 @@ namespace Sources.BoundedContexts.Scenes.Controllers
         private readonly ISignalControllersCollector _signalControllersCollector;
 
         public GameplayScene(
+            ICompositeAssetService compositeAssetService,
             IEcsStartUp ecsGameStartUp,
             ISceneViewFactory gameplaySceneViewFactory,
             IFocusService focusService,
@@ -34,6 +38,7 @@ namespace Sources.BoundedContexts.Scenes.Controllers
             ICurtainView curtainView,
             ISignalControllersCollector signalControllersCollector)
         {
+            _compositeAssetService = compositeAssetService ?? throw new ArgumentNullException(nameof(compositeAssetService));
             _ecsGameStartUp = ecsGameStartUp ?? throw new ArgumentNullException(nameof(ecsGameStartUp));
             _gameplaySceneViewFactory = gameplaySceneViewFactory ?? 
                                         throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
@@ -48,21 +53,23 @@ namespace Sources.BoundedContexts.Scenes.Controllers
                                           throw new ArgumentNullException(nameof(signalControllersCollector));
         }
 
-        public void Enter(object payload = null)
+        public async void Enter(object payload = null)
         {
             _focusService.Initialize();
+            await _compositeAssetService.LoadAsync();
             _gameplaySceneViewFactory.Create((IScenePayload)payload);
             _advertisingService.Initialize();
             _localizationService.Translate();
             _audioService.Initialize();
             _signalControllersCollector.Initialize();
-            _audioService.Play(AudioGroupId.GameplayBackground);
+            // _audioService.PlayAsync(AudioGroupId.GameplayBackground);
             _ecsGameStartUp.Initialize();
             // await _curtainView.HideAsync();
         }
 
         public void Exit()
         {
+            _compositeAssetService.Release();
             _ecsGameStartUp.Destroy();
             _signalControllersCollector.Destroy();
             _audioService.Stop(AudioGroupId.GameplayBackground);

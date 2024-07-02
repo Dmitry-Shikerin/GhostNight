@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Sources.InfrastructureInterfaces.Services.SceneLoaderService
+namespace Sources.Frameworks.GameServices.SceneLoaderServices.Interfaces
 {
     public interface ISceneLoaderService
     {

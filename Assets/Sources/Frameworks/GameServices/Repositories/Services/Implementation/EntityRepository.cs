@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Frameworks.Domain.Interfaces.Entities;
-using Sources.InfrastructureInterfaces.Services.Repositories;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
+using Sources.Frameworks.GameServices.Repositories.Services.Interfaces;
 
 namespace Sources.Frameworks.GameServices.Repositories.Services.Implementation
 {

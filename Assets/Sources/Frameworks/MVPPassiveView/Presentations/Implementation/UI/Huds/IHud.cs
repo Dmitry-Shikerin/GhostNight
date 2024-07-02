@@ -1,3 +1,4 @@
+using Sources.Frameworks.UiFramework.Collectors;
 using Sources.Frameworks.UiFramework.Views.Presentations.Implementation;
 
 namespace Sources.Frameworks.MVPPassiveView.Presentations.Implementation.UI.Huds

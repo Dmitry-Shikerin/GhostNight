@@ -1,9 +1,7 @@
 ﻿using System;
-using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.PresentationsInterfaces.Views.Cameras.Points;
-using UnityEngine;
+using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Cameras.Points;
 
-namespace Sources.InfrastructureInterfaces.Services.Cameras
+namespace Sources.Frameworks.GameServices.Cameras.Interfaces
 {
     public interface ICameraService
     {

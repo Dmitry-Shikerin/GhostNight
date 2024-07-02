@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace Agava.WebUtility
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Runtime
 {
     public static class Device
     {

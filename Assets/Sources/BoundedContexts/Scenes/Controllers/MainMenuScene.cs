@@ -1,16 +1,16 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Interfaces;
-using Sources.ControllersInterfaces.Scenes;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Interfaces;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Interfaces.Collectors;
 using Sources.Frameworks.GameServices.Curtains.Presentation.Interfaces;
 using Sources.Frameworks.GameServices.Scenes.Domain.Interfaces;
+using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.Scenes;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.YandexSdcFramework.Focuses.Interfaces;
-using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
+using Sources.Frameworks.UiFramework.Core.Services.Localizations.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.Focuses.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.SdcInitializes.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.Stickies.Interfaces;
 
 namespace Sources.BoundedContexts.Scenes.Controllers
 {

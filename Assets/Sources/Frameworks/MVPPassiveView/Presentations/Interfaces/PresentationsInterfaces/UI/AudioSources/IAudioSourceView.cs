@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Sources.PresentationsInterfaces.UI.AudioSources
+namespace Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.UI.AudioSources
 {
     public interface IAudioSourceView
     {

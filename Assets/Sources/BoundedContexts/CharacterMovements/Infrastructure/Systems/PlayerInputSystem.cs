@@ -13,6 +13,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
     public class PlayerInputSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<Inc<CharacterTag>, Exc<BlockJumpComponent>> _filter;
+        private readonly EcsFilterInject<Inc<CharacterTag, DirectionComponent>> _directionFilter;
         private readonly EcsWorldInject _world;
         
         private EventsBus _eventsBus;
@@ -20,7 +21,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
         public void Init(IEcsSystems systems)
         {
             _eventsBus = systems.GetShared<SharedData>().EventsBus;
-            _eventsBus.NewEventSingleton<InputEvent>();
         }
 
         public void Run(IEcsSystems systems)
@@ -35,8 +35,11 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            ref InputEvent body = ref _eventsBus.GetEventBodySingleton<InputEvent>();
-            body.Direction = new Vector2(horizontal, vertical).normalized;
+            foreach (int entity in _directionFilter.Value)
+            {
+                ref DirectionComponent directionComponent = ref _directionFilter.Pools.Inc2.Get(entity);
+                directionComponent.Direction = new Vector2(horizontal, vertical).normalized;
+            }
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -48,10 +51,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 {
                     ref JumpComponent jumpComponent = ref _world.Value.GetPool<JumpComponent>().Add(entity);
                     _world.Value.GetPool<BlockJumpComponent>().Add(entity);
-                    Debug.Log(jumpComponent);
                     jumpComponent.JumpForce = 10f;
                     jumpComponent.UpTime = 0.3f;
-                    _eventsBus.NewEventSingleton<JumpEvent>();
                 }
             }
         }

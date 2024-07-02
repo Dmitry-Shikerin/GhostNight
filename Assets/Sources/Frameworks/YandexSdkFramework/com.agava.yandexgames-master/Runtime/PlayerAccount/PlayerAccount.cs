@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using AOT;
 using UnityEngine;
 
-namespace Agava.YandexGames
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.PlayerAccount
 {
     /// <summary>
     /// Proxy for player-related methods in YandexGames SDK.

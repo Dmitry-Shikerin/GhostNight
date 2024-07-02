@@ -8,6 +8,8 @@ using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Interf
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Domain.Implementation;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Implementation;
 using Sources.BoundedContexts.Scenes.Infrastructure.Factories.Views.Interfaces;
+using Sources.Frameworks.GameServices.AddressablesInfr.AssetServices.Implementation;
+using Sources.Frameworks.GameServices.AddressablesInfr.AssetServices.Interfaces;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -17,7 +19,7 @@ namespace Sources.App.DIContainers.Gameplay
     public class GameplayInstaller : MonoInstaller
     {
         [SerializeField] private GameplayHud _gameplayHud;
-        [FormerlySerializedAs("environment")] [FormerlySerializedAs("_rootGameObject")] [SerializeField] private RootGameObject rootGameObject;
+        [SerializeField] private RootGameObject rootGameObject;
         
         public override void InstallBindings()
         {
@@ -29,6 +31,7 @@ namespace Sources.App.DIContainers.Gameplay
             Container.Bind<GameplayModelsLoaderService>().AsSingle();
             Container.Bind<ISceneViewFactory>().To<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IEcsStartUp>().To<EcsStartUp>().AsSingle();
+            Container.Bind<ICompositeAssetService>().To<CompositeAssetService>().AsSingle();
         }
     }
 }

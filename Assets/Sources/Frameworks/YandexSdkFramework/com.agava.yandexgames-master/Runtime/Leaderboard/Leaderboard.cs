@@ -1,9 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
 using AOT;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.PlayerAccount;
 using UnityEngine;
 
-namespace Agava.YandexGames
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Leaderboard
 {
     public static class Leaderboard
     {

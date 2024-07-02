@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sources.Utils.CustomCollections
+namespace Sources.Frameworks.Utils.CustomCollections
 {
     public interface ICustomCollection<T> : IReadOnlyList<T>
     {

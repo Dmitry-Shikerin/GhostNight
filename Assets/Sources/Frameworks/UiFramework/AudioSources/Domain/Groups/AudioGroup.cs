@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.ControllerLifetimes;
 using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Constructors;
+using Sources.Frameworks.UiFramework.AudioSources.Domain.Configs;
+using Sources.Frameworks.UiFramework.AudioSources.Domain.Groups.Types;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
-using Sources.Utils.Extentions;
+using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
+using Sources.Frameworks.Utils.Extensions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Groups
 {
     [Serializable]
-    public class AudioGroup : IConstruct<IAudioService>, IDestroy
+    public class AudioGroup : ScriptableObject,IConstruct<IAudioService>, IDestroy
     {
+        [SerializeField] private AudioGroupId _id;
+        [SerializeField] private AudioServiceDataBase _parent;
+        [FormerlySerializedAs("_playingType")]
+        [EnumToggleButtons] [Space(10)]
+        [SerializeField] private PlayingType type;
+        [Space(10)]
         [SerializeField] private List<AudioClip> _audioClips;
         [BoxGroup("CurrentClip")] [HideLabel]
         [SerializeField] private AudioClip _currentClip;
@@ -22,9 +32,11 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Groups
 
         private IAudioService _audioService;
 
+        public PlayingType Type => type;
         public IReadOnlyList<AudioClip> AudioClips => _audioClips;
         public bool IsPlaying { get; private set; } = false;
         public AudioClip CurrentClip => _currentClip;
+        public AudioGroupId Id => _id;
 
         public float CurrentTime => _currentTime;
 
@@ -37,6 +49,9 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Groups
             _currentClip = null;
             _currentTime = 0;
         }
+        
+        public void SetId(AudioGroupId id) =>
+            _id = id;
 
         public void Play() =>
             IsPlaying = true;
@@ -73,5 +88,13 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Groups
         {
             
         }
+
+        [PropertySpace(10)]
+        [Button(ButtonSizes.Large)] 
+        private void Remove() =>
+            _parent.RemoveGroup(this);
+
+        public void SetDataBase(AudioServiceDataBase audioServiceDataBase) =>
+            _parent = audioServiceDataBase ?? throw new ArgumentNullException(nameof(audioServiceDataBase));
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Threading;
-using Agava.WebUtility;
-using Agava.YandexGames;
 using Cysharp.Threading.Tasks;
 using Sources.BoundedContexts.PlayerWallets.Domain.Models;
 using Sources.Frameworks.GameServices.Pauses.Services.Interfaces;
-using Sources.Frameworks.YandexSdcFramework.Advertisings.Domain.Constant;
-using Sources.Frameworks.YandexSdcFramework.Advertisings.Services.Interfaces;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdkFramework.Advertisings.Domain.Constant;
 using Sources.Frameworks.YandexSdkFramework.Advertisings.Services.Interfaces;
+using Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Runtime;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Advertising;
 
 namespace Sources.Frameworks.YandexSdkFramework.Advertisings.Services.Implementation
 {

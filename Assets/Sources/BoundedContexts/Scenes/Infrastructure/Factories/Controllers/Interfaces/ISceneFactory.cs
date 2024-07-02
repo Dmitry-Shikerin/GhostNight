@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using Sources.ControllersInterfaces.Scenes;
+using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.Scenes;
 
 namespace Sources.BoundedContexts.Scenes.Infrastructure.Factories.Controllers.Interfaces
 {

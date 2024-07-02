@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Domain.Models.Constants;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Implementation;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Implementation.Collectors;
 using Sources.Frameworks.DoozyWrappers.SignalBuses.Controllers.Interfaces;
@@ -16,7 +15,9 @@ using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioS
 using Sources.Frameworks.UiFramework.Collectors;
 using Sources.Frameworks.UiFramework.Core.Services.Forms.Implementation;
 using Sources.Frameworks.UiFramework.Core.Services.Localizations.Implementation;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.UiFramework.Core.Services.Localizations.Interfaces;
+using Sources.Frameworks.UiFramework.Texts.Domain;
+using Sources.Frameworks.UiFramework.Texts.Domain.Constant;
 using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Views.Presentations.Implementation;
 using UnityEngine;

@@ -26,7 +26,7 @@ namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
         {
             foreach (int entity in _filter.Value)
             {
-                _audioService.Play(AudioClipId.FootStep);
+                _audioService.PlayAsync(AudioGroupId.Footstep);
             }
         }
     }

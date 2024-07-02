@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sources.Frameworks.GameServices.Volumes.Domain.Models.Implementation;
 using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Constructors;
 using Sources.Frameworks.UiFramework.AudioSources.Domain.Dictionaries;
+using Sources.Frameworks.UiFramework.AudioSources.Domain.Groups;
+using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
 using Sources.Frameworks.UiFramework.Core.Domain.Constants;
+using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Configs;
+using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Phrases;
+using UnityEditor;
 using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Configs
@@ -19,15 +25,14 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Configs
         [BoxGroup("Settings")] [Range(0, 1)] [OnValueChanged("ChangeVolume")]
         [SerializeField] private float _volume = 0.5f;
 
-        [TabGroup("Clips")]
-        [SerializeField] private AudioClipDictionary _audioClips;
-
         [TabGroup("Groups")] [Space(10f)]
-        [SerializeField] private AudioClipGroupDictionary _audioClipGroups;
+        [SerializeField] private AudioClipGroupDictionary _audioClipGroups = new AudioClipGroupDictionary();
+        
+        [Space(10f)]
+        [SerializeField] private AudioGroupId _audioGroupId;
 
         private Volume _volumeModel;
 
-        public AudioClipDictionary AudioClips => _audioClips;
         public AudioClipGroupDictionary AudioGroups => _audioClipGroups;
         public int PoolCount => _poolCount;
         public float Volume => _volume;
@@ -42,6 +47,34 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Domain.Configs
             
             _volumeModel.MusicVolume = _volume;
             _volumeModel.SoundsVolume = _volume;
+        }
+        
+        public void RemoveGroup(AudioGroup phrase)
+        {
+            AssetDatabase.RemoveObjectFromAsset(phrase);
+            _audioClipGroups.Remove(phrase.Id);
+            AssetDatabase.SaveAssets();
+        }
+        
+        [Button(ButtonSizes.Large)]
+        private void CreateGroup()
+        {
+#if UNITY_EDITOR
+            if (_audioClipGroups.ContainsKey(_audioGroupId))
+                return;
+            
+            AudioGroup audioGroup = CreateInstance<AudioGroup>();
+            
+            AssetDatabase.AddObjectToAsset(audioGroup, this);
+            AssetDatabase.Refresh();
+            
+            _audioClipGroups.Add(_audioGroupId, audioGroup);
+            audioGroup.SetDataBase(this);
+            audioGroup.SetId(_audioGroupId);
+            audioGroup.name = _audioGroupId + "_AudioGroup";
+
+            AssetDatabase.SaveAssets();
+#endif
         }
     }
 }

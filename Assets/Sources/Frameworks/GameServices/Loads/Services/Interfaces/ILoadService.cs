@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sources.Frameworks.Domain.Interfaces.Entities;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 
 namespace Sources.Frameworks.GameServices.Loads.Services.Interfaces
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sources.PresentationsInterfaces.Triggers
+namespace Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Triggers
 {
     public interface IEnteredTrigger<out T>
     {

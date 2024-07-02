@@ -1,6 +1,6 @@
-﻿using Sources.InfrastructureInterfaces.StateMachines.States;
+﻿using Sources.Frameworks.StateMachines.States;
 
-namespace Sources.ControllersInterfaces.Scenes
+namespace Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.Scenes
 {
     public interface IScene : IState
     {

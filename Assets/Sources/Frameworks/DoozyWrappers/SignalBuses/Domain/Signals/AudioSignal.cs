@@ -4,11 +4,11 @@ namespace Sources.Frameworks.DoozyWrappers.SignalBuses.Domain.Signals
 {
     public struct AudioSignal
     {
-        public AudioSignal(AudioClipId audioClipId)
+        public AudioSignal(AudioGroupId audioClipId)
         {
             AudioClipId = audioClipId;
         }
         
-        public AudioClipId AudioClipId { get; }
+        public AudioGroupId AudioClipId { get; }
     }
 }

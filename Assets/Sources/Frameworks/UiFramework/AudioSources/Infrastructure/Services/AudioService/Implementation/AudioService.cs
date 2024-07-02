@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using Sources.Frameworks.GameServices.ObjectPools.Implementation;
 using Sources.Frameworks.GameServices.Volumes.Domain.Models.Implementation;
 using Sources.Frameworks.UiFramework.AudioSources.Domain.Configs;
 using Sources.Frameworks.UiFramework.AudioSources.Domain.Groups;
+using Sources.Frameworks.UiFramework.AudioSources.Domain.Groups.Types;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Factories.Implementation;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Factories.Interfaces;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
@@ -14,6 +16,7 @@ using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Spawne
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Interfaces;
+using Sources.Frameworks.UiFramework.Collectors;
 using Sources.Frameworks.UiFramework.Views.Presentations.Implementation;
 using UnityEngine;
 
@@ -23,7 +26,6 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
     {
         private readonly AudioServiceDataBase _audioServiceDataBase;
         private readonly Dictionary<AudioSourceId, IUiAudioSource> _audioSources;
-        private readonly Dictionary<AudioClipId, AudioClip> _audioClips;
         private readonly Dictionary<AudioGroupId, AudioGroup> _audioGroups;
         private readonly ObjectPool<UiAudioSource> _audioSourcePool;
         private readonly IAudioSourceSpawner _audioSourceSpawner;
@@ -41,7 +43,6 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             _audioSources = uiCollector.UiAudioSources.ToDictionary(
                 uiAudioSource => uiAudioSource.AudioSourceId, uiAudioSource => uiAudioSource);
 
-            _audioClips = audioServiceDataBase.AudioClips;
             _audioGroups = audioServiceDataBase.AudioGroups;
             _audioSourcePool = new ObjectPool<UiAudioSource>();
             _audioSourcePool.SetPoolCount(_audioServiceDataBase.PoolCount);
@@ -79,44 +80,36 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             _audioSources[id].Play();
         }
 
-        public IUiAudioSource Play(AudioClipId audioClipId)
+        public IUiAudioSource Play(AudioGroupId audioGroupId)
         {
             UiAudioSource audioSource = _audioSourceSpawner.Spawn();
             audioSource.SetVolume(_volume.MusicVolume);
 
-            if (_audioClips.ContainsKey(audioClipId) == false)
-                throw new KeyNotFoundException(audioClipId.ToString());
+            if (_audioGroups.ContainsKey(audioGroupId) == false)
+                throw new KeyNotFoundException(audioGroupId.ToString());
 
-            audioSource.SetClip(_audioClips[audioClipId]);
-            audioSource?.PlayAsync(audioSource.Destroy);
+            // audioSource.SetClip(_audioGroups[audioGroupId]);
+            // audioSource?.PlayAsync(audioSource.Destroy);
             
             return audioSource;
         }
 
-        public async void Play(AudioGroupId audioGroupId)
+        public async void PlayAsync(AudioGroupId audioGroupId)
         {
             if (_audioGroups.ContainsKey(audioGroupId) == false)
                 throw new KeyNotFoundException(audioGroupId.ToString());
-
-            if (_audioGroups[audioGroupId].IsPlaying)
-                throw new InvalidOperationException($"Group {audioGroupId} is already playing");
-
+            
             IUiAudioSource audioSource = _audioSourceSpawner.Spawn();
             audioSource.SetVolume(_volume.MusicVolume);
-            _audioGroups[audioGroupId].Play();
+            AudioGroup audioGroup = _audioGroups[audioGroupId];
+            audioGroup.Play();
 
             try
             {
-                while (_audioCancellationTokenSource.Token.IsCancellationRequested == false &&
-                       _audioGroups[audioGroupId].IsPlaying)
-                {
-                    foreach (AudioClip audioClip in _audioGroups[audioGroupId].AudioClips)
-                    {
-                        audioSource.SetClip(audioClip);
-                        _audioGroups[audioGroupId].SetCurrentClip(audioClip);
-                        await audioSource.PlayAsync(audioGroup: _audioGroups[audioGroupId]);
-                    }
-                }
+                    if (audioGroup.Type == PlayingType.Loop)
+                        await PlayLoop(audioGroupId, audioSource);
+                    else if (audioGroup.Type == PlayingType.Default)
+                        PlayOneShot(audioGroupId, audioSource);
             }
             catch (OperationCanceledException)
             {
@@ -154,6 +147,33 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
 
             foreach (UiAudioSource audioSource in _audioSourcePool.Collection)
                 audioSource.SetVolume(volume);
+        }
+
+        private async UniTask PlayLoop(AudioGroupId audioGroupId, IUiAudioSource audioSource)
+        {
+            if (_audioGroups[audioGroupId].IsPlaying)
+                throw new InvalidOperationException($"Group {audioGroupId} is already playing");
+            
+            while (_audioCancellationTokenSource.Token.IsCancellationRequested == false &&
+                   _audioGroups[audioGroupId].IsPlaying)
+            {
+
+                foreach (AudioClip audioClip in _audioGroups[audioGroupId].AudioClips)
+                {
+                    audioSource.SetClip(audioClip);
+                    _audioGroups[audioGroupId].SetCurrentClip(audioClip);
+                    await audioSource.PlayAsync(audioGroup: _audioGroups[audioGroupId]);
+                }
+            }
+        }
+
+        private void PlayOneShot(AudioGroupId audioGroupId, IUiAudioSource audioSource)
+        {
+            if (_audioGroups[audioGroupId].AudioClips.Count <= 0)
+                throw new ArgumentOutOfRangeException();
+            
+            audioSource.SetClip(_audioGroups[audioGroupId].AudioClips.First());
+            audioSource?.PlayAsync(audioSource.Destroy);
         }
     }
 }

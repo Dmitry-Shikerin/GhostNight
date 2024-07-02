@@ -5,7 +5,7 @@ using Sources.Frameworks.GameServices.Loads.Services.Interfaces;
 using Sources.Frameworks.GameServices.Loads.Services.Interfaces.Collectors;
 using Sources.Frameworks.GameServices.Loads.Services.Interfaces.Data;
 using Sources.Frameworks.GameServices.Repositories.Services.Implementation;
-using Sources.InfrastructureInterfaces.Services.Repositories;
+using Sources.Frameworks.GameServices.Repositories.Services.Interfaces;
 using Zenject;
 
 namespace Sources.App.DIContainers.Common

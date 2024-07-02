@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Models.Constants;
+using Sources.Frameworks.UiFramework.Texts.Domain;
+using Sources.Frameworks.UiFramework.Texts.Domain.Constant;
 using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Phrases;
 using UnityEditor;

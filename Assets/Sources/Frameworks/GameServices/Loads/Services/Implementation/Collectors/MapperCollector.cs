@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Frameworks.Domain.Interfaces.Data;
-using Sources.Frameworks.Domain.Interfaces.Entities;
+using Sources.Frameworks.GameServices.Loads.Domain.Data;
 using Sources.Frameworks.GameServices.Loads.Services.Interfaces.Collectors;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 
 namespace Sources.Frameworks.GameServices.Loads.Services.Implementation.Collectors
 {

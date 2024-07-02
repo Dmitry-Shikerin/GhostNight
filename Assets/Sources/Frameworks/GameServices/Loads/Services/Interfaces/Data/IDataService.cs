@@ -1,6 +1,5 @@
 using System;
-using Sources.Frameworks.Domain.Interfaces.Data;
-using Sources.Frameworks.Domain.Interfaces.Entities;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 
 namespace Sources.Frameworks.GameServices.Loads.Services.Interfaces.Data
 {

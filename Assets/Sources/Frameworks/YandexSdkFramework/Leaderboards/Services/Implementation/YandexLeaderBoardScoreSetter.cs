@@ -1,9 +1,10 @@
-﻿using Agava.WebUtility;
-using Agava.YandexGames;
-using Sources.Domain.Models.Constants;
-using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
+﻿using Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Runtime;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Leaderboard;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.PlayerAccount;
+using Sources.Frameworks.YandexSdkFramework.Leaderboards.Domain.Constants;
+using Sources.Frameworks.YandexSdkFramework.Leaderboards.Services.Interfaces;
 
-namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
+namespace Sources.Frameworks.YandexSdkFramework.Leaderboards.Services.Implementation
 {
     public class YandexLeaderBoardScoreSetter : ILeaderBoardScoreSetter
     {

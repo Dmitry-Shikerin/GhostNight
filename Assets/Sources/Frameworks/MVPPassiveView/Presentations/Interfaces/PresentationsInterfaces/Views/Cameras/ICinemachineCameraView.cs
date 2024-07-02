@@ -1,7 +1,6 @@
-using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views;
 using UnityEngine;
 
-namespace Sources.PresentationsInterfaces.Views.Cameras
+namespace Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Cameras
 {
     public interface ICinemachineCameraView : IView
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Agava.YandexGames
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Utility
 {
     public class RemoteImage
     {

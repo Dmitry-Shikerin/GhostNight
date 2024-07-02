@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using AOT;
 using UnityEngine;
 
-namespace Agava.YandexGames
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Advertising
 {
     /// <summary>
     /// Proxy for ysdk.adv.showFullscreenAdv() method in YandexGames SDK.

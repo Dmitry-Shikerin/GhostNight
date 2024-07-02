@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Sources.ControllersInterfaces.Scenes;
 using Sources.Frameworks.GameServices.Scenes.Services.Interfaces;
-using Sources.Infrastructure.StateMachines.SceneStateMachines;
+using Sources.Frameworks.MVPPassiveView.Controllers.Interfaces.Scenes;
+using Sources.Frameworks.StateMachines.SceneStateMachines.Implementation;
 using Zenject;
 using Object = UnityEngine.Object;
 

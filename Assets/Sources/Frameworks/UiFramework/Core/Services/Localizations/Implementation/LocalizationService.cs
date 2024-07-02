@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Agava.WebUtility;
-using Agava.YandexGames;
-using Sources.Domain.Models.Constants;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.UiFramework.Collectors;
+using Sources.Frameworks.UiFramework.Core.Services.Localizations.Interfaces;
+using Sources.Frameworks.UiFramework.Texts.Domain;
+using Sources.Frameworks.UiFramework.Texts.Domain.Constant;
 using Sources.Frameworks.UiFramework.Texts.Presentations.Interfaces;
+using Sources.Frameworks.UiFramework.Texts.Presentations.Types;
 using Sources.Frameworks.UiFramework.Texts.Services.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Views.Presentations.Implementation;
+using Sources.Frameworks.YandexSdkFramework.com.agava.webutility_master.Runtime;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime;
 using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Core.Services.Localizations.Implementation

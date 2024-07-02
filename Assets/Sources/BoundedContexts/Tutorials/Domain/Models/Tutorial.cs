@@ -1,10 +1,9 @@
 ﻿using System;
-using Sources.BoundedContexts.Ids;
 using Sources.BoundedContexts.Ids.Domain.Constant;
-using Sources.Domain.Models.Data;
-using Sources.Frameworks.Domain.Interfaces.Entities;
+using Sources.BoundedContexts.Tutorials.Domain.Data;
+using Sources.Frameworks.GameServices.Repositories.Domain.Interfaces;
 
-namespace Sources.BoundedContexts.Tutorials.Domain
+namespace Sources.BoundedContexts.Tutorials.Domain.Models
 {
     public class Tutorial : IEntity
     {

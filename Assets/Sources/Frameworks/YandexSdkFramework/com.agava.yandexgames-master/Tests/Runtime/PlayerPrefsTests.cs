@@ -1,7 +1,7 @@
-using Agava.YandexGames.Utility;
 using NUnit.Framework;
+using Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Runtime.Utility;
 
-namespace Agava.YandexGames.Tests
+namespace Sources.Frameworks.YandexSdkFramework.com.agava.yandexgames_master.Tests.Runtime
 {
     public class PlayerPrefsTests
     {

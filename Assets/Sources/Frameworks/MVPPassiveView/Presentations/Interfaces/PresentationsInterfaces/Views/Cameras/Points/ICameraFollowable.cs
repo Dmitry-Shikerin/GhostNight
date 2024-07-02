@@ -1,7 +1,7 @@
-﻿using Sources.InfrastructureInterfaces.StateMachines.ContextStateMachines.Contexts;
+﻿using Sources.Frameworks.StateMachines.ContextStateMachines.Interfaces.Contexts;
 using UnityEngine;
 
-namespace Sources.PresentationsInterfaces.Views.Cameras.Points
+namespace Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views.Cameras.Points
 {
     public interface ICameraFollowable : IContext
     {
