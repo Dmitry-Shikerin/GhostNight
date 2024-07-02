@@ -12,7 +12,11 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
     public class JumpGravitySystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<
-            Inc<CharacterTag, JumpComponent, CharacterControllerComponent, GravityComponent>> _filter = default;
+            Inc<CharacterTag, 
+                JumpComponent, 
+                CharacterControllerComponent, 
+                GravityComponent, 
+                DirectionComponent>> _filter = default;
 
         private readonly EcsWorldInject _world = default;
 
@@ -28,8 +32,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 ref JumpComponent jumpComponent = ref _filter.Pools.Inc2.Get(entity);
                 ref CharacterControllerComponent controllerComponent = ref _filter.Pools.Inc3.Get(entity);
                 ref GravityComponent gravityComponent = ref _filter.Pools.Inc4.Get(entity);
-
-                ref InputEvent inputEvent = ref _eventsBus.GetEventBodySingleton<InputEvent>();
+                DirectionComponent directionComponent = _filter.Pools.Inc5.Get(entity);
 
                 if (jumpComponent.CurrentTime < jumpComponent.UpTime)
                     continue;
@@ -37,7 +40,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 Vector3 moveDirection =
                     Time.deltaTime
                     * gravityComponent.Speed
-                    * new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
+                    * new Vector3(directionComponent.Direction.x, 0, directionComponent.Direction.y);
                 moveDirection.y -= gravityComponent.Gravity * Time.deltaTime;
                 controllerComponent.CharacterController.Move(moveDirection);
             }

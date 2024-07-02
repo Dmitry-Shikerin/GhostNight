@@ -1,24 +1,25 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Views;
-using Sources.BoundedContexts.Footsteps.Domain.Events;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
-    public class CharacterAnimationSystem : IEcsRunSystem, IEcsInitSystem
+    public class CharacterMovementAnimationSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<
-            Inc<CharacterTag, CharacterAnimationComponent>> _filter = default;
+            Inc<CharacterTag,
+                CharacterAnimationComponent,
+                DirectionComponent>,
+            Exc<JumpComponent>> _filter = default;
 
         private EventsBus _eventsBus;
-        
+
         public void Init(IEcsSystems systems)
         {
             _eventsBus = systems.GetShared<SharedData>().EventsBus;
@@ -29,7 +30,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
             foreach (int entity in _filter.Value)
             {
                 CharacterAnimation animation = _filter.Pools.Inc2.Get(entity).Animation;
-                
+
                 if (_eventsBus.HasEventSingleton<JumpEvent>())
                 {
                     animation.PlayJump();
@@ -37,10 +38,9 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                     return;
                 }
 
-                if (_eventsBus.HasEventSingleton(out InputEvent inputEvent) == false)
-                    return;
+                DirectionComponent directionComponent = _filter.Pools.Inc3.Get(entity);
 
-                if (inputEvent.Direction != Vector2.zero)
+                if (directionComponent.Direction != Vector2.zero)
                     animation.PlayWalk();
                 else
                     animation.PlayIdle();

@@ -9,7 +9,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Features
     {
         protected override void Register()
         {
-            AddSystem(new CharacterAnimationInitSystem());
             AddSystem(new JumpSystem());
             AddSystem(new MovementSystem());
             AddSystem(new PlayerInputSystem());
@@ -17,7 +16,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Features
             AddSystem(new GroundCheckSystem());
             AddSystem(new JumpGravitySystem());
             AddSystem(new BlockJumpRemoveSystem());
-            AddSystem(new CharacterAnimationSystem());
+            AddSystem(new CharacterMovementAnimationSystem());
+            AddSystem(new CharacterJumpAnimationSystem());
             AddSystem(new FootstepParticleSystem());
             AddSystem(new CharacterJumpSoundSystem());
             AddSystem(new CharacterFootStepSoundSystem());

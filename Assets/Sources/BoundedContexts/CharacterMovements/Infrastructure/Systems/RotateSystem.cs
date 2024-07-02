@@ -9,28 +9,22 @@ using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
-    public class RotateSystem : IEcsRunSystem, IEcsInitSystem
+    public class RotateSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CharacterTag, RotateComponent>> _filter = default;
-        private EventsBus _eventsBus;
-
-        public void Init(IEcsSystems systems) =>
-            _eventsBus = systems.GetShared<SharedData>().EventsBus;
-
+        private readonly EcsFilterInject<Inc<CharacterTag, RotateComponent, DirectionComponent>> _filter = default;
 
         public void Run(IEcsSystems systems)
         {
-            if (_eventsBus.HasEventSingleton(out InputEvent inputEvent) == false)
-                return;
-            
-            if (inputEvent.Direction == Vector2.zero)
-                return;
 
             foreach (int entity in _filter.Value)
             {
                 ref RotateComponent rotateComponent = ref _filter.Pools.Inc2.Get(entity);
+                ref DirectionComponent directionComponent = ref _filter.Pools.Inc3.Get(entity);
                 
-                Vector3 moveDirection = new Vector3(inputEvent.Direction.x, 0, inputEvent.Direction.y);
+                if (directionComponent.Direction == Vector2.zero)
+                    continue;
+                
+                Vector3 moveDirection = new Vector3(directionComponent.Direction.x, 0, directionComponent.Direction.y);
                 float angle = Vector3.SignedAngle(Vector3.forward, moveDirection, Vector3.up);
                 Quaternion targetAngle = Quaternion.Euler(0, angle, 0);
                 
