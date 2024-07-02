@@ -10,6 +10,8 @@ using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
+using Sources.BoundedContexts.Hearths.Domain.Events;
+using Sources.BoundedContexts.Hearths.Infrastructure.Features;
 using Sources.BoundedContexts.Traps.Infrastructure.Features;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Zenject;
@@ -81,6 +83,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             _systems
                 .Add(new EntityReferenceInitializeSystem())
                 .Add(new CharacterMovementFeature())
+                .Add(new HearthFeature())
                 .Add(new EnemyMovementFeature())
                 .Add(new TrapFeature())
                 ;
@@ -90,6 +93,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
         {
             _systems
                 .AddOneFrame<FootstepEvent>()
+                .AddOneFrame<PickUpHearthEvent>()
                 ;
         }
 

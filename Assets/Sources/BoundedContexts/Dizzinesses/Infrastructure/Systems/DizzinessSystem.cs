@@ -34,7 +34,6 @@ namespace Sources.BoundedContexts.Dizzinesses.Infrastructure.Systems
 
                 navMesh.Agent.speed = DizzinessSpeed;
                 dizziness.CurrentTime += Time.deltaTime;
-                Debug.Log($"Current time: {dizziness.CurrentTime}");
             }
         }
     }

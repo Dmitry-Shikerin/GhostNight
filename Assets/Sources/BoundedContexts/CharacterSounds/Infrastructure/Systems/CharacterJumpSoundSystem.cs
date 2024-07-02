@@ -24,9 +24,6 @@ namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
 
         public void Run(IEcsSystems systems)
         {
-            if (_eventsBus.HasEventSingleton(out JumpEvent jumpEvent) == false)
-                return;
-
             // foreach (int entity in _filter.Value)
             //     _audioService.Play(AudioClipId.Jump);
         }
