@@ -3,7 +3,6 @@ using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyMovements.Domain.Tags;
-using UnityEngine;
 
 namespace Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Systems
 {
@@ -22,7 +21,6 @@ namespace Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Systems
                     continue;
                 
                 takeDamageParticleComponent.ParticleSystem.Play();
-                Debug.Log($"Play particle system");
             }
         }
     }

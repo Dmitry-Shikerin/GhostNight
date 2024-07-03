@@ -26,8 +26,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 CharacterAnimation animation = _filter.Pools.Inc2.Get(entity).Animation;
                 DirectionComponent directionComponent = _filter.Pools.Inc3.Get(entity);
                 
-                Debug.Log($"Set Movement Anim");
-
                 if (directionComponent.Direction != Vector2.zero)
                     animation.PlayWalk();
                 else

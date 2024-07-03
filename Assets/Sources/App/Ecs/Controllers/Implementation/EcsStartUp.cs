@@ -107,6 +107,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .AddOneFrame<TakeDamageEvent>()
                 .AddOneFrame<ShowHammerEvent>()
                 .AddOneFrame<HideHammerEvent>()
+                .AddOneFrame<HammerAttackEvent>()
                 ;
         }
 

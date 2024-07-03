@@ -1,6 +1,7 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Converters;
+using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyAttacks.Domain.Components;
 using Sources.BoundedContexts.EnemyMovements.Domain.Components;
@@ -38,6 +39,9 @@ namespace Sources.BoundedContexts.EnemyAttacks.Infrastructure.Systems
 
                 if (distance <= navMeshComponent.Agent.stoppingDistance + 0.1f)
                 {
+                    if (_world.Value.GetPool<BlockTakeDamageComponent>().Has(_characterReference.Entity))
+                        continue;
+                    
                     if (_world.Value.GetPool<TakeDamageEvent>().Has(_characterReference.Entity))
                         continue;
 

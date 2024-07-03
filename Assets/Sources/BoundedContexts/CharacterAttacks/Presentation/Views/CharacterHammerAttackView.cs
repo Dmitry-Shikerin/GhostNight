@@ -16,10 +16,7 @@ namespace Sources.BoundedContexts.CharacterAttacks.Presentation.Views
         private void OnDisable() =>
             _button.onClick.RemoveListener(OnButtonClick);
 
-        private void OnButtonClick()
-        {
-            Debug.Log($"Attack");
+        private void OnButtonClick() =>
             _characterAnimation.PlayHammerAttack();
-        }
     }
 }

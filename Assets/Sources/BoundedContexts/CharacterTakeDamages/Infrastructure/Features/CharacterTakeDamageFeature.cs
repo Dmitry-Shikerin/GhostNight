@@ -11,6 +11,7 @@ namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Features
             AddSystem(new CharacterTakeDamageAnimationSystem());
             AddSystem(new CharacterTakeDamageParticleSystem());
             AddSystem(new CharacterTakeDamageAudioSystem());
+            AddSystem(new CharacterBlockTakeDamageSystem());
         }
     }
 }

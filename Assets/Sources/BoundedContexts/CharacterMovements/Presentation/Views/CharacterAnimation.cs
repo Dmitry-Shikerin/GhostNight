@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Sources.BoundedContexts.Animations.Presentations;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
+using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.BoundedContexts.Hammers.Domain.Events;
@@ -16,7 +17,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         private static int s_isFlip = Animator.StringToHash("IsFlip");
         private static int s_isHurt = Animator.StringToHash("IsHurt");
         private static int s_isHammerAttack = Animator.StringToHash("IsHummerAttack");
-        
+
         private EntityReference _entityReference;
 
         private void Awake()
@@ -30,7 +31,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
 
             _entityReference = GetComponentInParent<EntityReference>();
         }
-        
+
         public void PlayWalk()
         {
             ExceptAnimation(StopWalk);
@@ -42,7 +43,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
             ExceptAnimation(StopIdle);
             Animator.SetBool(s_isIdle, true);
         }
-        
+
         public void PlayJump()
         {
             ExceptAnimation(StopJump);
@@ -52,10 +53,10 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         public void PlayHurt()
         {
             ExceptAnimation(StopHurt);
-            
+
             if (Animator.GetBool(s_isHurt))
                 return;
-            
+
             Animator.SetBool(s_isHurt, true);
         }
 
@@ -63,10 +64,22 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             ExceptAnimation(StopHammerAttack);
             Animator.SetBool(s_isHammerAttack, true);
-            _entityReference
-                .World
-                .GetPool<BlockMovementComponent>()
-                .Add(_entityReference.Entity);
+
+            if (_entityReference.World.GetPool<BlockMovementComponent>().Has(_entityReference.Entity) == false)
+            {
+                _entityReference
+                    .World
+                    .GetPool<BlockMovementComponent>()
+                    .Add(_entityReference.Entity);
+            }
+
+            if (_entityReference.World.GetPool<BlockTakeDamageComponent>().Has(_entityReference.Entity) == false)
+            {
+                _entityReference
+                    .World
+                    .GetPool<BlockTakeDamageComponent>()
+                    .Add(_entityReference.Entity);
+            }
         }
 
         private void StopHammerAttack() =>
@@ -75,10 +88,10 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         public void PlayFlip()
         {
             ExceptAnimation(StopFlip);
-            
+
             if (Animator.GetBool(s_isFlip))
                 return;
-                
+
             Animator.SetBool(s_isFlip, true);
         }
 
@@ -125,7 +138,10 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         [UsedImplicitly]
         private void OnHit()
         {
-            
+            _entityReference
+                .World
+                .GetPool<HammerAttackEvent>()
+                .Add(_entityReference.Entity);
         }
 
         [UsedImplicitly]
@@ -133,7 +149,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             _entityReference.World.GetPool<BlockMovementComponent>().Del(_entityReference.Entity);
             PlayIdle();
-            Debug.Log($"OnHurtEnded");
         }
 
         private void StopHurt() =>
@@ -144,10 +159,10 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
 
         private void StopWalk() =>
             Animator.SetBool(s_isWalk, false);
-        
+
         private void StopIdle() =>
             Animator.SetBool(s_isIdle, false);
-        
+
         private void StopJump() =>
             Animator.SetBool(s_isJump, false);
     }
