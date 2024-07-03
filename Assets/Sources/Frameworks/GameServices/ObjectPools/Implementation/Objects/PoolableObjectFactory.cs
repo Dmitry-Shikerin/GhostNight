@@ -1,5 +1,7 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.Frameworks.GameServices.ObjectPools.Interfaces.Generic;
+using Sources.Frameworks.GameServices.Prefabs.Interfaces;
 using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,16 +13,18 @@ namespace Sources.Frameworks.GameServices.ObjectPools.Implementation.Objects
         where T : MonoBehaviour, IView
     {
         private readonly IObjectPool<T> _pool;
+        private readonly IPrefabLoader _prefabLoader;
 
-        protected PoolableObjectFactory(IObjectPool<T> pool)
+        protected PoolableObjectFactory(IObjectPool<T> pool, IPrefabLoader prefabLoader)
         {
             _pool = pool ?? throw new ArgumentNullException(nameof(pool));
+            _prefabLoader = prefabLoader ?? throw new ArgumentNullException(nameof(prefabLoader));
         }
         
         protected T CreateView(string prefabPath)
         {
             T enemyView = Object.Instantiate(
-                Resources.Load<T>(prefabPath));
+                _prefabLoader.Load<T>(prefabPath));
 
             enemyView
                 .AddComponent<PoolableObject>()

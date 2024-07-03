@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Frameworks.GameServices.ObjectPools.Implementation;
+using Sources.Frameworks.GameServices.Prefabs.Implementation;
 using Sources.Frameworks.GameServices.Volumes.Domain.Models.Implementation;
 using Sources.Frameworks.UiFramework.AudioSources.Domain.Configs;
 using Sources.Frameworks.UiFramework.AudioSources.Domain.Groups;
@@ -17,7 +18,6 @@ using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Interfaces;
 using Sources.Frameworks.UiFramework.Collectors;
-using Sources.Frameworks.UiFramework.Views.Presentations.Implementation;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -47,7 +47,8 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             _audioGroups = audioServiceDataBase.AudioGroups;
             _audioSourcePool = new ObjectPool<UiAudioSource>();
             _audioSourcePool.SetPoolCount(_audioServiceDataBase.PoolCount);
-            IAudioContainerFactory audioContainerFactory = new AudioContainerFactory(_audioSourcePool);
+            IAudioContainerFactory audioContainerFactory = new AudioContainerFactory(
+                _audioSourcePool, new ResourcesPrefabLoader());
             _audioSourceSpawner = new AudioSourceSpawner(_audioSourcePool, audioContainerFactory);
         }
 
