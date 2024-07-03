@@ -14,6 +14,8 @@ using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Features;
 using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
+using Sources.BoundedContexts.Hammers.Domain.Events;
+using Sources.BoundedContexts.Hammers.Infrastructure.Features;
 using Sources.BoundedContexts.Hearths.Domain.Events;
 using Sources.BoundedContexts.Hearths.Infrastructure.Features;
 using Sources.BoundedContexts.Traps.Infrastructure.Features;
@@ -88,6 +90,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new EntityReferenceInitializeSystem())
                 .Add(new CharacterMovementFeature())
                 .Add(new HearthFeature())
+                .Add(new HammerFeature())
                 .Add(new EnemyMovementFeature())
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
@@ -102,6 +105,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .AddOneFrame<FootstepEvent>()
                 .AddOneFrame<PickUpHearthEvent>()
                 .AddOneFrame<TakeDamageEvent>()
+                .AddOneFrame<ShowHammerEvent>()
+                .AddOneFrame<HideHammerEvent>()
                 ;
         }
 

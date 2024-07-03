@@ -10,35 +10,23 @@ using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
-    public class CharacterMovementAnimationSystem : IEcsRunSystem, IEcsInitSystem
+    public class CharacterMovementAnimationSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<
             Inc<CharacterTag,
                 CharacterAnimationComponent,
                 DirectionComponent>,
-            Exc<JumpComponent>> _filter = default;
-
-        private EventsBus _eventsBus;
-
-        public void Init(IEcsSystems systems)
-        {
-            _eventsBus = systems.GetShared<SharedData>().EventsBus;
-        }
-
+            Exc<JumpComponent,
+                BlockMovementComponent>> _filter = default;
+        
         public void Run(IEcsSystems systems)
         {
             foreach (int entity in _filter.Value)
             {
                 CharacterAnimation animation = _filter.Pools.Inc2.Get(entity).Animation;
-
-                if (_eventsBus.HasEventSingleton<JumpEvent>())
-                {
-                    animation.PlayJump();
-
-                    return;
-                }
-
                 DirectionComponent directionComponent = _filter.Pools.Inc3.Get(entity);
+                
+                Debug.Log($"Set Movement Anim");
 
                 if (directionComponent.Direction != Vector2.zero)
                     animation.PlayWalk();

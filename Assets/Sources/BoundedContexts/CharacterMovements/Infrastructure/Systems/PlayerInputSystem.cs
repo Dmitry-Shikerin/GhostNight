@@ -1,28 +1,18 @@
 ﻿using System.Runtime.CompilerServices;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
-using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
-    public class PlayerInputSystem : IEcsRunSystem, IEcsInitSystem
+    public class PlayerInputSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<CharacterTag>, Exc<BlockJumpComponent>> _filter;
         private readonly EcsFilterInject<Inc<CharacterTag, DirectionComponent>> _directionFilter;
         private readonly EcsWorldInject _world;
         
-        private EventsBus _eventsBus;
-        
-        public void Init(IEcsSystems systems)
-        {
-            _eventsBus = systems.GetShared<SharedData>().EventsBus;
-        }
-
         public void Run(IEcsSystems systems)
         {
             UpdateDirectionInput();
