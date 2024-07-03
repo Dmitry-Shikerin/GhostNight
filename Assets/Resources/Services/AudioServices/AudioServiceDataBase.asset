@@ -19,6 +19,29 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0a292b136471f74fa41ac702c3424c5, type: 3}
   _currentClip: {fileID: 0}
   _currentTime: 0
+--- !u!114 &-5575320789979800528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7768d372fd56426abc7629a3a8efd397, type: 3}
+  m_Name: CharacterJump_AudioGroup
+  m_EditorClassIdentifier: 
+  _id: 4
+  _parent: {fileID: 11400000}
+  type: 2
+  _audioClips:
+  - {fileID: 8300000, guid: 05a2c990c2c35c847ab81322bc72c161, type: 3}
+  - {fileID: 8300000, guid: 55e721f1dfaef5246b02e46c56af95b8, type: 3}
+  - {fileID: 8300000, guid: 119550d83c92fca47916f66a9edd70fd, type: 3}
+  - {fileID: 8300000, guid: 6ddd2a11d84a7ef4db5280d0e8c34f90, type: 3}
+  - {fileID: 8300000, guid: 5d943caf3edecad4289608dc4bd37004, type: 3}
+  _currentClip: {fileID: 0}
+  _currentTime: 0
 --- !u!114 &-2548600227786409102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,8 +77,29 @@ MonoBehaviour:
   _poolCount: 3
   _volume: 0.5
   _audioClipGroups:
-    _keys: 0000000002000000
+    _keys: 00000000020000000300000004000000
     _values:
     - {fileID: -6707310200659605414}
     - {fileID: -2548600227786409102}
-  _audioGroupId: 2
+    - {fileID: 7626321751968231959}
+    - {fileID: -5575320789979800528}
+  _audioGroupId: 4
+--- !u!114 &7626321751968231959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7768d372fd56426abc7629a3a8efd397, type: 3}
+  m_Name: PickUpHeart_AudioGroup
+  m_EditorClassIdentifier: 
+  _id: 3
+  _parent: {fileID: 11400000}
+  type: 0
+  _audioClips:
+  - {fileID: 8300000, guid: 7ef55b15281e988459be4b38e36962d9, type: 3}
+  _currentClip: {fileID: 0}
+  _currentTime: 0

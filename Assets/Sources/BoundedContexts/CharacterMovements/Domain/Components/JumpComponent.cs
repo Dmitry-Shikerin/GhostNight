@@ -13,7 +13,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
         public float UpTime;
         [HideInInspector]
         public float CurrentTime;
-        // [Range(1, 6)]
-        // public float Speed;
+        public bool IsPlayJumpSound;
     }
 }

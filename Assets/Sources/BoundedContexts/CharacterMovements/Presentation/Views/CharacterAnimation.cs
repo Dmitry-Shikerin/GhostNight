@@ -16,6 +16,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         private static int s_isIdle = Animator.StringToHash("IsIdle");
         private static int s_isJump = Animator.StringToHash("IsJump");
         private static int s_isFlip = Animator.StringToHash("IsFlip");
+        private static int s_isHurt = Animator.StringToHash("IsHurt");
         
         private EntityReference _entityReference;
 

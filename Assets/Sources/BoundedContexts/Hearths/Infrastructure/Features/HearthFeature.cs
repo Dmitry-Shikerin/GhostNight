@@ -8,6 +8,7 @@ namespace Sources.BoundedContexts.Hearths.Infrastructure.Features
         protected override void Register()
         {
             AddSystem(new PickUpHeartParticleSystem());
+            AddSystem(new PickUpHeartSoundSystem());
         }
     }
 }

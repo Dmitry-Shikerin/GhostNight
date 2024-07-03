@@ -19,6 +19,7 @@ using Sources.Frameworks.UiFramework.AudioSources.Presentations.Interfaces;
 using Sources.Frameworks.UiFramework.Collectors;
 using Sources.Frameworks.UiFramework.Views.Presentations.Implementation;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Implementation
 {
@@ -102,7 +103,6 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             IUiAudioSource audioSource = _audioSourceSpawner.Spawn();
             audioSource.SetVolume(_volume.MusicVolume);
             AudioGroup audioGroup = _audioGroups[audioGroupId];
-            audioGroup.Play();
 
             try
             {
@@ -110,6 +110,8 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
                         await PlayLoop(audioGroupId, audioSource);
                     else if (audioGroup.Type == PlayingType.Default)
                         PlayOneShot(audioGroupId, audioSource);
+                    else if (audioGroup.Type == PlayingType.Random)
+                        PlayRandom(audioGroupId, audioSource);
             }
             catch (OperationCanceledException)
             {
@@ -154,6 +156,9 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             if (_audioGroups[audioGroupId].IsPlaying)
                 throw new InvalidOperationException($"Group {audioGroupId} is already playing");
             
+            AudioGroup audioGroup = _audioGroups[audioGroupId];
+            audioGroup.Play();
+            
             while (_audioCancellationTokenSource.Token.IsCancellationRequested == false &&
                    _audioGroups[audioGroupId].IsPlaying)
             {
@@ -167,10 +172,28 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             }
         }
 
+        private void PlayRandom(AudioGroupId audioGroupId, IUiAudioSource audioSource)
+        {
+            if (_audioGroups[audioGroupId].AudioClips.Count <= 0)
+                throw new ArgumentOutOfRangeException();
+            
+            AudioGroup audioGroup = _audioGroups[audioGroupId];
+            audioGroup.Play();
+            
+            int randomIndex = Random.Range(0, _audioGroups[audioGroupId].AudioClips.Count);
+            AudioClip clip = _audioGroups[audioGroupId].AudioClips[randomIndex];
+            
+            audioSource.SetClip(clip);
+            audioSource?.PlayAsync(audioSource.Destroy);
+        }
+
         private void PlayOneShot(AudioGroupId audioGroupId, IUiAudioSource audioSource)
         {
             if (_audioGroups[audioGroupId].AudioClips.Count <= 0)
                 throw new ArgumentOutOfRangeException();
+            
+            AudioGroup audioGroup = _audioGroups[audioGroupId];
+            audioGroup.Play();
             
             audioSource.SetClip(_audioGroups[audioGroupId].AudioClips.First());
             audioSource?.PlayAsync(audioSource.Destroy);

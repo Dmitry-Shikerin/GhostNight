@@ -72,7 +72,7 @@ namespace Sources.BoundedContexts.Scenes.Controllers
             _compositeAssetService.Release();
             _ecsGameStartUp.Destroy();
             _signalControllersCollector.Destroy();
-            _audioService.Stop(AudioGroupId.GameplayBackground);
+            // _audioService.Stop(AudioGroupId.GameplayBackground);
             _audioService.Destroy();
         }
 
