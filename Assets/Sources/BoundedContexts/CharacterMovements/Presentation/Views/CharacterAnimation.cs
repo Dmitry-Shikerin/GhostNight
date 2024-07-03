@@ -52,12 +52,17 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         public void PlayHurt()
         {
             ExceptAnimation(StopHurt);
+            
+            if (Animator.GetBool(s_isFlip))
+                return;
+            
             Animator.SetBool(s_isHurt, true);
         }
         
         public void PlayFlip()
         {
             ExceptAnimation(StopFlip);
+            
             if (Animator.GetBool(s_isFlip))
                 return;
                 

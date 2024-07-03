@@ -4,9 +4,8 @@ using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Views;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
-using UnityEngine;
 
-namespace Sources.BoundedContexts.CharacterDealDamages.Infrastructure.Systems
+namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems
 {
     public class CharacterTakeDamageAnimationSystem : IEcsRunSystem
     {

@@ -41,9 +41,9 @@ namespace Sources.BoundedContexts.EnemyAttacks.Infrastructure.Systems
                     if (_world.Value.GetPool<TakeDamageEvent>().Has(_characterReference.Entity))
                         continue;
 
-                    Debug.Log($"Enemy Attacked {_characterReference.Entity}");
-                    _world.Value.GetPool<TakeDamageEvent>().Add(_characterReference.Entity);
-                    Debug.Log(_world.Value.GetPool<TakeDamageEvent>().Has(_characterReference.Entity));
+                    ref TakeDamageEvent takeDamageEvent =  
+                        ref _world.Value.GetPool<TakeDamageEvent>().Add(_characterReference.Entity);
+                    takeDamageEvent.From = navMeshComponent.Agent.transform.position;
                     _world.Value.GetPool<BlockAttackComponent>().Add(entity);
                 }
             }

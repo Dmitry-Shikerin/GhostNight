@@ -13,23 +13,21 @@ namespace Sources.BoundedContexts.Triggers.Presentation.Common
 
         private void OnTriggerEnter(Collider other)
         {
-            // Debug.Log($"OnTriggerEnter {other.name}");
             if (other.TryGetComponent(out T component))
             {
                 Entered?.Invoke(component);
                 
                 return;
             }
-
-            if (other.GetComponentInChildren<T>() != null)
-            {
-                Entered?.Invoke(component);
-            }
+            //
+            // T childComponent = other.GetComponentInChildren<T>();
+            //
+            // if (childComponent != null)
+            //     Entered?.Invoke(childComponent);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            // Debug.Log($"OnTriggerExit {other.name}");
             if (other.TryGetComponent(out T component))
             {
                 Exited?.Invoke(component);

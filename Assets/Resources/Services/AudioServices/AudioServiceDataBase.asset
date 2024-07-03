@@ -42,6 +42,29 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5d943caf3edecad4289608dc4bd37004, type: 3}
   _currentClip: {fileID: 0}
   _currentTime: 0
+--- !u!114 &-3183790138733950416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7768d372fd56426abc7629a3a8efd397, type: 3}
+  m_Name: CharacterHurt_AudioGroup
+  m_EditorClassIdentifier: 
+  _id: 5
+  _parent: {fileID: 11400000}
+  type: 2
+  _audioClips:
+  - {fileID: 8300000, guid: 91ca9eae86b8eb64c81d77383b4d1345, type: 3}
+  - {fileID: 8300000, guid: b31d3b4cf0c150b488c1b459fde24d14, type: 3}
+  - {fileID: 8300000, guid: 6f6dba85ef6f86e4fb638b0b40c9dfde, type: 3}
+  - {fileID: 8300000, guid: 2db5b203c93cf7e43b05a11c015d79d8, type: 3}
+  - {fileID: 8300000, guid: 8f1cee5a09de2534b987be28b6d0ae40, type: 3}
+  _currentClip: {fileID: 0}
+  _currentTime: 0
 --- !u!114 &-2548600227786409102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,13 +100,14 @@ MonoBehaviour:
   _poolCount: 3
   _volume: 0.5
   _audioClipGroups:
-    _keys: 00000000020000000300000004000000
+    _keys: 0000000002000000030000000400000005000000
     _values:
     - {fileID: -6707310200659605414}
     - {fileID: -2548600227786409102}
     - {fileID: 7626321751968231959}
     - {fileID: -5575320789979800528}
-  _audioGroupId: 4
+    - {fileID: -3183790138733950416}
+  _audioGroupId: 5
 --- !u!114 &7626321751968231959
 MonoBehaviour:
   m_ObjectHideFlags: 0

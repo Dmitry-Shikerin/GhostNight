@@ -12,7 +12,11 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
     public class MovementSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<
-            Inc<CharacterTag, MovementComponent, CharacterControllerComponent, GravityComponent, DirectionComponent>, 
+            Inc<CharacterTag, 
+                MovementComponent, 
+                CharacterControllerComponent, 
+                GravityComponent, 
+                DirectionComponent>, 
             Exc<JumpComponent>> _filter = default;
 
         private readonly EcsWorldInject _world;

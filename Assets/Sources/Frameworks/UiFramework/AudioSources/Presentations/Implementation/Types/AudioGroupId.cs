@@ -6,6 +6,7 @@
         MainMenuBackground = 1,
         Footstep = 2,
         PickUpHeart = 3,
-        CharacterJump = 4
+        CharacterJump = 4,
+        CharacterHurt = 5,
     }
 }

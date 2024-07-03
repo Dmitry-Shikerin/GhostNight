@@ -5,12 +5,13 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
-using Sources.BoundedContexts.CharacterDealDamages.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
+using Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Features;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyAttacks.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
+using Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Features;
 using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.BoundedContexts.Hearths.Domain.Events;
@@ -90,6 +91,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new EnemyMovementFeature())
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
+                .Add(new EnemyTakeDamageFeature())
                 .Add(new TrapFeature())
                 ;
         }
