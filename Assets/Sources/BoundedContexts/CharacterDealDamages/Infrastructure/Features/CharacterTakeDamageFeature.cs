@@ -8,6 +8,7 @@ namespace Sources.BoundedContexts.CharacterDealDamages.Infrastructure.Features
         protected override void Register()
         {
             AddSystem(new CharacterTakeDamageSystem());
+            AddSystem(new CharacterTakeDamageAnimationSystem());
         }
     }
 }

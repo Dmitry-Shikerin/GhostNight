@@ -26,6 +26,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
             StoppingAnimations.Add(StopIdle);
             StoppingAnimations.Add(StopJump);
             StoppingAnimations.Add(StopFlip);
+            StoppingAnimations.Add(StopHurt);
 
             _entityReference = GetComponentInParent<EntityReference>();
         }
@@ -46,6 +47,12 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             ExceptAnimation(StopJump);
             Animator.SetBool(s_isJump, true);
+        }
+
+        public void PlayHurt()
+        {
+            ExceptAnimation(StopHurt);
+            Animator.SetBool(s_isHurt, true);
         }
         
         public void PlayFlip()
@@ -74,6 +81,9 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
                 .GetPool<FootstepEvent>()
                 .Add(_entityReference.Entity);
         }
+
+        private void StopHurt() =>
+            Animator.SetBool(s_isHurt, false);
 
         private void StopFlip() =>
             Animator.SetBool(s_isFlip, false);
