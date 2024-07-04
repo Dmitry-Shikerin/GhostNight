@@ -5,12 +5,13 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
-using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
+using Sources.BoundedContexts.CharacterStuns.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Features;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyAttacks.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
+using Sources.BoundedContexts.EnemyStuns.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Features;
 using Sources.BoundedContexts.EntityReferences.Infrastructure.Systems;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
@@ -18,6 +19,7 @@ using Sources.BoundedContexts.Hammers.Domain.Events;
 using Sources.BoundedContexts.Hammers.Infrastructure.Features;
 using Sources.BoundedContexts.Hearths.Domain.Events;
 using Sources.BoundedContexts.Hearths.Infrastructure.Features;
+using Sources.BoundedContexts.Stuns.Domain.Events;
 using Sources.BoundedContexts.Traps.Infrastructure.Features;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Zenject;
@@ -89,11 +91,13 @@ namespace Sources.App.Ecs.Controllers.Implementation
             _systems
                 .Add(new EntityReferenceInitializeSystem())
                 .Add(new CharacterMovementFeature())
+                .Add(new CharacterStunFeature())
                 .Add(new HearthFeature())
                 .Add(new HammerFeature())
                 .Add(new EnemyMovementFeature())
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
+                .Add(new EnemyStunFeature())
                 .Add(new EnemyTakeDamageFeature())
                 .Add(new TrapFeature())
                 ;
@@ -108,6 +112,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .AddOneFrame<ShowHammerEvent>()
                 .AddOneFrame<HideHammerEvent>()
                 .AddOneFrame<HammerAttackEvent>()
+                .AddOneFrame<StartStunEvent>()
+                .AddOneFrame<EndStunEvent>()
                 ;
         }
 

@@ -8,6 +8,7 @@ using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Hammers.Domain.Components;
 using Sources.BoundedContexts.Hammers.Domain.Events;
 using Sources.BoundedContexts.Layers.Domain.Const;
+using Sources.BoundedContexts.Stuns.Domain.Components;
 using Sources.Frameworks.GameServices.Overlaps.Interfaces;
 using UnityEngine;
 
@@ -38,7 +39,14 @@ namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
                     continue;
 
                 foreach (EntityReference entityReference in entityReferences)
+                {
                     _world.Value.GetPool<TakeDamageEvent>().Add(entityReference.Entity);
+
+                    if (_world.Value.GetPool<StunComponent>().Has(entityReference.Entity))
+                        continue;
+
+                    _world.Value.GetPool<StunComponent>().Add(entityReference.Entity).CurrentTime = 0;
+                }
             }
         }
     }
