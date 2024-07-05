@@ -1,5 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Converters;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;

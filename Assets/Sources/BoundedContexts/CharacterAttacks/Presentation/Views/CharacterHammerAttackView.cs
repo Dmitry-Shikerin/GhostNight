@@ -1,4 +1,4 @@
-﻿using Sources.BoundedContexts.CharacterMovements.Presentation.Views;
+﻿using Sources.BoundedContexts.CharacterAnimations.Presentation.Views;
 using Sources.Frameworks.MVPPassiveView.Presentations.Implementation.Views;
 using UnityEngine;
 using UnityEngine.UI;

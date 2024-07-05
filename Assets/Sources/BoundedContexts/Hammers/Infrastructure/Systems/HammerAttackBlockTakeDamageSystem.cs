@@ -1,13 +1,14 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.Hammers.Domain.Events;
 using UnityEngine;
 
-namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems
+namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
 {
-    public class CharacterBlockTakeDamageSystem : IEcsRunSystem
+    public class HammerAttackBlockTakeDamageSystem : IEcsRunSystem
     {
         private const float Delay = 2f;
         private readonly EcsFilterInject<Inc<CharacterTag, BlockTakeDamageComponent>> _filter = default;
@@ -17,19 +18,11 @@ namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems
         {
             foreach (int entity in _startAttackFilter.Value)
             {
-                systems.GetWorld().GetPool<BlockTakeDamageComponent>().Add(entity);
-            }
-            
-            foreach (int entity in _filter.Value)
-            {
-                ref BlockTakeDamageComponent blockTakeDamageComponent = ref _filter.Pools.Inc2.Get(entity);
+                ref BlockTakeDamageComponent blockTakeDamageComponent = 
+                    ref systems.GetWorld().GetPool<BlockTakeDamageComponent>().Add(entity);
                 
-                blockTakeDamageComponent.CurrentTime += Time.deltaTime;
-                
-                if (blockTakeDamageComponent.CurrentTime < Delay)
-                    continue;
-                
-                _filter.Pools.Inc2.Del(entity);
+                blockTakeDamageComponent.Duration = Delay;
+                blockTakeDamageComponent.CurrentTime = 0f;
             }
         }
     }

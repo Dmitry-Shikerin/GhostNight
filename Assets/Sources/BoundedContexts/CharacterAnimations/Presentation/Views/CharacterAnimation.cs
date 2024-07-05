@@ -1,14 +1,12 @@
 ﻿using JetBrains.Annotations;
 using Sources.BoundedContexts.Animations.Presentations;
 using Sources.BoundedContexts.BlockMovements.Domain.Components;
-using Sources.BoundedContexts.CharacterMovements.Domain.Components;
-using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.BoundedContexts.Hammers.Domain.Events;
 using UnityEngine;
 
-namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
+namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
 {
     public class CharacterAnimation : AnimationViewBase
     {
@@ -64,6 +62,14 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         public void PlayHammerAttack()
         {
             ExceptAnimation(StopHammerAttack);
+            
+            ref BlockMovementComponent blockMovementComponent = ref _entityReference
+                .World
+                .GetPool<BlockMovementComponent>()
+                .Add(_entityReference.Entity);
+            blockMovementComponent.Duration = 1.2f;
+            blockMovementComponent.CurrentDuration = 0;
+            
             Animator.SetBool(s_isHammerAttack, true);
         }
 

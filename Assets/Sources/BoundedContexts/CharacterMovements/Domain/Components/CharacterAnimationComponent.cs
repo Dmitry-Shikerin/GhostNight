@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.BoundedContexts.CharacterMovements.Presentation.Views;
+using Sources.BoundedContexts.CharacterAnimations.Presentation.Views;
 
 namespace Sources.BoundedContexts.CharacterMovements.Domain.Components
 {

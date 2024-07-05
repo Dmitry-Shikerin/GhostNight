@@ -20,6 +20,9 @@ namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
         {
             foreach (int entity in _showFilter.Value)
             {
+                if (_world.Value.GetPool<BlockMovementComponent>().Has(entity))
+                    continue;
+                
                 _world.Value.GetPool<BlockMovementComponent>().Add(entity);
             }
 
