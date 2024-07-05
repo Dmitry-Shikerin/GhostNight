@@ -1,6 +1,5 @@
 ﻿using JetBrains.Annotations;
 using Sources.BoundedContexts.Animations.Presentations;
-using Sources.BoundedContexts.BlockMovements.Domain.Components;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.BoundedContexts.Hammers.Domain.Events;
@@ -63,13 +62,11 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         {
             ExceptAnimation(StopHammerAttack);
             
-            ref BlockMovementComponent blockMovementComponent = ref _entityReference
+            _entityReference
                 .World
-                .GetPool<BlockMovementComponent>()
+                .GetPool<StartHummerAttackEvent>()
                 .Add(_entityReference.Entity);
-            blockMovementComponent.Duration = 1.2f;
-            blockMovementComponent.CurrentDuration = 0;
-            
+
             Animator.SetBool(s_isHammerAttack, true);
         }
 
@@ -107,10 +104,6 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         [UsedImplicitly]
         private void OnStartHammerAttack()
         {
-            _entityReference
-                .World
-                .GetPool<StartHummerAttackEvent>()
-                .Add(_entityReference.Entity);
         }
 
         [UsedImplicitly]

@@ -5,6 +5,7 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterStuns.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Features;
@@ -21,6 +22,7 @@ using Sources.BoundedContexts.Hearths.Domain.Events;
 using Sources.BoundedContexts.Hearths.Infrastructure.Features;
 using Sources.BoundedContexts.Stuns.Domain.Events;
 using Sources.BoundedContexts.Traps.Infrastructure.Features;
+using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Extensions;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Zenject;
 
@@ -56,6 +58,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             // AddEditorSystems();
             AddSystems();
             AddOneFrame();
+            AddDeleteAfterTime();
             AddEvents();
             AddComponentsConverterWorld();
             AddUnityIntegrationSystem();
@@ -89,11 +92,11 @@ namespace Sources.App.Ecs.Controllers.Implementation
         private void AddSystems()
         {
             _systems
+                .Add(new HammerFeature())
                 .Add(new EntityReferenceInitializeSystem())
                 .Add(new CharacterMovementFeature())
                 .Add(new CharacterStunFeature())
                 .Add(new HearthFeature())
-                .Add(new HammerFeature())
                 .Add(new EnemyMovementFeature())
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
@@ -114,6 +117,13 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .AddOneFrame<HammerAttackHitEvent>()
                 .AddOneFrame<StartStunEvent>()
                 .AddOneFrame<EndStunEvent>()
+                ;
+        }
+
+        private void AddDeleteAfterTime()
+        {
+            _systems
+                .AddDeleteAfterTime<BlockTakeDamageComponent>()
                 ;
         }
 

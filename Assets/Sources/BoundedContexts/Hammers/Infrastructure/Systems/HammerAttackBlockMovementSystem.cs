@@ -5,6 +5,7 @@ using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.Hammers.Domain.Components;
 using Sources.BoundedContexts.Hammers.Domain.Events;
+using UnityEngine;
 
 namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
 {
@@ -23,12 +24,11 @@ namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
                 if (_world.Value.GetPool<BlockMovementComponent>().Has(entity))
                     continue;
                 
-                _world.Value.GetPool<BlockMovementComponent>().Add(entity);
-            }
-
-            foreach (int entity in _hideFilter.Value)
-            {
-                _world.Value.GetPool<BlockMovementComponent>().Del(entity);
+                ref BlockMovementComponent blockMovementComponent = 
+                    ref _world.Value.GetPool<BlockMovementComponent>().Add(entity);
+                
+                blockMovementComponent.Duration = 1.2f;
+                blockMovementComponent.CurrentDuration = 0;
             }
         }
     }
