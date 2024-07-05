@@ -12,6 +12,7 @@ using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterStuns.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyAttacks.Infrastructure.Features;
+using Sources.BoundedContexts.EnemyHealths.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyStuns.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Features;
@@ -22,6 +23,7 @@ using Sources.BoundedContexts.Hammers.Infrastructure.Features;
 using Sources.BoundedContexts.Hearths.Domain.Events;
 using Sources.BoundedContexts.Hearths.Infrastructure.Features;
 using Sources.BoundedContexts.Jumps.Domain.Components;
+using Sources.BoundedContexts.LookAts.Infrastructure.Features;
 using Sources.BoundedContexts.Stuns.Domain.Events;
 using Sources.BoundedContexts.TakeDamages.Domain.Components;
 using Sources.BoundedContexts.TakeDamages.Domain.Events;
@@ -96,6 +98,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
         private void AddSystems()
         {
             _systems
+                .Add(new LookAtFeature())
                 .Add(new HammerFeature())
                 .Add(new EntityReferenceInitializeSystem())
                 .Add(new CharacterMovementFeature())
@@ -105,6 +108,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
                 .Add(new CharacterHealthFeature())
+                .Add(new EnemyHealthFeature())
                 .Add(new EnemyStunFeature())
                 .Add(new EnemyTakeDamageFeature())
                 .Add(new TrapFeature())

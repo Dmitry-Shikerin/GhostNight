@@ -7,6 +7,7 @@ namespace Sources.BoundedContexts.EnemyTakeDamages.Infrastructure.Features
     {
         protected override void Register()
         {
+            AddSystem(new EnemyTakeDamageSystem());
             AddSystem(new EnemyTakeDamageParticleSystem());
         }
     }

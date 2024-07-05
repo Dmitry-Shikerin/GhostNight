@@ -34,8 +34,6 @@ namespace Sources.BoundedContexts.CharacterHealths.Infrastructure.Systems
                 
                 for (int i = 0; i < healthComponent.Health; i++)
                     _healthView.Images[i].Show();
-                
-                Debug.Log($"Character health Ui Changed {healthComponent.Health}");
             }
             
             foreach (int entity in _pickUpHeartFilter.Value)
@@ -47,8 +45,6 @@ namespace Sources.BoundedContexts.CharacterHealths.Infrastructure.Systems
                 
                 for (int i = 0; i < healthComponent.Health; i++)
                     _healthView.Images[i].Show();
-                
-                Debug.Log($"Character health Ui Changed {healthComponent.Health}");
             }
         }
     }
