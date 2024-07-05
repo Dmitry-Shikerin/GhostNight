@@ -1,7 +1,5 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterControllers.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
@@ -11,7 +9,7 @@ using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
-    public class JumpGravitySystem : IEcsRunSystem, IEcsInitSystem
+    public class JumpGravitySystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<
             Inc<CharacterTag, 
@@ -19,14 +17,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 CharacterControllerComponent, 
                 GravityComponent, 
                 DirectionComponent>> _filter = default;
-
-        private readonly EcsWorldInject _world = default;
-
-        private EventsBus _eventsBus;
-
-        public void Init(IEcsSystems systems) =>
-            _eventsBus = systems.GetShared<SharedData>().EventsBus;
-
+        
         public void Run(IEcsSystems systems)
         {
             foreach (int entity in _filter.Value)

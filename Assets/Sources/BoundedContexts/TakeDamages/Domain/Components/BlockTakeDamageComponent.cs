@@ -1,6 +1,6 @@
 ﻿using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Domain.Components.Interfaces;
 
-namespace Sources.BoundedContexts.BlockTakeDamages.Domain.Components
+namespace Sources.BoundedContexts.TakeDamages.Domain.Components
 {
     public struct BlockTakeDamageComponent : ITemporaryComponent
     {

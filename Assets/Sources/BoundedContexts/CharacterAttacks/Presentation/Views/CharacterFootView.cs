@@ -1,8 +1,8 @@
 ﻿using System;
 using Sources.BoundedContexts.CharacterAttacks.Presentation.Triggers;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyAttacks.Presentation.Views;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 using Sources.Frameworks.MVPPassiveView.Presentations.Implementation.Views;
 using UnityEngine;
 

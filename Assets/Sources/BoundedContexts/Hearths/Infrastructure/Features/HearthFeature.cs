@@ -9,6 +9,7 @@ namespace Sources.BoundedContexts.Hearths.Infrastructure.Features
         {
             AddSystem(new PickUpHeartParticleSystem());
             AddSystem(new PickUpHeartSoundSystem());
+            AddSystem(new PickUpHeartSystem());
         }
     }
 }

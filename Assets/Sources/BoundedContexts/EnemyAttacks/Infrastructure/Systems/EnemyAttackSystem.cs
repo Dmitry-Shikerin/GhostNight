@@ -1,14 +1,14 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Converters;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyAttacks.Domain.Components;
 using Sources.BoundedContexts.EnemyMovements.Domain.Components;
 using Sources.BoundedContexts.EnemyMovements.Domain.Tags;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
+using Sources.BoundedContexts.TakeDamages.Domain.Components;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.EnemyAttacks.Infrastructure.Systems

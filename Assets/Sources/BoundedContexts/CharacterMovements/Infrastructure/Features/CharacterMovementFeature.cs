@@ -15,7 +15,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Features
             AddSystem(new CharacterRotateSystem());
             AddSystem(new GroundCheckSystem());
             AddSystem(new JumpGravitySystem());
-            AddSystem(new BlockJumpRemoveSystem());
+            // AddSystem(new BlockJumpRemoveSystem());
             AddSystem(new CharacterMovementAnimationSystem());
             AddSystem(new CharacterJumpAnimationSystem());
             AddSystem(new FootstepParticleSystem());

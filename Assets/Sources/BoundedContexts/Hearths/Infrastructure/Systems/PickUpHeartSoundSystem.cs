@@ -10,6 +10,7 @@ namespace Sources.BoundedContexts.Hearths.Infrastructure.Systems
     public class PickUpHeartSoundSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<Inc<PickUpHearthEvent>> _filter = default;
+        
         private IAudioService _audioService;
 
         public void Init(IEcsSystems systems) =>

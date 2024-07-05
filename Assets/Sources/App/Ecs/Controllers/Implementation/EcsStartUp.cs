@@ -6,11 +6,11 @@ using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.BlockMovements.Domain.Components;
-using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
+using Sources.BoundedContexts.CharacterHealths.Infrastructure.Features;
+using Sources.BoundedContexts.CharacterHealths.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterStuns.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Features;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EnemyAttacks.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyMovements.Infrastructure.Features;
 using Sources.BoundedContexts.EnemyStuns.Infrastructure.Features;
@@ -21,7 +21,10 @@ using Sources.BoundedContexts.Hammers.Domain.Events;
 using Sources.BoundedContexts.Hammers.Infrastructure.Features;
 using Sources.BoundedContexts.Hearths.Domain.Events;
 using Sources.BoundedContexts.Hearths.Infrastructure.Features;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 using Sources.BoundedContexts.Stuns.Domain.Events;
+using Sources.BoundedContexts.TakeDamages.Domain.Components;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 using Sources.BoundedContexts.Traps.Infrastructure.Features;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Extensions;
@@ -59,7 +62,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             // AddEditorSystems();
             AddSystems();
             AddOneFrame();
-            AddDeleteAfterTime();
+            AddTemporary();
             AddEvents();
             AddComponentsConverterWorld();
             AddUnityIntegrationSystem();
@@ -101,6 +104,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new EnemyMovementFeature())
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
+                .Add(new CharacterHealthFeature())
                 .Add(new EnemyStunFeature())
                 .Add(new EnemyTakeDamageFeature())
                 .Add(new TrapFeature())
@@ -121,11 +125,12 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 ;
         }
 
-        private void AddDeleteAfterTime()
+        private void AddTemporary()
         {
             _systems
-                .AddDeleteAfterTime<BlockTakeDamageComponent>()
-                .AddDeleteAfterTime<BlockMovementComponent>()
+                .AddTemporary<BlockTakeDamageComponent>()
+                .AddTemporary<BlockMovementComponent>()
+                .AddTemporary<BlockJumpComponent>()
                 ;
         }
 

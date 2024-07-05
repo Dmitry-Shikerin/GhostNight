@@ -2,7 +2,7 @@
 using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.BlockMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 
 namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems
 {

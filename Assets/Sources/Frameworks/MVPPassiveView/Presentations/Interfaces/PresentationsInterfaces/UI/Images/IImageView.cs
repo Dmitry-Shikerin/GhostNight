@@ -1,10 +1,11 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.Views;
 using UnityEngine;
 
 namespace Sources.Frameworks.MVPPassiveView.Presentations.Interfaces.PresentationsInterfaces.UI.Images
 {
-    public interface IImageView
+    public interface IImageView : IView
     {
         float FillAmount { get; }
         

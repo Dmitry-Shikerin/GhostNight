@@ -4,7 +4,7 @@ using Sources.BoundedContexts.CharacterControllers.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems

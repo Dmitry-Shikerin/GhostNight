@@ -3,12 +3,12 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Hammers.Domain.Components;
 using Sources.BoundedContexts.Hammers.Domain.Events;
 using Sources.BoundedContexts.Layers.Domain.Const;
 using Sources.BoundedContexts.Stuns.Domain.Components;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 using Sources.Frameworks.GameServices.Overlaps.Interfaces;
 
 namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems

@@ -5,6 +5,7 @@ using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.BoundedContexts.Hammers.Domain.Events;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
@@ -21,12 +22,16 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         private EntityReference _entityReference;
         private EcsWorld _world;
         private int _entity;
+        
+        private EcsWorld World => _world ??= _entityReference.World;
+        private int Entity => 
+            _entity == default 
+            ? _entityReference.Entity 
+            : throw new InvalidImplementationException();
 
         private void Awake()
         {
             _entityReference = GetComponentInParent<EntityReference>();
-            _world = _entityReference.World;
-            _entity = _entityReference.Entity;
             
             StoppingAnimations.Add(StopWalk);
             StoppingAnimations.Add(StopIdle);
@@ -67,7 +72,7 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         public void PlayHammerAttack()
         {
             ExceptAnimation(StopHammerAttack);
-            _world.Invoke<StartHummerAttackEvent>(_entity);
+            World.Invoke<StartHummerAttackEvent>(Entity);
             Animator.SetBool(s_isHammerAttack, true);
         }
 
@@ -86,11 +91,11 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
 
         [UsedImplicitly]
         private void OnRightStep() =>
-            _world.Invoke<FootstepEvent>(_entity);
+            World.Invoke<FootstepEvent>(Entity);
 
         [UsedImplicitly]
         private void OnLeftStep() =>
-            _world.Invoke<FootstepEvent>(_entity);
+            World.Invoke<FootstepEvent>(Entity);
 
         [UsedImplicitly]
         private void OnStartHammerAttack()
@@ -99,11 +104,11 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
 
         [UsedImplicitly]
         private void OnEndHammerAttack() =>
-            _world.Invoke<EndHammerAttackEvent>(_entity);
+            World.Invoke<EndHammerAttackEvent>(Entity);
 
         [UsedImplicitly]
         private void OnHit() =>
-            _world.Invoke<HammerAttackHitEvent>(_entity);
+            World.Invoke<HammerAttackHitEvent>(Entity);
 
         [UsedImplicitly]
         private void OnHurtEnded() =>

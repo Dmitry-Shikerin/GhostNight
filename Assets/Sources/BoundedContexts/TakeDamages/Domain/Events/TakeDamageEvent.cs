@@ -1,7 +1,7 @@
 ﻿using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Domain.Interfaces;
 using UnityEngine;
 
-namespace Sources.BoundedContexts.DealDamages.Domain.Events
+namespace Sources.BoundedContexts.TakeDamages.Domain.Events
 {
     public struct TakeDamageEvent : IEcsEvent
     {

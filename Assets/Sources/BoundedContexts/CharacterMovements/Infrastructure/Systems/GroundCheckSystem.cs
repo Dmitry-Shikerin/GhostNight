@@ -1,7 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.CharacterControllers.Domain.Components;
-using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.Jumps.Domain.Components;
 
@@ -9,8 +8,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
     public class GroundCheckSystem : IEcsRunSystem
     {
-        private readonly EcsWorldInject _world = default;
-
         private readonly EcsFilterInject<
             Inc<CharacterTag, JumpComponent, CharacterControllerComponent>> _filter = default;
 
@@ -27,7 +24,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 if (controllerComponent.CharacterController.isGrounded == false)
                     continue;
 
-                _world.Value.GetPool<JumpComponent>().Del(entity);
+                _filter.Pools.Inc2.Del(entity);
             }
         }
     }

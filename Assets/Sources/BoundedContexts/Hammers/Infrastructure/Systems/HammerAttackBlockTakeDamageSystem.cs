@@ -1,8 +1,8 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.Hammers.Domain.Events;
+using Sources.BoundedContexts.TakeDamages.Domain.Components;
 
 namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
 {

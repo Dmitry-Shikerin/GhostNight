@@ -2,7 +2,7 @@
 using Leopotam.EcsLite.Di;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
-using Sources.BoundedContexts.DealDamages.Domain.Events;
+using Sources.BoundedContexts.TakeDamages.Domain.Events;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
 
