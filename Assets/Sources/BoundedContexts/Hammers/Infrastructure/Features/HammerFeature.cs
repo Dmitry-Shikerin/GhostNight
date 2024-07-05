@@ -8,7 +8,8 @@ namespace Sources.BoundedContexts.Hammers.Infrastructure.Features
         protected override void Register()
         {
             AddSystem(new ShowHideHammerSystem());
-            AddSystem(new HummerAttackSystem());
+            AddSystem(new HammerAttackSystem());
+            AddSystem(new HammerAttackBlockMovementSystem());
         }
     }
 }

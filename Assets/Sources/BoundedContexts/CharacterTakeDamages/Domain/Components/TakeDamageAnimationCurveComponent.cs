@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Sources.BoundedContexts.CharacterDealDamages.Domain.Componets
+namespace Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets
 {
     [Serializable]
     public struct TakeDamageAnimationCurveComponent

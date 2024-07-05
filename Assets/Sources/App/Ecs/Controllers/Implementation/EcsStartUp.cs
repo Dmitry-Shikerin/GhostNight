@@ -109,9 +109,9 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .AddOneFrame<FootstepEvent>()
                 .AddOneFrame<PickUpHearthEvent>()
                 .AddOneFrame<TakeDamageEvent>()
-                .AddOneFrame<ShowHammerEvent>()
-                .AddOneFrame<HideHammerEvent>()
-                .AddOneFrame<HammerAttackEvent>()
+                .AddOneFrame<StartHummerAttackEvent>()
+                .AddOneFrame<EndHammerAttackEvent>()
+                .AddOneFrame<HammerAttackHitEvent>()
                 .AddOneFrame<StartStunEvent>()
                 .AddOneFrame<EndStunEvent>()
                 ;

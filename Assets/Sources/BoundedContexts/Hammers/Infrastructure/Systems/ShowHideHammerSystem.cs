@@ -10,8 +10,8 @@ namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
     public class ShowHideHammerSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent>> _hammerFilter = default;
-        private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent, ShowHammerEvent>> _showFilter = default;
-        private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent, HideHammerEvent>> _hideFilter = default;
+        private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent, StartHummerAttackEvent>> _showFilter = default;
+        private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent, EndHammerAttackEvent>> _hideFilter = default;
 
         public void Init(IEcsSystems systems)
         {

@@ -1,5 +1,5 @@
 ﻿using AB_Utility.FromSceneToEntityConverter;
-using Sources.BoundedContexts.CharacterDealDamages.Domain.Componets;
+using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 
 namespace Sources.BoundedContexts.CharacterDealDamages.Preseentation.Converters
 {

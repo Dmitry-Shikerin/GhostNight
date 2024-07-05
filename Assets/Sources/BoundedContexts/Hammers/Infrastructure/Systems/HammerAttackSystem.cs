@@ -10,14 +10,13 @@ using Sources.BoundedContexts.Hammers.Domain.Events;
 using Sources.BoundedContexts.Layers.Domain.Const;
 using Sources.BoundedContexts.Stuns.Domain.Components;
 using Sources.Frameworks.GameServices.Overlaps.Interfaces;
-using UnityEngine;
 
 namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
 {
-    public class HummerAttackSystem : IEcsRunSystem, IEcsInitSystem
+    public class HammerAttackSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsWorldInject _world = default;
-        private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent, HammerAttackEvent>> _filter = default;
+        private readonly EcsFilterInject<Inc<CharacterTag, HammerComponent, HammerAttackHitEvent>> _filter = default;
         private IOverlapService _overlapService;
 
         public void Init(IEcsSystems systems) =>

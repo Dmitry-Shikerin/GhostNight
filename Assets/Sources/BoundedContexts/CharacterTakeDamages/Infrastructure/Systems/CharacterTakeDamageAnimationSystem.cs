@@ -19,12 +19,7 @@ namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems
             {
                 CharacterAnimation animation = _filter.Pools.Inc2.Get(entity).Animation;
 
-                if (_world.Value.GetPool<BlockMovementComponent>().Has(entity))
-                    continue;
-                
                 animation.PlayHurt();
-                _world.Value.GetPool<BlockMovementComponent>().Add(entity);
-                Debug.Log($"PlayHurt");
             }
         }
     }

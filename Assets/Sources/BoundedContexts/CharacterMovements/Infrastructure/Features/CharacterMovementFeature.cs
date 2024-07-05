@@ -1,4 +1,5 @@
-﻿using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
+﻿using Sources.BoundedContexts.CharacterBlockMovements.Infrastructure.Systems;
+using Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems;
 using Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems;
 using Sources.BoundedContexts.FootstepParticles.Infrastructure.Systems;
 using Sources.Frameworks.MyLeoEcsExtensions.Features.Infrastructure.Systems.Implementation;
@@ -9,6 +10,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Features
     {
         protected override void Register()
         {
+            AddSystem(new CharacterBlockMovementDeleteSystem());
             AddSystem(new JumpSystem());
             AddSystem(new MovementSystem());
             AddSystem(new PlayerInputSystem());

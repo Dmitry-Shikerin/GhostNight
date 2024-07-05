@@ -1,12 +1,12 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using Sources.BoundedContexts.CharacterDealDamages.Domain.Componets;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
+using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
 using UnityEngine;
 
-namespace Sources.BoundedContexts.CharacterDealDamages.Infrastructure.Systems
+namespace Sources.BoundedContexts.CharacterTakeDamages.Infrastructure.Systems
 {
     public class CharacterTakeDamageMoveSystem : IEcsRunSystem
     {

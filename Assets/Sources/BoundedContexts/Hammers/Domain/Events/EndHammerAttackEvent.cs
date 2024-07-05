@@ -2,7 +2,7 @@
 
 namespace Sources.BoundedContexts.Hammers.Domain.Events
 {
-    public struct ShowHammerEvent : IEcsEvent
+    public struct EndHammerAttackEvent : IEcsEvent
     {
     }
 }

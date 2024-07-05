@@ -3,7 +3,6 @@ using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.EnemyMovements.Domain.Tags;
 using Sources.BoundedContexts.Stuns.Domain.Components;
 using Sources.BoundedContexts.Stuns.Domain.Events;
-using UnityEngine;
 
 namespace Sources.BoundedContexts.EnemyStuns.Infrastructure.Systems
 {
@@ -17,13 +16,11 @@ namespace Sources.BoundedContexts.EnemyStuns.Infrastructure.Systems
             foreach (int entity in _startStunFilter.Value)
             {
                 _startStunFilter.Pools.Inc2.Get(entity).ParticleSystem.Play();
-                Debug.Log($"PlayStun particle");
             }
             
             foreach (int entity in _endStunFilter.Value)
             {
                 _endStunFilter.Pools.Inc2.Get(entity).ParticleSystem.Stop();
-                Debug.Log($"stopStun particle");
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Sources.BoundedContexts.Animations.Presentations;
+using Sources.BoundedContexts.BlockMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
@@ -64,22 +65,6 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             ExceptAnimation(StopHammerAttack);
             Animator.SetBool(s_isHammerAttack, true);
-
-            if (_entityReference.World.GetPool<BlockMovementComponent>().Has(_entityReference.Entity) == false)
-            {
-                _entityReference
-                    .World
-                    .GetPool<BlockMovementComponent>()
-                    .Add(_entityReference.Entity);
-            }
-
-            if (_entityReference.World.GetPool<BlockTakeDamageComponent>().Has(_entityReference.Entity) == false)
-            {
-                _entityReference
-                    .World
-                    .GetPool<BlockTakeDamageComponent>()
-                    .Add(_entityReference.Entity);
-            }
         }
 
         private void StopHammerAttack() =>
@@ -118,7 +103,7 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             _entityReference
                 .World
-                .GetPool<ShowHammerEvent>()
+                .GetPool<StartHummerAttackEvent>()
                 .Add(_entityReference.Entity);
         }
 
@@ -127,12 +112,8 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             _entityReference
                 .World
-                .GetPool<HideHammerEvent>()
+                .GetPool<EndHammerAttackEvent>()
                 .Add(_entityReference.Entity);
-            _entityReference
-                .World
-                .GetPool<BlockMovementComponent>()
-                .Del(_entityReference.Entity);
         }
 
         [UsedImplicitly]
@@ -140,14 +121,13 @@ namespace Sources.BoundedContexts.CharacterMovements.Presentation.Views
         {
             _entityReference
                 .World
-                .GetPool<HammerAttackEvent>()
+                .GetPool<HammerAttackHitEvent>()
                 .Add(_entityReference.Entity);
         }
 
         [UsedImplicitly]
         private void OnHurtEnded()
         {
-            _entityReference.World.GetPool<BlockMovementComponent>().Del(_entityReference.Entity);
             PlayIdle();
         }
 

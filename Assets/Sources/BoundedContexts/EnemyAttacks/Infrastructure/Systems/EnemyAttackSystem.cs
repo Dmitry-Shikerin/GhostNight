@@ -1,5 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Presentation.Converters;
 using Sources.BoundedContexts.CharacterTakeDamages.Domain.Componets;
 using Sources.BoundedContexts.DealDamages.Domain.Events;
@@ -20,6 +21,7 @@ namespace Sources.BoundedContexts.EnemyAttacks.Infrastructure.Systems
                 AttackComponent,
                 NavMeshComponent>,
             Exc<BlockAttackComponent>> _filter = default;
+        private readonly EcsFilterInject<Inc<TransformComponent>> _transformFilter = default;
 
         private EntityReference _characterReference;
 
@@ -33,9 +35,11 @@ namespace Sources.BoundedContexts.EnemyAttacks.Infrastructure.Systems
             foreach (int entity in _filter.Value)
             {
                 ref NavMeshComponent navMeshComponent = ref _filter.Pools.Inc3.Get(entity);
+                    TransformComponent characterTransformComponent = 
+                        _transformFilter.Pools.Inc1.Get(_characterReference.Entity);
 
                 float distance = Vector3.Distance(
-                    navMeshComponent.Agent.destination, navMeshComponent.Agent.transform.position);
+                    characterTransformComponent.Transform.position, navMeshComponent.Agent.transform.position);
 
                 if (distance <= navMeshComponent.Agent.stoppingDistance + 0.1f)
                 {

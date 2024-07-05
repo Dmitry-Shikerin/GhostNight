@@ -2,6 +2,7 @@
 using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.BlockMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
