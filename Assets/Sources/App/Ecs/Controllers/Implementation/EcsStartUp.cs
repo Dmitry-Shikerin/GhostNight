@@ -58,7 +58,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
             _sharedData = new SharedData
             {
                 EventsBus = _eventsBus,
-                DiContainer = _container
+                DiContainer = _container,
             };
             _systems = new EcsSystems(_world, _sharedData);
             // AddEditorSystems();
