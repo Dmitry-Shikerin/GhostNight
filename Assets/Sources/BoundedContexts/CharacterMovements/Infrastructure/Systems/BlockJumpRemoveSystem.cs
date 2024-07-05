@@ -1,6 +1,7 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems

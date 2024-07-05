@@ -1,10 +1,9 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Domain;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
-using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterSounds.Domain.Components;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
 

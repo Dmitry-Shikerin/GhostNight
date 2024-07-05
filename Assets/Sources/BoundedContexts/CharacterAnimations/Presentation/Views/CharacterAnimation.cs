@@ -1,8 +1,10 @@
 ﻿using JetBrains.Annotations;
+using Leopotam.EcsLite;
 using Sources.BoundedContexts.Animations.Presentations;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.BoundedContexts.Hammers.Domain.Events;
+using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
@@ -17,17 +19,21 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         private static int s_isHammerAttack = Animator.StringToHash("IsHummerAttack");
 
         private EntityReference _entityReference;
+        private EcsWorld _world;
+        private int _entity;
 
         private void Awake()
         {
+            _entityReference = GetComponentInParent<EntityReference>();
+            _world = _entityReference.World;
+            _entity = _entityReference.Entity;
+            
             StoppingAnimations.Add(StopWalk);
             StoppingAnimations.Add(StopIdle);
             StoppingAnimations.Add(StopJump);
             StoppingAnimations.Add(StopFlip);
             StoppingAnimations.Add(StopHurt);
             StoppingAnimations.Add(StopHammerAttack);
-
-            _entityReference = GetComponentInParent<EntityReference>();
         }
 
         public void PlayWalk()
@@ -61,12 +67,7 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         public void PlayHammerAttack()
         {
             ExceptAnimation(StopHammerAttack);
-            
-            _entityReference
-                .World
-                .GetPool<StartHummerAttackEvent>()
-                .Add(_entityReference.Entity);
-
+            _world.Invoke<StartHummerAttackEvent>(_entity);
             Animator.SetBool(s_isHammerAttack, true);
         }
 
@@ -84,22 +85,12 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         }
 
         [UsedImplicitly]
-        private void OnRightStep()
-        {
-            _entityReference
-                .World
-                .GetPool<FootstepEvent>()
-                .Add(_entityReference.Entity);
-        }
+        private void OnRightStep() =>
+            _world.Invoke<FootstepEvent>(_entity);
 
         [UsedImplicitly]
-        private void OnLeftStep()
-        {
-            _entityReference
-                .World
-                .GetPool<FootstepEvent>()
-                .Add(_entityReference.Entity);
-        }
+        private void OnLeftStep() =>
+            _world.Invoke<FootstepEvent>(_entity);
 
         [UsedImplicitly]
         private void OnStartHammerAttack()
@@ -107,28 +98,16 @@ namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Views
         }
 
         [UsedImplicitly]
-        private void OnEndHammerAttack()
-        {
-            _entityReference
-                .World
-                .GetPool<EndHammerAttackEvent>()
-                .Add(_entityReference.Entity);
-        }
+        private void OnEndHammerAttack() =>
+            _world.Invoke<EndHammerAttackEvent>(_entity);
 
         [UsedImplicitly]
-        private void OnHit()
-        {
-            _entityReference
-                .World
-                .GetPool<HammerAttackHitEvent>()
-                .Add(_entityReference.Entity);
-        }
+        private void OnHit() =>
+            _world.Invoke<HammerAttackHitEvent>(_entity);
 
         [UsedImplicitly]
-        private void OnHurtEnded()
-        {
+        private void OnHurtEnded() =>
             PlayIdle();
-        }
 
         private void StopHurt() =>
             Animator.SetBool(s_isHurt, false);

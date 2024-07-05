@@ -1,10 +1,10 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using SevenBoldPencil.EasyEvents;
-using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.CharacterControllers.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
-using Sources.BoundedContexts.CharacterMovements.Domain.Events;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
+using Sources.BoundedContexts.Gravities.Domain.Components;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems

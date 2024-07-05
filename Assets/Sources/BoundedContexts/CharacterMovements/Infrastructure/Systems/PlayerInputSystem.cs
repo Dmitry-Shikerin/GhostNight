@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
@@ -40,7 +41,12 @@ namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
                 foreach (int entity in _filter.Value)
                 {
                     ref JumpComponent jumpComponent = ref _world.Value.GetPool<JumpComponent>().Add(entity);
-                    _world.Value.GetPool<BlockJumpComponent>().Add(entity);
+                    ref BlockJumpComponent blockJumpComponent = 
+                        ref _world.Value.GetPool<BlockJumpComponent>().Add(entity);
+                    
+                    blockJumpComponent.CurrentTime = 0f;
+                    blockJumpComponent.Duration = 1.5f;
+                    
                     jumpComponent.JumpForce = 10f;
                     jumpComponent.UpTime = 0.3f;
                 }

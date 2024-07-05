@@ -5,6 +5,7 @@ using Leopotam.EcsLite.Di;
 using SevenBoldPencil.EasyEvents;
 using Sources.App.Ecs.Controllers.Interfaces;
 using Sources.App.Ecs.Domain;
+using Sources.BoundedContexts.BlockMovements.Domain.Components;
 using Sources.BoundedContexts.BlockTakeDamages.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Infrastructure.Features;
 using Sources.BoundedContexts.CharacterStuns.Infrastructure.Features;
@@ -22,8 +23,8 @@ using Sources.BoundedContexts.Hearths.Domain.Events;
 using Sources.BoundedContexts.Hearths.Infrastructure.Features;
 using Sources.BoundedContexts.Stuns.Domain.Events;
 using Sources.BoundedContexts.Traps.Infrastructure.Features;
-using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Extensions;
 using Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions;
+using Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Extensions;
 using Zenject;
 
 namespace Sources.App.Ecs.Controllers.Implementation
@@ -124,6 +125,7 @@ namespace Sources.App.Ecs.Controllers.Implementation
         {
             _systems
                 .AddDeleteAfterTime<BlockTakeDamageComponent>()
+                .AddDeleteAfterTime<BlockMovementComponent>()
                 ;
         }
 

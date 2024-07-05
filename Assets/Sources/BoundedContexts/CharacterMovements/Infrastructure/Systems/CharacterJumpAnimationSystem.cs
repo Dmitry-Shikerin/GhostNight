@@ -3,6 +3,7 @@ using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.CharacterAnimations.Presentation.Views;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {

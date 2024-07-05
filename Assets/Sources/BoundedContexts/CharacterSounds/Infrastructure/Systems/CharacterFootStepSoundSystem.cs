@@ -6,7 +6,6 @@ using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
 using Sources.BoundedContexts.Footsteps.Domain.Events;
 using Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.AudioService.Interfaces;
 using Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementation.Types;
-using UnityEngine;
 
 namespace Sources.BoundedContexts.CharacterSounds.Infrastructure.Systems
 {

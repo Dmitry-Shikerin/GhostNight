@@ -28,7 +28,7 @@ namespace Sources.BoundedContexts.Hammers.Infrastructure.Systems
                     ref _world.Value.GetPool<BlockMovementComponent>().Add(entity);
                 
                 blockMovementComponent.Duration = 1.2f;
-                blockMovementComponent.CurrentDuration = 0;
+                blockMovementComponent.CurrentTime = 0;
             }
         }
     }

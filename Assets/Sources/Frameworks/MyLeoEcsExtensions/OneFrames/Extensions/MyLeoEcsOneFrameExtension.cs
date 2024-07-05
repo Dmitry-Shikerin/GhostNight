@@ -12,5 +12,9 @@ namespace Sources.Frameworks.MyLeoEcsExtensions.OneFrames.Extensions
 
             return systems;
         }
+        
+        public static void Invoke<T>(this EcsWorld world, int entity)
+            where T : struct, IEcsEvent =>
+            world.GetPool<T>().Add(entity);
     }
 }

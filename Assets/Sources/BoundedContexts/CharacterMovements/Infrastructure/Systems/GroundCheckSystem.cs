@@ -1,7 +1,9 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Sources.BoundedContexts.CharacterControllers.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;
+using Sources.BoundedContexts.Jumps.Domain.Components;
 
 namespace Sources.BoundedContexts.CharacterMovements.Infrastructure.Systems
 {
