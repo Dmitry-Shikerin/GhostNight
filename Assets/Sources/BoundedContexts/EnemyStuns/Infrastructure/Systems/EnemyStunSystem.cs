@@ -20,9 +20,7 @@ namespace Sources.BoundedContexts.EnemyStuns.Infrastructure.Systems
                 ref StunComponent stunComponent = ref _filter.Pools.Inc2.Get(entity);
 
                 if (Mathf.Approximately(stunComponent.CurrentTime, 0))
-                {
                     systems.GetWorld().GetPool<StartStunEvent>().Add(entity);
-                }
 
                 if (stunComponent.CurrentTime >= Duration)
                 {

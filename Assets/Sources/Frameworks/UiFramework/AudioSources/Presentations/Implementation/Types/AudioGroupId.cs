@@ -8,5 +8,6 @@
         PickUpHeart = 3,
         CharacterJump = 4,
         CharacterHurt = 5,
+        Stun = 6,
     }
 }

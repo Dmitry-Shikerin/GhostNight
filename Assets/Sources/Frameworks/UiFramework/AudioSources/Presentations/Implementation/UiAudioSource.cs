@@ -53,7 +53,7 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementati
             {
                 _audioSource.Play();
 
-                while (CanPlay() == false && _cancellationTokenSource.Token.IsCancellationRequested == false)
+                while (CanPlay(audioGroup) == false && _cancellationTokenSource.Token.IsCancellationRequested == false)
                 {
                     audioGroup?.SetCurrentTime(_audioSource.time);
                     await UniTask.Yield();
@@ -101,7 +101,9 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Presentations.Implementati
             _audioSource.UnPause();
         }
 
-        private bool CanPlay() =>
-            _audioSource != null && _audioSource.clip.length <= _audioSource.time + 0.025f;
+        private bool CanPlay(AudioGroup audioGroup) =>
+            _audioSource != null 
+            && _audioSource.clip.length <= _audioSource.time + 0.025f
+            && audioGroup.IsPlaying;
     }
 }

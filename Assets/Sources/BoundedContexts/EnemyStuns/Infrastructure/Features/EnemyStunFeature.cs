@@ -9,6 +9,7 @@ namespace Sources.BoundedContexts.EnemyStuns.Infrastructure.Features
         {
             AddSystem(new EnemyStunSystem());
             AddSystem(new EnemyStunParticleSystem());
+            AddSystem(new EnemyStunAudioSystem());
         }
     }
 }

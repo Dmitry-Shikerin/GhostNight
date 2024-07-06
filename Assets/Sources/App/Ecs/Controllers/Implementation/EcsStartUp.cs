@@ -108,9 +108,9 @@ namespace Sources.App.Ecs.Controllers.Implementation
                 .Add(new EnemyAttackFeature())
                 .Add(new CharacterTakeDamageFeature())
                 .Add(new CharacterHealthFeature())
-                .Add(new EnemyHealthFeature())
                 .Add(new EnemyStunFeature())
                 .Add(new EnemyTakeDamageFeature())
+                .Add(new EnemyHealthFeature())
                 .Add(new TrapFeature())
                 ;
         }

@@ -122,13 +122,15 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
 
         public void Stop(AudioGroupId audioGroupId)
         {
+            AudioGroup audioGroup = _audioGroups[audioGroupId];
+            
             if (_audioGroups.ContainsKey(audioGroupId) == false)
                 throw new KeyNotFoundException(audioGroupId.ToString());
 
-            if (_audioGroups[audioGroupId].IsPlaying == false)
+            if (audioGroup.IsPlaying == false)
                 return;
 
-            _audioGroups[audioGroupId].Stop();
+            audioGroup.Stop();
         }
 
         private void ClearStates()
@@ -154,21 +156,22 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
 
         private async UniTask PlayLoop(AudioGroupId audioGroupId, IUiAudioSource audioSource)
         {
-            if (_audioGroups[audioGroupId].IsPlaying)
+            AudioGroup audioGroup = _audioGroups[audioGroupId];
+            
+            if (audioGroup.IsPlaying)
                 throw new InvalidOperationException($"Group {audioGroupId} is already playing");
             
-            AudioGroup audioGroup = _audioGroups[audioGroupId];
             audioGroup.Play();
             
             while (_audioCancellationTokenSource.Token.IsCancellationRequested == false &&
-                   _audioGroups[audioGroupId].IsPlaying)
+                   audioGroup.IsPlaying)
             {
 
                 foreach (AudioClip audioClip in _audioGroups[audioGroupId].AudioClips)
                 {
                     audioSource.SetClip(audioClip);
-                    _audioGroups[audioGroupId].SetCurrentClip(audioClip);
-                    await audioSource.PlayAsync(audioGroup: _audioGroups[audioGroupId]);
+                    audioGroup.SetCurrentClip(audioClip);
+                    await audioSource.PlayAsync(audioGroup: audioGroup);
                 }
             }
         }
@@ -185,7 +188,8 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
             AudioClip clip = _audioGroups[audioGroupId].AudioClips[randomIndex];
             
             audioSource.SetClip(clip);
-            audioSource?.PlayAsync(audioSource.Destroy);
+            audioGroup.SetCurrentClip(clip);
+            audioSource?.PlayAsync(audioSource.Destroy, audioGroup);
         }
 
         private void PlayOneShot(AudioGroupId audioGroupId, IUiAudioSource audioSource)
@@ -194,10 +198,12 @@ namespace Sources.Frameworks.UiFramework.AudioSources.Infrastructure.Services.Au
                 throw new ArgumentOutOfRangeException();
             
             AudioGroup audioGroup = _audioGroups[audioGroupId];
+            AudioClip audioClip = audioGroup.AudioClips.First();
             audioGroup.Play();
             
-            audioSource.SetClip(_audioGroups[audioGroupId].AudioClips.First());
-            audioSource?.PlayAsync(audioSource.Destroy);
+            audioSource.SetClip(audioClip);
+            audioGroup.SetCurrentClip(audioClip);
+            audioSource?.PlayAsync(audioSource.Destroy, audioGroup);
         }
     }
 }
