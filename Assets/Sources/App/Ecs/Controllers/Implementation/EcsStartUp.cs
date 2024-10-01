@@ -165,8 +165,8 @@ namespace Sources.App.Ecs.Controllers.Implementation
 #if UNITY_EDITOR
             _editorSystems = new EcsSystems(_world);
             _editorSystems
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem())
+                // .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+                // .Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem())
                 .Init();
 #endif
         }

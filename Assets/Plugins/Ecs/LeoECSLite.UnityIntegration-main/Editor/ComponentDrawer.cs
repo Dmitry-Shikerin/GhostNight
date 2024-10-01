@@ -34,7 +34,6 @@ namespace Mitfart.LeoECSLite.UnityIntegration.Editor {
       private Type   ComponentType => _target.ComponentType;
 
 
-
       public override VisualElement CreatePropertyGUI(SerializedProperty property) {
          _property = property;
          _target   = (ComponentView)property.GetUnderlyingValue();

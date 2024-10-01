@@ -15,7 +15,7 @@ using static Mitfart.LeoECSLite.UnityIntegration.Editor.Extensions.Style.StyleCo
 namespace Mitfart.LeoECSLite.UnityIntegration.Editor {
    [CustomEditor(typeof(EntityView))]
    public class EntityEditor : UnityEditor.Editor {
-      private const string _COMPONENTS_FIELD       = nameof(EntityView.components);
+      private const string _COMPONENTS_FIELD = nameof(EntityView.components);
       private const string _COMPONENTS_COUNT_FIELD = nameof(EntityView.componentsCount);
 
       private const string _ADD_BTN_TEXT  = "Add";
@@ -171,6 +171,6 @@ namespace Mitfart.LeoECSLite.UnityIntegration.Editor {
 
 
       private SerializedProperty ComponentsCountProperty() => serializedObject.FindProperty(_COMPONENTS_COUNT_FIELD);
-      private SerializedProperty ComponentsProperty()      => serializedObject.FindProperty(_COMPONENTS_FIELD);
+      private SerializedProperty ComponentsProperty() => serializedObject.FindProperty(_COMPONENTS_FIELD);
    }
 }
