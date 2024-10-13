@@ -1,4 +1,4 @@
-﻿using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Domain.Components.Interfaces;
+﻿using Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Domain.Components.Interfaces;
 
 namespace Sources.BoundedContexts.TakeDamages.Domain.Components
 {

@@ -1,6 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Domain.Components.Interfaces;
+using Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Domain.Components.Interfaces;
 using UnityEngine;
 
 namespace Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Infrastructure.Systems

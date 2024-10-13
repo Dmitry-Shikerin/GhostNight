@@ -1772,6 +1772,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1817680271}
     m_Modifications:
+    - target: {fileID: 667380072388897402, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1642758839326533222, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1839,6 +1843,18 @@ PrefabInstance:
     - target: {fileID: 5433518243534694054, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_Name
       value: CharacterAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665433373386725188, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6915350347274671199, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081331571627097884, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7336011109504537767, guid: 1555211d447f79644ba68f8d14d03c5e, type: 3}
       propertyPath: m_IsActive
@@ -6818,7 +6834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _component:
     Gravity: 0
-    Speed: 0
+    Speed: 1
 --- !u!114 &1817680281
 MonoBehaviour:
   m_ObjectHideFlags: 0

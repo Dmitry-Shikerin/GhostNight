@@ -1,6 +1,7 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Sources.BoundedContexts.BlockMovements.Domain.Components;
+using Sources.BoundedContexts.CharacterAnimations.Domain.Components;
 using Sources.BoundedContexts.CharacterAnimations.Presentation.Views;
 using Sources.BoundedContexts.CharacterMovements.Domain.Components;
 using Sources.BoundedContexts.CharacterMovements.Domain.Tags;

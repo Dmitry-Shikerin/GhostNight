@@ -1,4 +1,4 @@
-﻿namespace Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Domain.Components.Interfaces
+﻿namespace Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Domain.Components.Interfaces
 {
     public interface ITemporaryComponent
     {
