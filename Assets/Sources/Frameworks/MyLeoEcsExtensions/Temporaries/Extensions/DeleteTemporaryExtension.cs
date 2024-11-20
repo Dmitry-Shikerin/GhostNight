@@ -1,6 +1,6 @@
 ﻿using Leopotam.EcsLite;
-using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Domain.Components.Interfaces;
 using Sources.Frameworks.MyLeoEcsExtensions.AfterTimes.Infrastructure.Systems;
+using Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Domain.Components.Interfaces;
 
 namespace Sources.Frameworks.MyLeoEcsExtensions.Temporaries.Extensions
 {

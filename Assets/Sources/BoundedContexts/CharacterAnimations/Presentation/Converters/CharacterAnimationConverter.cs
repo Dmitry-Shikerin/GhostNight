@@ -1,5 +1,5 @@
 ﻿using AB_Utility.FromSceneToEntityConverter;
-using Sources.BoundedContexts.CharacterMovements.Domain.Components;
+using Sources.BoundedContexts.CharacterAnimations.Domain.Components;
 
 namespace Sources.BoundedContexts.CharacterAnimations.Presentation.Converters
 {

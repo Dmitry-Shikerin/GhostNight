@@ -1,5 +1,4 @@
-﻿using System;
-using Sources.BoundedContexts.CharacterAttacks.Presentation.Triggers;
+﻿using Sources.BoundedContexts.CharacterAttacks.Presentation.Triggers;
 using Sources.BoundedContexts.EnemyAttacks.Presentation.Views;
 using Sources.BoundedContexts.EntityReferences.Presentation.Views;
 using Sources.BoundedContexts.TakeDamages.Domain.Events;
